@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { createContext, useEffect } from "react";
+import { BrowserRouter } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserProfile } from "./store/actions";
+import { GlobalRoutes } from "./routes/globalRoutes/GlobalRoutes";
+import { MyBook } from "./components/homePage/homeBoarding";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+export const QuizItemsContext = createContext({});
+export const IsAdmin = createContext({});
+export const GlobalUserProfileContext = createContext({
+    isFetchingProfile: null,
+    profile: null,
+    lastTimeFetched: null,
+});
+
+const App = () => {
+    const { isFetchingProfile, profile, lastTimeFetched } = useSelector(
+        (state) => state.userProfileReducer
+    );
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchUserProfile);
+    }, []);
+    return (
+        <GlobalUserProfileContext.Provider value={{ isFetchingProfile, profile }}>
+            <BrowserRouter>
+                <GlobalRoutes />
+            </BrowserRouter>
+        </GlobalUserProfileContext.Provider>
+    );
+};
 
 export default App;
