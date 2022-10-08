@@ -1,10 +1,12 @@
-import { forwardRef } from "react";
+import { forwardRef, useEffect } from "react";
 import styled from "styled-components";
 const PageWrapper = styled.div`
     background-color: #ff0000;
     background-image: ${`url(${(props) => props?.bgimg || ""} )`};
 `;
 export const Page = forwardRef((props, ref) => {
+
+
     return (
         <PageWrapper>
             <div className="page" ref={ref} data-density={props.density | "soft"}>

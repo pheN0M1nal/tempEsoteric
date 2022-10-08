@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { PageCover } from "../myBook/CoverPage";
 import bgimg1 from "../../static/images/bg/bg2.png";
 import bgimg2 from "../../static/images/bg/bg2.png";
-import { Page } from "../myBook/Pages";
+import { Page } from "../myBook/Page";
 
 const StyledComponent = styled.div`
     max-width: 80vw;

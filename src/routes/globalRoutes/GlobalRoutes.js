@@ -8,7 +8,8 @@ import LoginContainer from "../../components/Authentication/login/Container";
 export const GlobalRoutes = () => {
     return (
         <Routes>
-            <Route path="/" exact={true} element={<MyBook />} />
+			 <Route path="/" exact={true} element={<MyBook />} />
+			 
             <Route
                 path="/login"
                 exact={true}
