@@ -1,10 +1,9 @@
 import { Route, Routes } from 'react-router-dom'
-import { ProtectedRouteComponent } from '../ProtectedRouteComponent'
+import { ProtectedRouteComponent } from './ProtectedRouteComponent'
 import { isAuthenticated, isGuest } from '../../conditions/Index'
-import { MyBook } from '../../components/homePage/homeBoarding'
-import PageComp from '../../components/myBook/PageComp'
-import LogoutContainer from '../../components/Authentication/logout/Container'
-import LoginContainer from '../../components/Authentication/login/Container'
+import { HomeScreen } from '../../screens/HomeScreen'
+import LogoutContainer from '../Authentication/logout/Container'
+import LoginContainer from '../Authentication/login/Container'
 
 export const GlobalRoutes = () => {
 	return (
@@ -30,7 +29,7 @@ export const GlobalRoutes = () => {
 					/>
 				}
 			/>
-			<Route path='/' exact={true} element={<MyBook />} />
+			<Route path='/' exact={true} element={<HomeScreen />} />
 		</Routes>
 	)
 }
