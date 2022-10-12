@@ -1,6 +1,6 @@
 import { forwardRef, useMemo, useState } from 'react'
 import styled from 'styled-components'
-import menuItems from './menuItems'
+import menuItems from '../../DataList/menuItems'
 import { useNavigate } from 'react-router'
 const PageWrapper = styled.div`
 	${
@@ -57,6 +57,11 @@ const PageWrapper = styled.div`
 export const Menu = forwardRef((props, ref) => {
 	const navigate = useNavigate()
 
+	const goToPage = pageNumber => {
+		props.book.current.pageFlip().flip(pageNumber, 'top')
+		console.log(props.book.current.pageFlip().getPageCount())
+	}
+
 	return (
 		<div
 			className='page softPage'
@@ -70,12 +75,14 @@ export const Menu = forwardRef((props, ref) => {
 						<ul>
 							{menuItems.map(item => (
 								<li key={item.pageNumber}>
-									<a
-										href={`/page/${item.pageNumber}`}
+									<button
+										onClick={() =>
+											goToPage(item.pageNumber)
+										}
 									>
 										{item.name}
 										<span>{item.pageNumber}</span>
-									</a>
+									</button>
 								</li>
 							))}
 						</ul>

@@ -2,13 +2,13 @@ import { Route, Routes } from 'react-router-dom'
 import { ProtectedRouteComponent } from '../ProtectedRouteComponent'
 import { isAuthenticated, isGuest } from '../../conditions/Index'
 import { MyBook } from '../../components/homePage/homeBoarding'
-import PageComp from '../../components/myBook/PageComp'
 import LogoutContainer from '../../components/Authentication/logout/Container'
 import LoginContainer from '../../components/Authentication/login/Container'
 
 export const GlobalRoutes = () => {
 	return (
 		<Routes>
+			<Route path='/page/:pageNumber' element={<MyBook />} />
 			<Route
 				path='/login'
 				exact={true}

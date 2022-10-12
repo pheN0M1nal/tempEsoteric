@@ -4,8 +4,8 @@ import styled from 'styled-components'
 import { PageCover } from '../myBook/CoverPage'
 import bgimg1 from '../../static/images/general/bookcove-final-1.jpg'
 import bgimg2 from '../../static/images/general/bookcove-final-2.jpg'
-import { Page } from '../myBook/Pages'
-import { pages } from '../../config/DataList/UserList'
+import { Page } from '../myBook/Page'
+import menuItems from '../../DataList/menuItems'
 import { Menu } from '../myBook/Menu'
 import { useParams, useNavigate } from 'react-router'
 import { useDispatch } from 'react-redux'
@@ -27,7 +27,9 @@ const StyledComponent = styled.div`
 `
 
 export const MyBook = () => {
-	const [page, setPage] = useState(1)
+	const [page, setPage] = useState(0)
+	const [flag, setFlag] = useState(false)
+
 	const [totalPage, setTotalPage] = useState(0)
 	const [orientation, setOrientation] = useState('landscape')
 	const [readState, setReadState] = useState('read')
@@ -36,26 +38,28 @@ export const MyBook = () => {
 	//initializing useParms
 	const params = useParams()
 
+	const pages = menuItems
+
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 
 	// getting pageNumber to goto
 	const pageNumber = params.pageNumber
 
-	// const nextButtonClick = () => {
-	// 	flipRef.current.getPageFlip().flipNext()
-	// }
+	const nextButtonClick = () => {
+		flipRef.current.pageFlip().flipNext()
+	}
 
-	// const prevButtonClick = () => {
-	// 	flipRef.current.getPageFlip().flipPrev()
-	// }
+	const prevButtonClick = () => {
+		flipRef.current.pageFlip().flipPrev()
+	}
 
-	// const onFlip = useCallback(e => {
-	// 	console.log('Current page: ' + e.data)
-	// 	setPage(e.data)
-	// }, [])
+	const onFlip = useCallback(e => {
+		setPage(e.data)
+	}, [])
+
 	// const onChangeOrientation = e => {
-	// 	setOrientation(e.data)
+	// 	setOrientation(e.da ta)
 	// }
 
 	// const onChangeState = e => {
@@ -64,7 +68,13 @@ export const MyBook = () => {
 
 	// console.log(pages.length % 2 === 0, 'clg')
 
-	useEffect(() => {}, [flipRef])
+	useEffect(() => {
+		setTotalPage(flipRef.current.pageFlip()?.getPageCount())
+	})
+
+	useEffect(() => {
+		console.log('iamajeeb')
+	}, [])
 
 	return (
 		<StyledComponent pageLength={pages?.length}>
@@ -80,9 +90,9 @@ export const MyBook = () => {
 					maxShadowOpacity={0.5}
 					showCover={true}
 					mobileScrollSupport={true}
-					//onFlip={() => onFlip}
-					// onChangeOrientation={() => onChangeOrientation}
-					// onChangeState={() => onChangeState}
+					onFlip={onFlip}
+					// onChangeOrientation={onChangeOrientation}
+					// onChangeState={onChangeState}
 					className='flip-book html-book demo-book'
 					ref={flipRef}
 				>
@@ -98,16 +108,16 @@ export const MyBook = () => {
 						key={1}
 						pos='top'
 					/>
-					<Menu />
+					<Menu book={flipRef} />
 					{pages.map((item, index) => (
 						<Page
 							key={index}
 							data={item}
 							className='page'
-							number={index}
+							number={page}
 						></Page>
 					))}
-					{pages.length % 2 === 0 ? (
+					{/* {pages.length % 2 === 0 ? (
 						<PageCover
 							bgimg={''}
 							title={'THE END'}
@@ -135,17 +145,17 @@ export const MyBook = () => {
 						title={'THE END'}
 						key={pages.length}
 						pos='bottom'
-					/>
+					/> */}
 				</HTMLFlipBook>
 			</div>
 
-			{/* <div className='container mt-3'>
+			<div className='container mt-3'>
 				<div className='row'>
 					<div className='col-md-6'>
 						<button
 							type='button'
 							className='btn btn-info btn-sm btn-prev'
-							onClick={() => prevButtonClick}
+							onClick={() => prevButtonClick()}
 						>
 							Previous page
 						</button>
@@ -154,17 +164,17 @@ export const MyBook = () => {
 						<button
 							type='button'
 							className='btn btn-info btn-sm btn-next'
-							onClick={() => nextButtonClick}
+							onClick={() => nextButtonClick()}
 						>
 							Next page
 						</button>
 					</div>
-					<div className='col-md-6'>
+					{/* <div className='col-md-6'>
 						State: <i>{readState}</i>, orientation:{' '}
 						<i>{orientation}</i>
-					</div>
+					</div> */}
 				</div>
-			</div> */}
+			</div>
 		</StyledComponent>
 	)
 }
