@@ -14,7 +14,7 @@ const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
 			<ul className='pagination justify-content-center'>
 				<li className='page-item'>
 					<a className='page-link' onClick={prevPage} href='#'>
-						Previous
+						&#60;
 					</a>
 				</li>
 				{pageNumbers.map(pgNumber => (
@@ -35,7 +35,7 @@ const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
 				))}
 				<li className='page-item'>
 					<a className='page-link' onClick={nextPage} href='#'>
-						Next
+						&#62;
 					</a>
 				</li>
 			</ul>

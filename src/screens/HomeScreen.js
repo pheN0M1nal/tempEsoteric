@@ -1,14 +1,15 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import HTMLFlipBook from 'react-pageflip'
 import styled from 'styled-components'
-import { PageCover } from '../myBook/CoverPage'
-import bgimg1 from '../../static/images/general/bookcove-final-1.jpg'
-import bgimg2 from '../../static/images/general/bookcove-final-2.jpg'
-import { Page } from '../myBook/Page'
-import menuItems from '../../DataList/menuItems'
-import { Menu } from '../myBook/Menu'
+import { PageCover } from './HomePageComponents/CoverPage'
+import bgimg1 from '../static/images/general/bookcove-final-1.jpg'
+import bgimg2 from '../static/images/general/bookcove-final-2.jpg'
+import { Page } from './HomePageComponents/Page'
+import menuItems from '../DataList/menuItems'
+import { MenuPage } from './HomePageComponents/MenuPage'
 import { useParams, useNavigate } from 'react-router'
 import { useDispatch } from 'react-redux'
+import PdfModal from '../components/modal/PdfModal'
 
 const StyledComponent = styled.div`
 	max-width: 80vw;
@@ -26,7 +27,7 @@ const StyledComponent = styled.div`
 	}
 `
 
-export const MyBook = () => {
+export const HomeScreen = () => {
 	const [page, setPage] = useState(0)
 	const [flag, setFlag] = useState(false)
 
@@ -72,10 +73,6 @@ export const MyBook = () => {
 		setTotalPage(flipRef.current.pageFlip()?.getPageCount())
 	})
 
-	useEffect(() => {
-		console.log('iamajeeb')
-	}, [])
-
 	return (
 		<StyledComponent pageLength={pages?.length}>
 			<div className='container-md bookOuterContainer'>
@@ -108,7 +105,7 @@ export const MyBook = () => {
 						key={1}
 						pos='top'
 					/>
-					<Menu book={flipRef} />
+					<MenuPage book={flipRef} />
 					{pages.map((item, index) => (
 						<Page
 							key={index}
@@ -159,8 +156,7 @@ export const MyBook = () => {
 						>
 							Previous page
 						</button>
-						[<span>{page + 1}</span> of{' '}
-						<span>{totalPage}</span>]
+						[<span>{page}</span> of <span>{totalPage}</span>]
 						<button
 							type='button'
 							className='btn btn-info btn-sm btn-next'
@@ -175,6 +171,8 @@ export const MyBook = () => {
 					</div> */}
 				</div>
 			</div>
+
+			<PdfModal />
 		</StyledComponent>
 	)
 }

@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
+import { useDispatch } from 'react-redux'
+
+import { showModal } from '../../../store/actions/modalActions'
 
 const PageWrapper = styled.div`
 	${
@@ -55,8 +58,16 @@ const PageWrapper = styled.div`
 `
 
 const Records = props => {
+	const dispatch = useDispatch()
+
+	const openModal = img => {
+		dispatch(showModal(img))
+	}
+
+	const pdf = 'dashboard-of-nash-rambler.pdf'
+
 	useEffect(() => {
-		console.log(props)
+		//console.log(props)
 	}, [props.data])
 
 	return (
@@ -65,11 +76,18 @@ const Records = props => {
 				{props?.data?.map((item, i) => {
 					return (
 						<div key={i} className='imageOuterList'>
-							<img src={item.url} alt='1' />
+							<img
+								onClick={() => openModal(pdf)}
+								src={item.url}
+								alt='image down'
+							/>
+							<div className='page-footer'>
+								{item.pageNumber + 1}
+							</div>
 						</div>
 					)
 				})}
-				<div className='page-footer'>{props.data.number + 1}</div>
+
 				{/* <Pagination
 						className='pagination-bar'
 						currentPage={currentPage}

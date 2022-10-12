@@ -2,8 +2,7 @@ import { createContext, useEffect } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUserProfile } from './store/actions/userActions'
-import { GlobalRoutes } from './routes/globalRoutes/GlobalRoutes'
-import { MyBook } from './components/homePage/homeBoarding'
+import { GlobalRoutes } from './components/routes/GlobalRoutes'
 
 export const QuizItemsContext = createContext({})
 export const IsAdmin = createContext({})

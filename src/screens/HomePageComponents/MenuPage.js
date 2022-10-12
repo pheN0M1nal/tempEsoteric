@@ -54,7 +54,7 @@ const PageWrapper = styled.div`
 		}
 	}
 `
-export const Menu = forwardRef((props, ref) => {
+export const MenuPage = forwardRef((props, ref) => {
 	const navigate = useNavigate()
 
 	const goToPage = pageNumber => {
@@ -80,7 +80,7 @@ export const Menu = forwardRef((props, ref) => {
 											goToPage(item.pageNumber)
 										}
 									>
-										{item.name}
+										{item.name}.....
 										<span>{item.pageNumber}</span>
 									</button>
 								</li>
