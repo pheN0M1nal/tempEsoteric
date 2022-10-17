@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
-import styled from "styled-components";
-import { Button } from "./Button";
-import dummyImage from "../../static/images/Auth/relax-leisure-attractive-smart-asian-female-freelance-entrepreneur-smile-enjoy-working-with-smartphone-laptop-cafe-with-blur-city-business-digital-nomad-casual-ideas-concept.png";
+import { useEffect, useState } from 'react'
+import styled from 'styled-components'
+import { Button } from './Button'
 
 const StyledComponent = styled.div`
     display: flex;
@@ -50,64 +49,68 @@ const StyledComponent = styled.div`
             }
         }
     }
-`;
+`
 
 export const ImagePickerComponent = ({
-    setShowImage,
-    image,
-    setImage,
-    label,
-    btnText,
-    disabled,
+	setShowImage,
+	image,
+	setImage,
+	label,
+	btnText,
+	disabled,
 }) => {
-    const [tempImage, setTempImage] = useState(null);
-    const [tempImageData, setTempImageData] = useState("");
+	const [tempImage, setTempImage] = useState(null)
+	const [tempImageData, setTempImageData] = useState('')
 
-    useEffect(() => {
-        if (tempImage) {
-            console.log(tempImage.name, "tempImage.name");
-            const fileReader = new FileReader();
-            fileReader.addEventListener(
-                "load",
-                () => {
-                    setTempImageData(fileReader.result);
-                    setShowImage(fileReader.result);
-                },
-                false
-            );
-            fileReader.readAsDataURL(tempImage);
-            if (tempImage) setImage(tempImage);
-        }
-    }, [tempImage]);
-    useEffect(() => {
-        if (disabled == true) {
-            setTempImage(null);
-            setImage(null);
-        }
-    }, [disabled]);
-    return (
-        <StyledComponent>
-            <div className="imageWrapper">
-                <img src={tempImageData || image || dummyImage} alt={""} />
-            </div>
-            <div className="controlsWrapperImage">
-                <span className="text">
-                    {!disabled
-                        ? image?.name || "Select profile image"
-                        : (label && label) || "Select profile image"}
-                </span>
-                <div className="chooseImageButtonWrapper">
-                    <Button fontSize={0.7} paddingTopBottom={0.4} paddingLeftRight={1.5}>
-                        {btnText}
-                    </Button>
-                    <input
-                        type={`${!disabled && "file"}`}
-                        onChange={(e) => {
-                            setTempImage(e.target.files[0]);
-                        }}
-                    />
-                </div>
-            </div>
-        </StyledComponent>
-    );
-};
+	useEffect(() => {
+		if (tempImage) {
+			console.log(tempImage.name, 'tempImage.name')
+			const fileReader = new FileReader()
+			fileReader.addEventListener(
+				'load',
+				() => {
+					setTempImageData(fileReader.result)
+					setShowImage(fileReader.result)
+				},
+				false
+			)
+			fileReader.readAsDataURL(tempImage)
+			if (tempImage) setImage(tempImage)
+		}
+	}, [tempImage])
+	useEffect(() => {
+		if (disabled == true) {
+			setTempImage(null)
+			setImage(null)
+		}
+	}, [disabled])
+	return (
+		<StyledComponent>
+			<div className='imageWrapper'>
+				<img src={tempImageData || image} alt={''} />
+			</div>
+			<div className='controlsWrapperImage'>
+				<span className='text'>
+					{!disabled
+						? image?.name || 'Select profile image'
+						: (label && label) || 'Select profile image'}
+				</span>
+				<div className='chooseImageButtonWrapper'>
+					<Button
+						fontSize={0.7}
+						paddingTopBottom={0.4}
+						paddingLeftRight={1.5}
+					>
+						{btnText}
+					</Button>
+					<input
+						type={`${!disabled && 'file'}`}
+						onChange={e => {
+							setTempImage(e.target.files[0])
+						}}
+					/>
+				</div>
+			</div>
+		</StyledComponent>
+	)
+}

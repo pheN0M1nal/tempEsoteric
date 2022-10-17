@@ -55,6 +55,12 @@ const PageWrapper = styled.div`
 			}
 		}
 	}
+	.line {
+		width: 30px;
+		height: 100%;
+		background-color: yellow;
+		position: absolute;
+	}
 `
 export const Page = forwardRef((props, ref) => {
 	const [data, setData] = useState([])
@@ -109,7 +115,8 @@ export const Page = forwardRef((props, ref) => {
 						currentPage={currentPage}
 						setCurrentPage={setCurrentPage}
 					/>
-				</div>Nhxfjhy
+				</div>
+				<div className='line'></div>
 			</PageWrapper>
 		</div>
 	)

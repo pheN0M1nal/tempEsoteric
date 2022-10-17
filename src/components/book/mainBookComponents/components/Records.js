@@ -2,13 +2,13 @@ import React, { useEffect } from 'react'
 
 import { useDispatch } from 'react-redux'
 
-import { showModal } from '../../../../store/actions/modalActions'
+import { showPdfModal } from '../../../../store/actions/modalActions'
 
 const Records = props => {
 	const dispatch = useDispatch()
 
 	const openModal = img => {
-		dispatch(showModal(img))
+		dispatch(showPdfModal(img))
 	}
 
 	const pdf = 'dashboard-of-nash-rambler.pdf'

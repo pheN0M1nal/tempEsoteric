@@ -1,9 +1,21 @@
 import React, { useState } from 'react'
-import ModalComponent from '../Global/Modal'
+import { useSelector } from 'react-redux'
+import { ModalComponent } from '../Global/Modal'
+import { hideLoginModal } from '../../store/actions/modalActions'
+import { useDispatch } from 'react-redux'
+import LoginContainer from '../Authentication/login/Container'
+import ForgotPasswordContainer from '../Authentication/forgot_password/Container'
+import RegisterContainer from '../Authentication/signup/Container'
 
 const Login = () => {
-	const [isOpen, setIsOpen] = useState(false)
+	const [showLoginComp, setShowLoginComp] = useState(true)
+	const [showRegisterComp, setShowRegisterComp] = useState(false)
+	const [showForgetPassComp, setShowForgetPassComp] = useState(false)
 
+	const dispatch = useDispatch()
+
+	const loginModal = useSelector(state => state.loginModal)
+	const { show } = loginModal
 	const customStyles = {
 		content: {
 			//  top: "50%",
@@ -22,19 +34,35 @@ const Login = () => {
 	}
 
 	const callbackCloseModal = () => {
-		setIsOpen(false)
+		dispatch(hideLoginModal())
+	}
+
+	const ShowLogin = () => {
+		setShowLoginComp(true)
+		setShowRegisterComp(false)
+		setShowForgetPassComp(false)
+	}
+
+	const ShowRegister = () => {
+		setShowLoginComp(false)
+		setShowRegisterComp(true)
+		setShowForgetPassComp(false)
 	}
 
 	return (
 		<ModalComponent
-			isOpen={loginOpen}
+			isOpen={show}
 			//onAfterOpen={callbackOnAfterOpen}
 			onRequestClose={callbackCloseModal}
 			style={customStyles}
 			contentLabel={'Login-SignUp'}
 		>
-			Login
-			<button onClick={() => callbackCloseModal}>X</button>
+			{showLoginComp && <LoginContainer showRegister={ShowRegister} />}
+			{showRegisterComp && <RegisterContainer showLogin={ShowLogin} />}
+			{showForgetPassComp && (
+				<ForgotPasswordContainer showLogin={ShowLogin} />
+			)}
+			<button onClick={callbackCloseModal}>X</button>
 		</ModalComponent>
 	)
 }
