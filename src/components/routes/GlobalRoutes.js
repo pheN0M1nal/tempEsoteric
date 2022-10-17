@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import { ProtectedRouteComponent } from './ProtectedRouteComponent'
 import { isAuthenticated, isGuest } from '../../conditions/Index'
-import { HomeScreen } from '../../screens/HomeScreen'
+import HomeScreen from '../../screens/HomeScreen'
 import LogoutContainer from '../Authentication/logout/Container'
 import LoginContainer from '../Authentication/login/Container'
 

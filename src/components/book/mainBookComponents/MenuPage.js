@@ -1,6 +1,6 @@
 import { forwardRef, useMemo, useState } from 'react'
 import styled from 'styled-components'
-import menuItems from '../../DataList/menuItems'
+import menuItems from '../../../DataList/menuItems'
 import { useNavigate } from 'react-router'
 const PageWrapper = styled.div`
 	${

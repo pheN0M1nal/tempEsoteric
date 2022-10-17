@@ -5,6 +5,7 @@ import AllPages from './ShowAllPages'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { hideModal } from '../../store/actions/modalActions'
+import { ModalComponent } from '../Global/Modal'
 
 const customStyles = {
 	content: {
@@ -26,24 +27,26 @@ const PdfModal = () => {
 	const modalInfo = useSelector(state => state.modal)
 	const { show, pdf } = modalInfo
 
-	useEffect(() => {
-		setIsOpen(show)
-	}, [show])
-
 	function afterOpenModal() {
 		// references are now sync'd and can be accessed.
 		//subtitle.style.color = '#f00'
 	}
 
 	function closeModal() {
-		setIsOpen(false)
 		dispatch(hideModal())
 	}
+
+	useEffect(() => {
+		console.log('pdfModal')
+		return () => {
+			console.log('pdfModal um')
+		}
+	})
 
 	return (
 		<div>
 			<Modal
-				isOpen={modalIsOpen}
+				isOpen={show}
 				onAfterOpen={afterOpenModal}
 				onRequestClose={closeModal}
 				contentLabel='Example Modal'

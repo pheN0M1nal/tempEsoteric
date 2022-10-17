@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUserProfile } from './store/actions/userActions'
 import { GlobalRoutes } from './components/routes/GlobalRoutes'
+import './App.css'
 
 export const QuizItemsContext = createContext({})
 export const IsAdmin = createContext({})
