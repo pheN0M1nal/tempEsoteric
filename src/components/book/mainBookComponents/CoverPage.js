@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 import styled from 'styled-components'
 const CoverWrapper = styled.div`
-	background-color: #ff0000;
+	background-color:#DAA520;
 	background-image: url(${props => props.bgimg});
 	background-position: center;
 	background-size: 100% 100%;
