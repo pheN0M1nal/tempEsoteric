@@ -1,6 +1,7 @@
-import { ForgotPasswordForm } from "./Form";
+import { ForgotPasswordForm } from './Form'
 
-const ForgotPasswordContainer = () => {
-  return <ForgotPasswordForm />;
-};
-export default ForgotPasswordContainer;
+const ForgotPasswordContainer = ({ showLogin }) => {
+	console.log(showLogin, 'sl')
+	return <ForgotPasswordForm showLogin={showLogin} />
+}
+export default ForgotPasswordContainer

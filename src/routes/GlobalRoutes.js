@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom'
 import { ProtectedRouteComponent } from './ProtectedRouteComponent'
-import { isAuthenticated, isGuest } from '../../conditions/Index'
-import HomeScreen from '../../screens/HomeScreen'
-import LogoutContainer from '../Authentication/logout/Container'
-import LoginContainer from '../Authentication/login/Container'
+import { isAuthenticated, isGuest } from '../conditions/Index'
+import HomeScreen from '../screens/HomeScreen'
+import LogoutContainer from '../components/Authentication/logout/Container'
+import LoginContainer from '../components/Authentication/login/Container'
 
 export const GlobalRoutes = () => {
 	return (

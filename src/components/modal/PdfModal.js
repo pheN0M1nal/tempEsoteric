@@ -4,7 +4,7 @@ import Modal from 'react-modal'
 import AllPages from './ShowAllPages'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { hideModal } from '../../store/actions/modalActions'
+import { hidePdfModal } from '../../store/actions/modalActions'
 import { ModalComponent } from '../Global/Modal'
 
 const customStyles = {
@@ -24,7 +24,7 @@ const PdfModal = () => {
 	let subtitle
 	const [modalIsOpen, setIsOpen] = useState(false)
 
-	const modalInfo = useSelector(state => state.modal)
+	const modalInfo = useSelector(state => state.pdfModal)
 	const { show, pdf } = modalInfo
 
 	function afterOpenModal() {
@@ -33,7 +33,7 @@ const PdfModal = () => {
 	}
 
 	function closeModal() {
-		dispatch(hideModal())
+		dispatch(hidePdfModal())
 	}
 
 	useEffect(() => {

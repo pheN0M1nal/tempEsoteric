@@ -14,17 +14,16 @@ const Nav = styled.div`
     }
     .pagination {
         display: flex;
-        @include list-unstyled();
+        list-style: none;
     }
 
     .page-link {
         position: relative;
         display: block;
-        color: $pagination-color;
-        text-decoration: if($link-decoration == none, null, none);
-        background-color: $pagination-bg;
-        border: $pagination-border-width solid $pagination-border-color;
-        @include transition($pagination-transition);
+        color: #DAA520;
+        text-decoration: none;
+        background-color: #fff;
+        border: .1px solid #DAA520;
 
         &:hover {
             z-index: 2;
@@ -51,8 +50,8 @@ const Nav = styled.div`
         &.active .page-link {
             z-index: 3;
             color: $pagination-active-color;
-            @include gradient-bg($pagination-active-bg);
-            border-color: $pagination-active-border-color;
+            background-color: #DAA520;
+            border-color:#DAA520;
         }
 
         &.disabled .page-link {
@@ -63,33 +62,7 @@ const Nav = styled.div`
         }
     }
 
-    //
-    // Sizing
-    //
-    @include pagination-size(
-        $pagination-padding-y,
-        $pagination-padding-x,
-        null,
-        $pagination-border-radius
-    );
-
-    .pagination-lg {
-        @include pagination-size(
-            $pagination-padding-y-lg,
-            $pagination-padding-x-lg,
-            $font-size-lg,
-            $pagination-border-radius-lg
-        );
-    }
-
-    .pagination-sm {
-        @include pagination-size(
-            $pagination-padding-y-sm,
-            $pagination-padding-x-sm,
-            $font-size-sm,
-            $pagination-border-radius-sm
-        );
-    }
+  
 `;
 const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
     const pageNumbers = [...Array(nPages + 1).keys()].slice(1);

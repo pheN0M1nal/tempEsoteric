@@ -2,7 +2,7 @@ import { createContext, useEffect } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUserProfile } from './store/actions/userActions'
-import { GlobalRoutes } from './components/routes/GlobalRoutes'
+import  {GlobalRoutes}  from './routes/GlobalRoutes'
 
 
 export const QuizItemsContext = createContext({})

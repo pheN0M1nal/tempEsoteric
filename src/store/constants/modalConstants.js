@@ -1,5 +1,5 @@
-export const SHOW_MODAL = 'SHOW_PDF_MODAL'
-export const HIDE_MODAL = 'HIDE_PDF_MODAL'
+export const SHOW_PDF_MODAL = 'SHOW_PDF_MODAL'
+export const HIDE_PDF_MODAL = 'HIDE_PDF_MODAL'
 export const FAILED_MODAL = 'FAILED_PDF_MODAL'
 
 export const SHOW_LOGIN_MODAL = 'SHOW_LOGIN_MODAL'

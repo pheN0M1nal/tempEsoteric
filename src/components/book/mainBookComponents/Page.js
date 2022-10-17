@@ -8,7 +8,6 @@ const PageWrapper = styled.div`
     width: 100%;
     height: 100%;
     position: relative;
-	
 	border: 8px solid #DAA520;
     border-width: ${(props) => (props.pageNumber % 2 === 0 ? `8px 8px 8px 0` : "8px 0 8px 8px")};
     background-color: #00ff00;

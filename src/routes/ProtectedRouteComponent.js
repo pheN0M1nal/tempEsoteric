@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Navigate, useParams } from 'react-router'
 // import { GlobalUserProfileContext } from "../App";
-import { Spinner } from '../Global/Spinner'
+import { Spinner } from '../components/Global/Spinner'
 
 export const ProtectedRouteComponent = ({
 	conditions,
