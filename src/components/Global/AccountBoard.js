@@ -131,7 +131,7 @@ export const AccountBoard = ({ profile }) => {
 	}
 	return (
 		<Wrapper>
-			{profile ? (
+			{!profile ? (
 				<>
 					<ProfilePictureBoard size={2.5}>
 						<img
@@ -178,14 +178,7 @@ export const AccountBoard = ({ profile }) => {
 								&nbsp; Log Out
 							</Link>
 							<HorizontalRule />
-							<Link
-								to={
-									profile.account_type === 'Users'
-										? '/'
-										: '/login'
-								}
-								className='logout-button'
-							>
+							<Link to='/login' className='logout-button'>
 								<img src={'logout'} alt='logout' />
 								&nbsp; Log In
 							</Link>
