@@ -19,10 +19,19 @@ src: url("./static/fonts/rushing_nightshade.ttf") format("truetype"); /* Safari,
 */
 
 .ReactModal__Overlay--after-open {
-  background-color: rgb(137 137 137 / 62%) !important;
+  background-color: rgb(137 137 137 / 18%) !important;
 }
 .ReactModal__Content.ReactModal__Content--after-open {
-  width: 100%;
+  width: 80vw;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0 auto;
+  height: 90vh;
+}
+.react-pdf__Page__textContent
+{
+display: none;
 }
 :root {
   --custom-primary-bg: #e9ece6;

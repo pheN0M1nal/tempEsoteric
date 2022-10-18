@@ -20,11 +20,11 @@ const Nav = styled.div`
     .page-link {
         position: relative;
         display: block;
-        color: #DAA520;
+        color: #daa520;
         text-decoration: none;
         background-color: #fff;
-        border: .1px solid #DAA520;
-
+        border: 0.1px solid #daa520;
+        padding: 0.175rem 0.475rem;
         &:hover {
             z-index: 2;
             color: $pagination-hover-color;
@@ -50,8 +50,8 @@ const Nav = styled.div`
         &.active .page-link {
             z-index: 3;
             color: $pagination-active-color;
-            background-color: #DAA520;
-            border-color:#DAA520;
+            background-color: #daa520;
+            border-color: #daa520;
         }
 
         &.disabled .page-link {
@@ -61,8 +61,6 @@ const Nav = styled.div`
             border-color: $pagination-disabled-border-color;
         }
     }
-
-  
 `;
 const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
     const pageNumbers = [...Array(nPages + 1).keys()].slice(1);

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import Modal from 'react-modal'
-import AllPages from './ShowAllPages'
+import {AllPages} from './ShowAllPages'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { hidePdfModal } from '../../store/actions/modalActions'
@@ -44,7 +44,6 @@ const PdfModal = () => {
 	})
 
 	return (
-		<div>
 			<Modal
 				isOpen={show}
 				onAfterOpen={afterOpenModal}
@@ -55,7 +54,6 @@ const PdfModal = () => {
 					<AllPages pdf={pdf} />
 				</div>
 			</Modal>
-		</div>
 	)
 }
 

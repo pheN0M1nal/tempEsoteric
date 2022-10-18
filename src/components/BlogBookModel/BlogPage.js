@@ -1,7 +1,5 @@
-import { forwardRef, useMemo, useState, useEffect } from 'react'
-import Records from './components/Records'
-import Pagination from './components/Pagination'
-import menuItems from '../../../DataList/menuItems'
+import { forwardRef,  useState, useEffect } from 'react'
+// import Records from './components/Records'
 import styled from 'styled-components'
 import axios from 'axios'
 const PageWrapper = styled.div`
@@ -74,12 +72,11 @@ const PageWrapper = styled.div`
 		height: 25px;
 	}
 `
-export const Page = forwardRef((props, ref) => {
+export const BlogPage = forwardRef((props, ref) => {
 	const [data, setData] = useState([])
-	const [loading, setLoading] = useState(true)
 	const [paginationCurrentPage, setPaginationCurrentPage] = useState(1)
 	const [recordsPerPage] = useState(10)
-
+console.log(props,"props pages blog")
 	const cancelToken = axios.CancelToken.source()
 	const get = async cp => {
 		const api = `http://localhost:3500/content`
@@ -125,12 +122,8 @@ export const Page = forwardRef((props, ref) => {
 			>
 				<div className='pageInner'>
 					<h2>{props.data.name}</h2>
-					<Records data={data} />
-					<Pagination
-						nPages={nPages}
-						currentPage={paginationCurrentPage}
-						setCurrentPage={setPaginationCurrentPage}
-					/>
+					{/* <Records data={data} /> */}
+					
 				</div>
 				<div className='page-footer'>{props?.data?.pageNumber}</div>
 			</PageWrapper>
