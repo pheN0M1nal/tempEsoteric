@@ -43,7 +43,7 @@ const Wrapper = styled.div`
 `
 export const LoginForm = ({ showRegister }) => {
 	const [data, setData] = useState({
-		email: '',
+		username: '',
 		password: '',
 	})
 	const [showSpinner, setShowSpinner] = useState(false)
@@ -53,7 +53,7 @@ export const LoginForm = ({ showRegister }) => {
 	const navigate = useNavigate()
 	const validateFields = () => {
 		let state = true
-		const fields = ['email', 'password']
+		const fields = ['username', 'password']
 		for (let field of fields) {
 			if (!data[field]) {
 				notifyFailure(`${field} is required`)
@@ -65,38 +65,40 @@ export const LoginForm = ({ showRegister }) => {
 
 	const handleUserLogin = async e => {
 		e.preventDefault()
+		console.log(data)
 		if (!validateFields()) {
 			return
 		}
-		// console.log('DATA ', data);
-		setShowSpinner(true)
-		axiosServerInstance()
-			.post(userLogin(), data)
-			.then(response => {
-				console.log('Response data ', response)
-				const user = response.data
-				setProfile(user)
-				// console.log(profile, 'usercontext')
-				if (user.is_loggedIn) {
-					notifySuccess('Logged in Successfully')
-					navigate(`/`, { replace: true })
-				}
 
-				window.localStorage.setItem(
-					'access_token',
-					'faidfiaifeiiiooi232f'
-				) // Test
-				// const { refresh, access } = response.data;
-				// window.localStorage.setItem("access_token", access);
-				// window.localStorage.setItem("refresh_token", refresh);
-				// navigate(`/`, { replace: true });
-				setShowSpinner(false)
-			})
-			.catch(err => {
-				notifyFailure(err)
-				console.log(err.message)
-				setShowSpinner(false)
-			})
+		// console.log('DATA ', data);
+		// setShowSpinner(true)
+		// axiosServerInstance()
+		// 	.post(userLogin(), data)
+		// 	.then(response => {
+		// 		console.log('Response data ', response)
+		// 		const user = response.data
+		// 		setProfile(user)
+		// 		// console.log(profile, 'usercontext')
+		// 		if (user.is_loggedIn) {
+		// 			notifySuccess('Logged in Successfully')
+		// 			navigate(`/`, { replace: true })
+		// 		}
+
+		// 		window.localStorage.setItem(
+		// 			'access_token',
+		// 			'faidfiaifeiiiooi232f'
+		// 		) // Test
+		// 		// const { refresh, access } = response.data;
+		// 		// window.localStorage.setItem("access_token", access);
+		// 		// window.localStorage.setItem("refresh_token", refresh);
+		// 		// navigate(`/`, { replace: true });
+		// 		setShowSpinner(false)
+		// 	})
+		// 	.catch(err => {
+		// 		notifyFailure(err)
+		// 		console.log(err.message)
+		// 		setShowSpinner(false)
+		// 	})
 	}
 
 	const handleOnClickForgotPassword = () => {
@@ -110,11 +112,11 @@ export const LoginForm = ({ showRegister }) => {
 		<Wrapper>
 			<FormComponent>
 				<InputComponent
-					placeholder={'Email'}
-					type='email'
-					value={data.email}
+					placeholder={'Username'}
+					type='username'
+					value={data.username}
 					onChange={e =>
-						HandleOnChangeInput(e, 'email', setData, data)
+						HandleOnChangeInput(e, 'username', setData, data)
 					}
 				/>
 				<InputComponent

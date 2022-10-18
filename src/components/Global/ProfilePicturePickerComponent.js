@@ -52,7 +52,7 @@ const StyledComponent = styled.div`
 `
 
 export const ImagePickerComponent = ({
-	setShowImage,
+	//setShowImage,
 	image,
 	setImage,
 	label,
@@ -70,7 +70,7 @@ export const ImagePickerComponent = ({
 				'load',
 				() => {
 					setTempImageData(fileReader.result)
-					setShowImage(fileReader.result)
+					//setShowImage(fileReader.result)
 				},
 				false
 			)

@@ -21,10 +21,10 @@ export const RegistrationForm = ({ showLogin }) => {
 	const [showSpinner, setShowSpinner] = useState(false)
 	const navigate = useNavigate()
 	const [data, setData] = useState({
-		fullname: '',
+		firstname: '',
+		lastname: '',
 		email: '',
-		business_name: '',
-		phone: '',
+		contact_number: '',
 		username: '',
 		password: '',
 		confirm_password: '',
@@ -71,6 +71,8 @@ export const RegistrationForm = ({ showLogin }) => {
 			return
 		}
 
+		console.log('data', data)
+
 		// console.log(data, "data");
 		// setShowSpinner(true);
 		// axiosInstance()
@@ -89,6 +91,7 @@ export const RegistrationForm = ({ showLogin }) => {
 
 	const handleUserSignup = async e => {
 		e.preventDefault()
+		console.log('data', data)
 		if (!validateFields()) {
 			return
 		}
@@ -128,12 +131,23 @@ export const RegistrationForm = ({ showLogin }) => {
 		<FormComponent>
 			<div className='inputOuter'>
 				<InputComponent
-					placeholder={'Full Name'}
+					placeholder={'First Name'}
 					type='text'
 					height={2.5}
-					value={data.fullname}
+					value={data.firstname}
 					onChange={e =>
-						HandleOnChangeInput(e, 'fullname', setData, data)
+						HandleOnChangeInput(e, 'firstname', setData, data)
+					}
+				/>
+			</div>
+			<div className='inputOuter'>
+				<InputComponent
+					placeholder={'Last Name'}
+					type='text'
+					height={2.5}
+					value={data.lastname}
+					onChange={e =>
+						HandleOnChangeInput(e, 'lastname', setData, data)
 					}
 				/>
 			</div>
@@ -188,26 +202,14 @@ export const RegistrationForm = ({ showLogin }) => {
 			</div>
 			<div className='inputOuter'>
 				<InputComponent
-					placeholder={'phone'}
+					placeholder={'contact_number'}
 					type='text'
 					height={2.5}
-					value={data.phone}
-					onChange={e =>
-						HandleOnChangeInput(e, 'phone', setData, data)
-					}
-				/>
-			</div>
-
-			<div className='inputOuter'>
-				<InputComponent
-					placeholder={'Business name'}
-					type='text'
-					height={2.5}
-					value={data.business_name}
+					value={data.contact_number}
 					onChange={e =>
 						HandleOnChangeInput(
 							e,
-							'business_name',
+							'contact_number',
 							setData,
 							data
 						)
@@ -219,7 +221,7 @@ export const RegistrationForm = ({ showLogin }) => {
 					<ImagePickerComponent
 						image={profilePicture}
 						setImage={setProfilePicture}
-						btnText='CHANGE LOGO'
+						btnText='Choose file'
 					/>
 					<SizedBox height={3} />
 				</div>
