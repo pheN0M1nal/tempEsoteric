@@ -39,11 +39,11 @@ const StyledComponent = styled.div`
 			max-width:900px;
 		} */
     }
-    .wrap {
+    h2.wrap {
         background-color: #daa520;
         padding: 20px;
     }
-    .wrap2 {
+    h2.wrap2 {
         background: transparent;
         background-color: transparent;
 

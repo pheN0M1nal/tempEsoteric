@@ -12,6 +12,9 @@ export const GlobalUserProfileContext = createContext({
 	profile: null,
 	lastTimeFetched: null,
 })
+let Auth = window.localStorage.getItem("access")
+
+let isAuthenticated=Auth?true:true;
 
 const App = () => {
 	const { isFetchingProfile, profile, lastTimeFetched } = useSelector(
@@ -24,7 +27,7 @@ const App = () => {
 	}, [])
 	return (
 		<GlobalUserProfileContext.Provider
-			value={{ isFetchingProfile, profile }}
+			value={{ isFetchingProfile, profile ,isAuthenticated}}
 		>
 			<BrowserRouter>
 				<GlobalRoutes />

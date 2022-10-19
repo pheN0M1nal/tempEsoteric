@@ -22,21 +22,24 @@ src: url("./static/fonts/rushing_nightshade.ttf") format("truetype"); /* Safari,
   background-color: rgb(137 137 137 / 18%) !important;
 }
 .ReactModal__Content.ReactModal__Content--after-open {
-  width: 80vw;
+  width: 100vw;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: start;
   margin: 0 auto;
-  height: 90vh;
+  height: 100vh;
+  inset: 0 !important;
+  padding: 4rem !important;
 }
-.react-pdf__Page__textContent
+/* .react-pdf__Page__textContent
 {
 display: none;
-}
+} */
 :root {
   --custom-primary-bg: #e9ece6;
   --custom-secondry-bg: #f3f3f2;
-  --custom-border-color: #707070;
+  --custom-light-bg: #e9ece6eb;
+  --custom-border-color: #c0dfd9;
   --custom-white: #fff;
   --custom-input-bg: #0d0d17;
   --custom-black: #1b203d;
@@ -54,9 +57,10 @@ display: none;
   --custom-light-line_break-color: rgba(245, 245, 245, 1);
   --custom-deep-line_break-color: rgba(140, 140, 140, 1);
   --custom-blue-color: #0275d8;
-  --custom-green-color: #4b9339;
+  --custom-orange-color: #e7b434;
   --color-change-transition: 200ms ease-in-out color;
   /* duetics code */
+  --custom-shadow:  0 0 15px -8px #8b8b8b;
 
   /* fonts sizes */
   --font-74: 74px;
@@ -80,6 +84,14 @@ display: none;
 body {
   background-color: var(--custom-primary-bg);
 }
+body {
+
+  background-image: url(../../static/images/general/wood3.JPG);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+}
 
 *:not(i) {
   font-family: "Roboto", sans-serif;
@@ -95,34 +107,38 @@ root {
 ::-webkit-scrollbar {
   background: var(--custom-input-border);
   height: 4px;
-  width: 4px;
+  width: 6px;
   margin: 0;
   padding: 0;
+  border-radius: 5px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
   background: var(--custom-input-border);
   height: 4px;
-  width: 4px;
+  width: 6px;
   margin: 0;
   padding: 0;
+  border-radius: 5px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: var(--custom-btn-bg);
+  background:  var(--custom-orange-color);
   height: 4px;
-  width: 4px;
+  width: 6px;
   margin: 0;
   padding: 0;
+  border-radius: 5px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--custom-btn-bg);
+  background:  var(--custom-orange-color);
   height: 4px;
-  width: 4px;
+  width: 8px;
   margin: 0;
   padding: 0;
+  border-radius: 5px;
 }

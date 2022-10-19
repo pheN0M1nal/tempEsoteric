@@ -4,13 +4,14 @@ import { AccountBoard } from '../AccountBoard'
 import { NavigationContext } from '../MainWrapper'
 import { MobileNavContainer } from './mobile/Container'
 import { GlobalUserProfileContext } from '../../../App'
+import { Search } from '../Search'
 
 const StyledComponent = styled.div`
 	display: flex;
 	align-items: center;
 	position: sticky;
 	top: 0;
-	background-color: var(--custom-primary-bg);
+	background-color: var(--custom-transparent);
 	z-index: ${({ mobileSubNavEnabled }) => (mobileSubNavEnabled ? 30 : 1)};
 	color: var(--custom-txt-color);
 	padding: 0 1rem;
@@ -29,9 +30,13 @@ const StyledComponent = styled.div`
 				margin: 0;
 			}
 			.authMenuBarLink {
+				width: 100%;
 				display: flex;
+				gap:.5rem;
+				justify-content: space-between;
 				align-items: center;
 				border-left: 1px solid var(--custom-input-border);
+				padding: 0.2rem 0;
 				.authMenuBarNotification {
 					padding: 1.1rem 1.5rem;
 					border-right: 1px solid var(--custom-input-border);
@@ -77,20 +82,21 @@ export const NavigationContainer = () => {
 				<div className='headerOuter '>
 					<div className='authMenuBarWrapper'>
 						<div className='authMenuBarLink'>
+							<Search/>
 							<AccountBoard
 								isFetchingProfile={isFetchingProfile}
 								profile={profile}
 							/>
 						</div>
 
-						<img
+						{/* <img
 							className='menuBar'
 							src='{Bar}'
 							alt='menu bar'
 							onClick={() => {
 								setMobileSubNavEnabled(old => !old)
 							}}
-						/>
+						/> */}
 					</div>
 				</div>
 			</StyledComponent>
