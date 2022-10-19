@@ -1,13 +1,7 @@
-import { forwardRef, useMemo, useState, useEffect } from 'react'
-import Records from './components/Records'
-import Pagination from './components/Pagination'
-import menuItems from '../../../DataList/menuItems'
+import { forwardRef,  useState, useEffect } from 'react'
+// import Records from './components/Records'
 import styled from 'styled-components'
-import { fetchBlogs } from '../../../store/actions/blogsActions'
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'react-redux'
-import { Spinner } from '../../Global/Spinner'
-
+import axios from 'axios'
 const PageWrapper = styled.div`
 	width: 100%;
 	height: 100%;
@@ -78,17 +72,38 @@ const PageWrapper = styled.div`
 		height: 25px;
 	}
 `
-export const Page = forwardRef((props, ref) => {
+export const BlogPage = forwardRef((props, ref) => {
+	const [data, setData] = useState([])
 	const [paginationCurrentPage, setPaginationCurrentPage] = useState(1)
 	const [recordsPerPage] = useState(10)
+console.log(props,"props pages blog")
+	const cancelToken = axios.CancelToken.source()
+	const get = async cp => {
+		const api = `http://localhost:3500/content`
 
-	const dispatch = useDispatch()
+		console.log(api)
 
-	const content = useSelector(state => state.blogs)
-	const { loading, blogs: data } = content
+		try {
+			const data = await axios.get(api, {
+				cancelToken: cancelToken.token,
+			})
+			setData(data.data)
+			console.log()
+		} catch (error) {
+			axios.isCancel(error) && console.log('error: ', error)
+		}
+	}
+
+	// useEffect(() => {
+	// 	get(1)
+	// }, [])
 
 	useEffect(() => {
-		dispatch(fetchBlogs(props.data.pageNumber, paginationCurrentPage))
+		get(paginationCurrentPage)
+		//console.log(paginationCurrentPage)
+		return () => {
+			cancelToken.cancel()
+		}
 	}, [paginationCurrentPage])
 
 	const indexOfLastRecord = paginationCurrentPage * recordsPerPage
@@ -107,20 +122,8 @@ export const Page = forwardRef((props, ref) => {
 			>
 				<div className='pageInner'>
 					<h2>{props.data.name}</h2>
-					{loading ? (
-						<Spinner size={3} />
-					) : (
-						<>
-							<Records data={data} />
-							<Pagination
-								nPages={nPages}
-								currentPage={paginationCurrentPage}
-								setCurrentPage={
-									setPaginationCurrentPage
-								}
-							/>
-						</>
-					)}
+					{/* <Records data={data} /> */}
+					
 				</div>
 				<div className='page-footer'>{props?.data?.pageNumber}</div>
 			</PageWrapper>

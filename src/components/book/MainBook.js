@@ -106,7 +106,13 @@ const MainBook = () => {
 	return (
 		<StyledComponent pageLength={pages?.length}>
 			<div className='container-md bookOuterContainer'>
-				<div className={page > 1 ? `wrap` : `wrap2`}>
+				<div
+					className={
+						page > 1 && page < pages.length + 2
+							? `wrap`
+							: `wrap2`
+					}
+				>
 					<HTMLFlipBook
 						width={550}
 						height={733}
