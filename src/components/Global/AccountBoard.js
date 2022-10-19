@@ -131,7 +131,7 @@ export const AccountBoard = ({ profile }) => {
 	}
 	return (
 		<Wrapper>
-			{!profile ? (
+			{profile ? (
 				<>
 					<ProfilePictureBoard size={2.5}>
 						<img
@@ -198,18 +198,6 @@ export const AccountBoard = ({ profile }) => {
 						border={'border-color'}
 					>
 						LOGIN
-					</Button>
-					<Button
-						//onClick={handleOnClickSignup}
-						textTransform={'uppercase'}
-						paddingLeftRight={3}
-						fontSize={16}
-						maxWidth={200}
-						height={41}
-						BgColor={'transparent'}
-						border={'border-color'}
-					>
-						SIGNUP
 					</Button>
 				</div>
 			)}

@@ -53,8 +53,7 @@ export const ForgotPasswordForm = ({ showLogin }) => {
 		// }
 	}
 
-	const handleGoToLogin = e => {
-		e.preventDefault()
+	const handleGoToLogin = () => {
 		showLogin()
 	}
 
@@ -90,23 +89,23 @@ export const ForgotPasswordForm = ({ showLogin }) => {
 						</>
 					) : null}
 				</AuthButtonContainer>
-				<AuthButtonContainer>
-					{showButton ? (
-						<>
-							<Button
-								textTransform={'uppercase'}
-								height={54}
-								fontSize={16}
-								maxWidth={250}
-								onClick={handleGoToLogin}
-							>
-								Go Back To Login
-							</Button>
-							<SizedBox height={1.0} />
-						</>
-					) : null}
-				</AuthButtonContainer>
 			</FormComponent>
+			<AuthButtonContainer>
+				{showButton ? (
+					<>
+						<Button
+							textTransform={'uppercase'}
+							height={54}
+							fontSize={16}
+							maxWidth={250}
+							onClick={handleGoToLogin}
+						>
+							Go Back To Login
+						</Button>
+						<SizedBox height={1.0} />
+					</>
+				) : null}
+			</AuthButtonContainer>
 		</Wrapper>
 	)
 }

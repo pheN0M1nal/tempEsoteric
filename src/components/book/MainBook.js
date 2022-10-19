@@ -21,11 +21,11 @@ const StyledComponent = styled.div`
 		max-width: 1000px;
 	}
 	@media (min-width: 1100px) and (max-width: 1400px) {
-		max-width: 900px;
+		max-width: 800px;
 	}
 	.bookOuterContainer {
 		margin: 0 auto;
-		margin-top: 2rem;
+		margin-top: 1rem;
 	}
 	.container-md {
 		height: 80vh;
