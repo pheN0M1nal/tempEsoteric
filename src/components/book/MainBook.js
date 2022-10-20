@@ -25,7 +25,7 @@ const StyledComponent = styled.div`
 	}
 	.bookOuterContainer {
 		margin: 0 auto;
-		margin-top: 1rem;
+		margin-top: 2rem;
 	}
 	.container-md {
 		height: 80vh;
@@ -39,11 +39,11 @@ const StyledComponent = styled.div`
 			max-width:900px;
 		} */
 	}
-	.wrap {
+	h2.wrap {
 		background-color: #daa520;
 		padding: 20px;
 	}
-	.wrap2 {
+	h2.wrap2 {
 		background: transparent;
 		background-color: transparent;
 
@@ -123,7 +123,7 @@ const MainBook = () => {
 						maxHeight={1000}
 						flippingTime={1500}
 						maxShadowOpacity={0.5}
-						drawShadow={false}
+						drawShadow={true}
 						showCover={true}
 						mobileScrollSupport={true}
 						onFlip={onFlip}

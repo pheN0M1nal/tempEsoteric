@@ -13,8 +13,9 @@ import { notifyFailure } from '../../../helpers/notifications/notifyFailure'
 import { HandleOnChangeInput } from '../../../helpers/formInput/HandleOnChangeInput'
 import { notifySuccess } from '../../../helpers/notifications/notifySuccess'
 import { GlobalUserProfileContext } from '../../../App'
-import axiosServerInstance from '../../../config/api/axois'
-import { userLogin } from '../../../api/EndPoints'
+import { useDispatch } from 'react-redux'
+import { login } from '../../../store/actions/userActions'
+import { useSelector } from 'react-redux'
 
 const Wrapper = styled.div`
 	input {
@@ -42,15 +43,20 @@ const Wrapper = styled.div`
 	}
 `
 export const LoginForm = ({ showRegister }) => {
+	// initializing
 	const [data, setData] = useState({
 		username: '',
 		password: '',
 	})
-	const [showSpinner, setShowSpinner] = useState(false)
+	const userInfo = useSelector(state => state.userLogin)
+	const { loading, error } = userInfo
 	const [forgotPasswordModal, setForgotPasswordModal] = useState(false)
-	const { profile, setProfile } = useContext(GlobalUserProfileContext)
+	const dispatch = useDispatch()
 
-	const navigate = useNavigate()
+	//notifying if error
+	error && notifyFailure(error)
+
+	// validating feilds
 	const validateFields = () => {
 		let state = true
 		const fields = ['username', 'password']
@@ -63,51 +69,26 @@ export const LoginForm = ({ showRegister }) => {
 		return state
 	}
 
+	// login
 	const handleUserLogin = async e => {
 		e.preventDefault()
-		console.log(data)
 		if (!validateFields()) {
 			return
 		}
-
-		// console.log('DATA ', data);
-		// setShowSpinner(true)
-		// axiosServerInstance()
-		// 	.post(userLogin(), data)
-		// 	.then(response => {
-		// 		console.log('Response data ', response)
-		// 		const user = response.data
-		// 		setProfile(user)
-		// 		// console.log(profile, 'usercontext')
-		// 		if (user.is_loggedIn) {
-		// 			notifySuccess('Logged in Successfully')
-		// 			navigate(`/`, { replace: true })
-		// 		}
-
-		// 		window.localStorage.setItem(
-		// 			'access_token',
-		// 			'faidfiaifeiiiooi232f'
-		// 		) // Test
-		// 		// const { refresh, access } = response.data;
-		// 		// window.localStorage.setItem("access_token", access);
-		// 		// window.localStorage.setItem("refresh_token", refresh);
-		// 		// navigate(`/`, { replace: true });
-		// 		setShowSpinner(false)
-		// 	})
-		// 	.catch(err => {
-		// 		notifyFailure(err)
-		// 		console.log(err.message)
-		// 		setShowSpinner(false)
-		// 	})
+		dispatch(login(data))
 	}
 
+	// forget password
 	const handleOnClickForgotPassword = () => {
 		setForgotPasswordModal(true)
 	}
+
+	// sign up
 	const handleOnClickSignUp = e => {
 		e.preventDefault()
 		showRegister()
 	}
+
 	return (
 		<Wrapper>
 			<FormComponent>
@@ -129,7 +110,7 @@ export const LoginForm = ({ showRegister }) => {
 				/>
 				<SizedBox height={1.5} />
 				<AuthButtonContainer>
-					{!showSpinner ? (
+					{!loading ? (
 						<div className='formfooter'>
 							<div className='formfooterinner'>
 								<p>

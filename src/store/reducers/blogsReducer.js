@@ -12,7 +12,7 @@ export const blogsReducer = (state = { blogs: [] }, action) => {
 			return {
 				loading: false,
 				blogs: action.payload.blogs,
-				section: action.payload.section,
+				pages: action.payload.pages,
 				page: action.payload.page,
 			}
 		case FETCH_BLOGS_FAILED:

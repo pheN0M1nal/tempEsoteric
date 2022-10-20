@@ -31,39 +31,38 @@ const PageWrapper = styled.div`
 		background-size: 100% 100%;
 		background-repeat: no-repeat;
 		background-image: url(${props => props?.imag});
-		/* border: 2px solid #DAA520; */
 		width: 100%;
 		height: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-self: center;
 		align-items: center;
-		padding: 10% 15%;
+		padding: 10% 13%;
 	}
 	.pageContentOuter {
 		text-align: center;
 		margin: 0 auto;
 		height: 100%;
 		overflow: auto;
-
-		.imageOuterList {
-			width: 100%;
-			height: 100%;
-			max-width: 300px;
-			max-height: 250px;
-			overflow: hidden;
-			margin: 0.5rem auto;
-			img {
-				padding: 1rem;
-				border: 1px solid #ff0000;
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-			}
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.heading {
+		font-size: 1.4rem;
+		@media (max-width: 500px) {
+			font-size: 1rem;
 		}
 	}
+	.word1 {
+		font-size: 1.2rem !important;
+	}
+	.word2 {
+		font-size: 1.1rem !important;
+	}
 	.page-footer {
-		background-color: #daa520;
+		background-color: var(--custom-orange-color);
 		color: #000;
 		display: flex;
 		justify-content: center;
@@ -85,7 +84,7 @@ export const Page = forwardRef((props, ref) => {
 	const dispatch = useDispatch()
 
 	const content = useSelector(state => state.blogs)
-	const { loading, blogs: data } = content
+	const { loading, blogs: data, page, section } = content
 
 	useEffect(() => {
 		dispatch(fetchBlogs(props.data.pageNumber, paginationCurrentPage))
