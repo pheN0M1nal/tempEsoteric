@@ -3,8 +3,8 @@ import { useContext } from 'react'
 import { AccountBoard } from '../AccountBoard'
 import { NavigationContext } from '../MainWrapper'
 import { MobileNavContainer } from './mobile/Container'
-import { GlobalUserProfileContext } from '../../../App'
 import { Search } from '../Search'
+import { useSelector } from 'react-redux'
 
 const StyledComponent = styled.div`
 	display: flex;
@@ -32,7 +32,7 @@ const StyledComponent = styled.div`
 			.authMenuBarLink {
 				width: 100%;
 				display: flex;
-				gap:.5rem;
+				gap: 0.5rem;
 				justify-content: space-between;
 				align-items: center;
 				border-left: 1px solid var(--custom-input-border);
@@ -73,7 +73,8 @@ const StyledComponent = styled.div`
 `
 
 export const NavigationContainer = () => {
-	const { isFetchingProfile, profile } = useContext(GlobalUserProfileContext)
+	const userProfile = useSelector(state => state.userProfile)
+	const { isFetchingProfile, profile } = userProfile
 	const { setMobileSubNavEnabled, mobileSubNavEnabled } =
 		useContext(NavigationContext)
 	return (
@@ -82,7 +83,7 @@ export const NavigationContainer = () => {
 				<div className='headerOuter '>
 					<div className='authMenuBarWrapper'>
 						<div className='authMenuBarLink'>
-							<Search/>
+							<Search />
 							<AccountBoard
 								isFetchingProfile={isFetchingProfile}
 								profile={profile}

@@ -1,25 +1,30 @@
-import { forwardRef, useMemo, useState, useEffect } from "react";
-import Records from "./components/Records";
-import Pagination from "./components/Pagination";
-import menuItems from "../../../DataList/menuItems";
-import styled from "styled-components";
-import axios from "axios";
+import { forwardRef, useMemo, useState, useEffect } from 'react'
+import Records from './components/Records'
+import Pagination from './components/Pagination'
+import menuItems from '../../../DataList/menuItems'
+import styled from 'styled-components'
+import { fetchBlogs } from '../../../store/actions/blogsActions'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { Spinner } from '../../Global/Spinner'
+
 const PageWrapper = styled.div`
-    width: 100%;
-    height: 100%;
-    position: relative;
-    /* border: 8px solid #DAA520;
-	border-width: ${(props) => (props.pageNumber % 2 === 0 ? `8px 8px 8px 0` : "8px 0 8px 8px")}; */
-    background-color: #00ff00;
-    /* padding-left: 5%;	 */
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-self: center;
-    align-items: center;
-    top: auto;
-    bottom: auto;
-    margin: auto;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	/* border: 8px solid #DAA520;
+	border-width: ${props =>
+		props.pageNumber % 2 === 0 ? `8px 8px 8px 0` : '8px 0 8px 8px'}; */
+	background-color: #00ff00;
+	/* padding-left: 5%;	 */
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-self: center;
+	align-items: center;
+	top: auto;
+	bottom: auto;
+	margin: auto;
 
     .pageInner {
         background-position: center;
@@ -133,38 +138,23 @@ const PageWrapper = styled.div`
     }
 `;
 export const Page = forwardRef((props, ref) => {
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [paginationCurrentPage, setPaginationCurrentPage] = useState(1);
+	const [paginationCurrentPage, setPaginationCurrentPage] = useState(1)
+	const [recordsPerPage] = useState(10)
 
-    const cancelToken = axios.CancelToken.source();
-    const get = async (cp) => {
-        const api = `http://localhost:3500/content`;
+	const dispatch = useDispatch()
 
-        console.log(api);
+	const content = useSelector(state => state.blogs)
+	const { loading, blogs: data, page, section } = content
 
-        try {
-            const data = await axios.get(api, {
-                cancelToken: cancelToken.token,
-            });
-            setData(data.data);
-            console.log();
-        } catch (error) {
-            axios.isCancel(error) && console.log("error: ", error);
-        }
-    };
+	useEffect(() => {
+		dispatch(fetchBlogs(props.data.pageNumber, paginationCurrentPage))
+	}, [paginationCurrentPage])
 
-    // useEffect(() => {
-    // 	get(1)
-    // }, [])
+	const indexOfLastRecord = paginationCurrentPage * recordsPerPage
+	const indexOfFirstRecord = indexOfLastRecord - recordsPerPage
+	const nPages = 5
 
-    useEffect(() => {
-        get(paginationCurrentPage);
-        //console.log(paginationCurrentPage)
-        return () => {
-            cancelToken.cancel();
-        };
-    }, [paginationCurrentPage]);
+
 
     return (
         <div

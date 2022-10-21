@@ -1,17 +1,22 @@
-import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router";
-import { Button } from "../../Global/Button";
-import { SizedBox } from "../../Global/SizedBox";
-import { AuthButtonContainer } from "../components/AuthButtonContainer";
-import { FormComponent } from "../components/FormElement";
-import { InputComponent } from "../components/InputELement";
-import { ModalComponent } from "../../Global/Modal";
-import ForgotPasswordContainer from "../forgot_password/Container";
-import { Spinner } from "../../Global/Spinner";
-import styled from "styled-components";
-import { notifyFailure } from "../../../helpers/notifications/notifyFailure";
-import { HandleOnChangeInput } from "../../../helpers/formInput/HandleOnChangeInput";
-import { GlobalUserProfileContext } from "../../../App";
+import React, { useContext, useState } from 'react'
+import { useNavigate } from 'react-router'
+import { Button } from '../../Global/Button'
+import { SizedBox } from '../../Global/SizedBox'
+import { AuthButtonContainer } from '../components/AuthButtonContainer'
+import { FormComponent } from '../components/FormElement'
+import { InputComponent } from '../components/InputELement'
+import { ModalComponent } from '../../Global/Modal'
+import ForgotPasswordContainer from '../forgot_password/Container'
+import { Spinner } from '../../Global/Spinner'
+import styled from 'styled-components'
+import { notifyFailure } from '../../../helpers/notifications/notifyFailure'
+import { HandleOnChangeInput } from '../../../helpers/formInput/HandleOnChangeInput'
+import { notifySuccess } from '../../../helpers/notifications/notifySuccess'
+import { GlobalUserProfileContext } from '../../../App'
+import { useDispatch } from 'react-redux'
+import { login } from '../../../store/actions/userActions'
+import { useSelector } from 'react-redux'
+
 const Wrapper = styled.div`
     input {
         @media (max-width: 1100px) {
@@ -21,42 +26,51 @@ const Wrapper = styled.div`
     }
 `;
 export const LoginForm = ({ showRegister }) => {
-    const [data, setData] = useState({
-        username: "",
-        password: "",
-    });
-    const [showSpinner, setShowSpinner] = useState(false);
-    const [forgotPasswordModal, setForgotPasswordModal] = useState(false);
-    const { profile, setProfile } = useContext(GlobalUserProfileContext);
+	// initializing
+	const [data, setData] = useState({
+		username: '',
+		password: '',
+	})
+	const userInfo = useSelector(state => state.userLogin)
+	const { loading, error } = userInfo
+	const [forgotPasswordModal, setForgotPasswordModal] = useState(false)
+	const dispatch = useDispatch()
 
-    const navigate = useNavigate();
-    const validateFields = () => {
-        let state = true;
-        const fields = ["username", "password"];
-        for (let field of fields) {
-            if (!data[field]) {
-                notifyFailure(`${field} is required`);
-                state = false;
-            }
-        }
-        return state;
-    };
+	//notifying if error
+	error && notifyFailure(error)
 
-    const handleUserLogin = async (e) => {
-        e.preventDefault();
-        console.log(data);
-        if (!validateFields()) {
-            return;
-        }
-    };
+	// validating feilds
+	const validateFields = () => {
+		let state = true
+		const fields = ['username', 'password']
+		for (let field of fields) {
+			if (!data[field]) {
+				notifyFailure(`${field} is required`)
+				state = false
+			}
+		}
+		return state
+	}
 
-    const handleOnClickForgotPassword = () => {
-        setForgotPasswordModal(true);
-    };
-    const handleOnClickSignUp = (e) => {
-        e.preventDefault();
-        showRegister();
-    };
+	// login
+	const handleUserLogin = async e => {
+		e.preventDefault()
+		if (!validateFields()) {
+			return
+		}
+		dispatch(login(data))
+	}
+
+	// forget password
+	const handleOnClickForgotPassword = () => {
+		setForgotPasswordModal(true)
+	}
+
+	// sign up
+	const handleOnClickSignUp = e => {
+		e.preventDefault()
+		showRegister()
+	}
     return (
         <Wrapper>
             <FormComponent>
@@ -77,7 +91,7 @@ export const LoginForm = ({ showRegister }) => {
                 />
                 <SizedBox height={1.5} />
                 <AuthButtonContainer>
-                    {!showSpinner ? (
+                    {!loading ? (
                         <div className="formfooter">
                             <Button
                                 textTransform={"uppercase"}
