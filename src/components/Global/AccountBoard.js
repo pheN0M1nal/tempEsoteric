@@ -1,18 +1,22 @@
-import styled from "styled-components";
-import { ProfilePictureBoard } from "./ProfilePictureBoard";
-import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
-import { NavigationContext } from "./MainWrapper";
-import { SizedBox } from "./SizedBox";
-import { HorizontalRule } from "./HorizontalRule";
-import { Button } from "./Button";
-import logout from "../../static/images/Auth/3599716@0.png";
-import profileimg from "../../static/images/Auth/2384396@0.png";
-import profilePicture from "../../static/images/Auth/How-to-be-happy-as-an-introvert.png";
-import down from "../../static/images/Auth/4980085@0.png";
-import { useDispatch } from "react-redux";
-import { showLoginModal } from "../../store/actions/modalActions";
-import { ModalComponent } from "./Modal";
+import styled from 'styled-components'
+import { ProfilePictureBoard } from './ProfilePictureBoard'
+import { Link } from 'react-router-dom'
+import { useContext, useState } from 'react'
+import { NavigationContext } from './MainWrapper'
+import { SizedBox } from './SizedBox'
+import { HorizontalRule } from './HorizontalRule'
+import { Button } from './Button'
+import logout from '../../static/images/Auth/3599716@0.png'
+import profileimg from '../../static/images/Auth/2384396@0.png'
+import profilePicture from '../../static/images/Auth/How-to-be-happy-as-an-introvert.png'
+import down from '../../static/images/Auth/4980085@0.png'
+import { useDispatch } from 'react-redux'
+import {
+	showLoginModal,
+	showProfileModal,
+	showSubscriptionModal,
+} from '../../store/actions/modalActions'
+import { ModalComponent } from './Modal'
 
 const Wrapper = styled.div`
 	display: flex;
@@ -122,59 +126,97 @@ const Wrapper = styled.div`
 export const AccountBoard = ({ profile }) => {
 	const dispatch = useDispatch()
 
-    const [subNavToggle, setSubNavToggle] = useState(false);
-    const { currentSubNavKey, setCurrentSubNavKey } = useContext(NavigationContext);
-    // const { profile, isAuthenticated } = useContext(GlobalUserProfileContext);
-    // console.log(Auth);
-    const handleOnClickProfileBoard = (e) => {
-        e.preventDefault();
-        setSubNavToggle(!subNavToggle);
-        // setCurrentSubNavKey((prev) => (prev === "auth" ? null : "auth"));
-    };
-    const handleOnClickLogin = () => {
-        dispatch(showLoginModal());
-    };
-    return (
-        <Wrapper>
-            {profile ? (
-                <>
-                    <div className="profileTab">
-                        <ProfilePictureBoard size={2.5}>
-                            <img
-                                className="img"
-                                src={
-                                    profile?.profile?.picture
-                                        ? profile?.profile?.picture
-                                        : profilePicture
-                                }
-                                alt=""
-                                onClick={handleOnClickProfileBoard}
-                            />
-                        </ProfilePictureBoard>
-                        <div className="name" onClick={handleOnClickProfileBoard}>
-                            <span className="first">{profile?.fullname || "name"}</span>
-                            <img className="downChevron" src={down} alt="down" />
-                        </div>
-                    </div>
-                    {subNavToggle ? (
-                        <div id="pop-nav">
-                            <Link to="/userprofile" className="logout-button logout1">
-                                <img src={profileimg} alt="userprofile" />
-                                &nbsp; Profile
-                            </Link>
-                            <Link to={`/logout/${profile?.id}`} className="logout-button logout2">
-                                <img src={logout} alt="logout" />
-                                &nbsp; Log Out
-                            </Link>
-                        </div>
-                    ) : null}
-                </>
-            ) : (
-                <div className="AuthBtn">
-                    <Button
-                        onClick={handleOnClickLogin}
-                        textTransform={"uppercase"}
-                        fontSize={16}
+	const [subNavToggle, setSubNavToggle] = useState(false)
+	const { currentSubNavKey, setCurrentSubNavKey } =
+		useContext(NavigationContext)
+	// const { profile, isAuthenticated } = useContext(GlobalUserProfileContext);
+	// console.log(Auth);
+	const handleOnClickProfileBoard = e => {
+		e.preventDefault()
+		setSubNavToggle(!subNavToggle)
+		// setCurrentSubNavKey((prev) => (prev === "auth" ? null : "auth"));
+	}
+	const handleOnClickLogin = () => {
+		dispatch(showLoginModal())
+	}
+
+	const showProfile = () => {
+		dispatch(showProfileModal())
+	}
+
+	const showSubscription = () => {
+		dispatch(showSubscriptionModal())
+	}
+
+	return (
+		<Wrapper>
+			{!profile ? (
+				<>
+					<div className='profileTab'>
+						<ProfilePictureBoard size={2.5}>
+							<img
+								className='img'
+								src={
+									profile?.profile?.picture
+										? profile?.profile?.picture
+										: profilePicture
+								}
+								alt=''
+								onClick={handleOnClickProfileBoard}
+							/>
+						</ProfilePictureBoard>
+						<div
+							className='name'
+							onClick={handleOnClickProfileBoard}
+						>
+							<span className='first'>
+								{profile?.fullname || 'name'}
+							</span>
+							<img
+								className='downChevron'
+								src={down}
+								alt='down'
+							/>
+						</div>
+					</div>
+					{subNavToggle ? (
+						<div id='pop-nav'>
+							<Link
+								onClick={showProfile}
+								className='logout-button logout1'
+							>
+								<img
+									src={profileimg}
+									alt='userprofile'
+								/>
+								&nbsp; Profile
+							</Link>
+							<Link
+								onClick={showSubscription}
+								className='logout-button logout1'
+							>
+								<img
+									src={profileimg}
+									alt='userprofile'
+								/>
+								&nbsp; Subscription
+							</Link>
+							<Link
+								to={`/logout/${profile?.id}`}
+								className='logout-button logout2'
+							>
+								<img src={logout} alt='logout' />
+								&nbsp; Log Out
+							</Link>
+						</div>
+					) : null}
+				</>
+			) : (
+				<div className='AuthBtn'>
+					<Button
+						onClick={handleOnClickLogin}
+						textTransform={'uppercase'}
+						fontSize={16}
 						addEffect={true}
 						maxWidth={200}
 						paddingLeftRight={3}

@@ -1,22 +1,21 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { hidePdfModal } from '../../store/actions/modalActions'
+import { hideSubscriptionModal } from '../../store/actions/modalActions'
 import { ModalComponent } from '../Global/Modal'
-import subscriptionModels from '../../DataList/subscriptionModels'
+import { subscriptionModels } from '../../DataList/subscriptionModels'
 import { SubscriptionCard } from '../Global/subscriptionCard/SubscriptionCard'
+import { CloseBtn } from '../Global/CloseBtn'
 
 const customStyles = {
-	content: {
-		top: '10%',
-		left: '10%',
-		right: 'auto',
-		bottom: 'auto',
-		marginRight: '-50%',
-		transform: 'translate(-50%, 0%)',
-	},
+	// content: {
+	// 	top: '10%',
+	// 	left: '10%',
+	// 	right: 'auto',
+	// 	bottom: 'auto',
+	// 	marginRight: '-50%',
+	// 	transform: 'translate(-50%, 0%)',
+	// },
 }
-
-
 
 const SubscriptionModal = () => {
 	const dispatch = useDispatch()
@@ -28,7 +27,7 @@ const SubscriptionModal = () => {
 	const { profile } = userInfo
 
 	function closeModal() {
-		dispatch(hidePdfModal())
+		dispatch(hideSubscriptionModal())
 	}
 
 	const handleSubscrition = () => {
@@ -38,7 +37,6 @@ const SubscriptionModal = () => {
 	return (
 		<ModalComponent
 			isOpen={show}
-			onAfterOpen={afterOpenModal}
 			onRequestClose={closeModal}
 			modalLabel={'Example Modal'}
 			stylesFromProps={customStyles}
@@ -54,6 +52,7 @@ const SubscriptionModal = () => {
 						handleSubscrition={handleSubscrition}
 					/>
 				))}
+				<CloseBtn handleOnClickClose={closeModal} />
 			</div>
 		</ModalComponent>
 	)
