@@ -1,25 +1,24 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
-import { Document, pdfjs } from "react-pdf";
-import { Page } from "./BlogPage";
-import PdfBook from "./PdfBook";
+import React, { useState,useEffect } from 'react'
+import { Document, pdfjs } from 'react-pdf'
+import { Page } from './BlogPage'
+import PdfBook from './PdfBook'
 
 
 
-export const AllPages = (props, callbackCancel) => {
-    pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
-    const [numPages, setNumPages] = useState(6);
-    function onDocumentLoadSuccess({ numPages }) {
-        setNumPages(numPages);
-    }
-    console.log(props, "props");
-    const { pdf } = props;
+export const AllPages = props => {
+	pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
+	const [numPages, setNumPages] = useState(6)
+	function onDocumentLoadSuccess({ numPages }) {
+		setNumPages(numPages)
+	}
+	console.log(props, 'props')
+	const { pdf } = props
 
     useEffect(() => {
         console.log("showAllPages");
     });
     const handleOnClickClose = () => {
-        callbackCancel(false);
+        props.callbackCancel(false);
     };
     return (
         <>

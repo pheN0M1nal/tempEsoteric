@@ -1,7 +1,7 @@
 import PdfModal from '../components/modal/PdfModal'
 import MainBook from '../components/book/MainBook'
-import Login from '../components/Login-Signup/Login'
 import { NavigationContainer } from '../components/Global/navigation/Container'
+import Login from '../components/modal/LoginModal'
 
 const HomeScreen = () => {
 	return (

@@ -2,16 +2,22 @@ import {
 	FETCH_BLOGS_START,
 	FETCH_BLOGS_FAILED,
 	FETCH_BLOGS_SUCCESS,
-} from './constants/blogsConstants'
+} from '../constants/blogsConstants'
+import axios from 'axios'
 
-export const fetchBlogs = id => async dispatch => {
+import AxiosInstance from '../../config/api/axois'
+
+export const fetchBlogs = (page, section) => async dispatch => {
 	try {
 		dispatch({ type: FETCH_BLOGS_START })
-
-		//const { data } = await axios.get(`/api/blogs/page=2&sections=2`)
-
-		dispatch({ type: FETCH_BLOGS_SUCCESS, payload: data })
+		const api = `http://localhost:3500/content`
+		const { data } = await axios.get(api)
+		dispatch({
+			type: FETCH_BLOGS_SUCCESS,
+			payload: { blogs: data, page: page, section: section },
+		})
 	} catch (error) {
+		axios.isCancel(error) && console.log('error: ', error)
 		dispatch({
 			type: FETCH_BLOGS_FAILED,
 			payload:

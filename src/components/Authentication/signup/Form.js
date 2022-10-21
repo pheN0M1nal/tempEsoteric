@@ -1,32 +1,45 @@
-import { Button } from "../../Global/Button";
-import { SizedBox } from "../../Global/SizedBox";
-import { AuthButtonContainer } from "../components/AuthButtonContainer";
-import { InputComponent } from "../components/InputELement";
-import { FormComponent } from "../components/FormElement";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ImagePickerComponent } from "../../Global/ProfilePicturePickerComponent";
-import { Spinner } from "../../Global/Spinner";
-import { notifyFailure } from "../../../helpers/notifications/notifyFailure";
-import { HandleOnChangeInput } from "../../../helpers/formInput/HandleOnChangeInput";
-import axiosServerInstance from "../../../config/api/axois";
-import { userSignup } from "../../../api/EndPoints";
-import { notifySuccess } from "../../../helpers/notifications/notifySuccess";
+import { Button } from '../../Global/Button'
+import { SizedBox } from '../../Global/SizedBox'
+import { AuthButtonContainer } from '../components/AuthButtonContainer'
+import { InputComponent } from '../components/InputELement'
+import { FormComponent } from '../components/FormElement'
+import { useEffect, useState } from 'react'
+import { ImagePickerComponent } from '../../Global/ProfilePicturePickerComponent'
+import { Spinner } from '../../Global/Spinner'
+import { notifyFailure } from '../../../helpers/notifications/notifyFailure'
+import { HandleOnChangeInput } from '../../../helpers/formInput/HandleOnChangeInput'
+import { useDispatch, useSelector } from 'react-redux'
+import { register } from '../../../store/actions/userActions'
 
 export const RegistrationForm = ({ showLogin }) => {
-    const [profilePicture, setProfilePicture] = useState(null);
-    const [showSpinner, setShowSpinner] = useState(false);
-    const navigate = useNavigate();
-    const [data, setData] = useState({
-        firstname: "",
-        lastname: "",
-        email: "",
-        contact_number: "",
-        username: "",
-        password: "",
-        confirm_password: "",
-        // logo: ""
-    });
+	// initializing
+	const [profilePicture, setProfilePicture] = useState(null)
+	const [data, setData] = useState({
+		firstname: '',
+		lastname: '',
+		email: '',
+		contact_number: '',
+		username: '',
+		password: '',
+		confirm_password: '',
+		// logo: ""
+	})
+	const dispatch = useDispatch()
+
+	// checking if user exist
+	const userInfo = useSelector(state => state.userProfile)
+	const { loading, profile, error } = userInfo
+
+	// checking if user updated
+	const userUpdate = useSelector(state => state.userUpdateProfile)
+	const {
+		loading: loadingUpdate,
+		error: errorUpdate,
+		success: successUpdate,
+	} = userUpdate
+
+	// notifying if error from reducer state
+	error && notifyFailure(error)
 
     useEffect(() => {
         if (profilePicture) {
@@ -38,69 +51,47 @@ export const RegistrationForm = ({ showLogin }) => {
         }
     }, [profilePicture]);
 
-    const validateFields = () => {
-        let state = true;
-        let fields = [
-            "fullname",
-            "email",
-            "business_name",
-            "phone",
-            "username",
-            "password",
-            "confirm_password",
-        ];
-        for (let field of fields) {
-            if (!data[field]) {
-                notifyFailure(`${field} is required`);
-                state = false;
-            }
-        }
-        if (data.password !== data.confirm_password) {
-            notifyFailure(`Your passwords doesn't match`);
-            state = false;
-        }
-        return state;
-    };
+	const validateFields = () => {
+		let state = true
+		let fields = [
+			'fullname',
+			'email',
+			'business_name',
+			'phone',
+			'username',
+			'password',
+			'confirm_password',
+		]
+		for (let field of fields) {
+			if (!data[field]) {
+				notifyFailure(`${field} is required`)
+				state = false
+			}
+		}
+		if (data.password !== data.confirm_password) {
+			notifyFailure(`Your passwords doesn't match`)
+			state = false
+		}
+		return state
+	}
 
-    const handleOnClickButton = async (e) => {
-        e.preventDefault();
-        if (!validateFields()) {
-            return;
-        }
+	// handling sign up button
+	const handleUserSignup = async e => {
+		e.preventDefault()
+		console.log('data', data)
+		if (!validateFields()) {
+			return
+		}
+		let modData = { ...data }
+		delete modData.confirm_password
+		// console.log(modData)
+		dispatch(register(modData))
+	}
 
-        console.log("data", data);
+	const handleOnClickLogin = () => {
+		showLogin()
+	}
 
-     
-    };
-
-    const handleUserSignup = async (e) => {
-        e.preventDefault();
-        console.log("data", data);
-        if (!validateFields()) {
-            return;
-        }
-        setShowSpinner(true);
-        let modData = { ...data };
-        delete modData.confirm_password;
-        axiosServerInstance()
-            .post(userSignup(), modData)
-            .then((response) => {
-                const user = response.data;
-                if (user.is_loggedIn) {
-                    navigate(`/`, { replace: true });
-                }
-                notifySuccess("Registered successfully");
-                setShowSpinner(false);
-            })
-            .catch((err) => {
-                console.log(err);
-                setShowSpinner(false);
-            });
-    };
-
-    const handleOnClickLogin = () => {
-        showLogin();
-    };
 
     return (
         <FormComponent>
@@ -185,7 +176,7 @@ export const RegistrationForm = ({ showLogin }) => {
                 </div>
             </div>
                 <AuthButtonContainer>
-                    {!showSpinner ? (
+                    {!loading ? (
                         <div className="formfooter">
                                 <Button
                                     textTransform={"uppercase"}

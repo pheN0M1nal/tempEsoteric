@@ -53,18 +53,18 @@ const Login = () => {
     const { show } = loginModal;
     const customStyles = {
         content: {
-            top: "50%",
-            left: "50%",
-            right: "auto",
-            bottom: "auto",
-            maxWidth: "80%",
-            borderRadius: "5px",
-            marginRight: "-50%",
-            transform: "translate(-50%, -50%)",
-            background: "var(--custom-primary-bg)",
-            padding: "2rem 3rem",
-            maxHeight: "100vh",
-            overflowY: "scroll",
+            // top: "50%",
+            // left: "50%",
+            // right: "auto",
+            // bottom: "auto",
+            // maxWidth: "80%",
+            // borderRadius: "5px",
+            // marginRight: "0%",
+            // transform: "translate(0%, 0%)",
+            // background: "var(--custom-primary-bg)",
+            // padding: "2rem 3rem",
+            // maxHeight: "100vh",
+            // overflowY: "scroll",
         },
     };
 
@@ -89,17 +89,15 @@ const Login = () => {
             isOpen={show}
             //onAfterOpen={callbackOnAfterOpen}
             onRequestClose={callbackCloseModal}
-            style={customStyles}
+            stylesFromProps={customStyles}
             contentLabel={"Login-SignUp"}
-            className="Modal"
+            classNameFromProps="login_model"
         >
             <Wrapper>
                 {showLoginComp && <LoginContainer showRegister={ShowRegister} />}
                 {showRegisterComp && <RegisterContainer showLogin={ShowLogin} />}
                 {showForgetPassComp && <ForgotPasswordContainer showLogin={ShowLogin} />}
-                {/* <button className="closeBtn" onClick={callbackCloseModal}>
-                    <img src={closeBtn} alt="close" />
-                </button> */}
+               
                 <CloseBtn handleOnClickClose={callbackCloseModal}/>
             </Wrapper>
         </ModalComponent>
