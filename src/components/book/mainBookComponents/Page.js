@@ -46,10 +46,9 @@ const PageWrapper = styled.div`
     }
     .heading {
         font-size: 1.4rem;
-		@media (max-width:500px) {
-			font-size: 1rem;
-			
-		}
+        @media (max-width: 500px) {
+            font-size: 1rem;
+        }
     }
     .word1 {
         font-size: 1.2rem !important;
@@ -58,8 +57,6 @@ const PageWrapper = styled.div`
         font-size: 1.1rem !important;
     }
     .page-footer {
-        background-color: var(--custom-orange-color);
-        color: #000;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -71,6 +68,68 @@ const PageWrapper = styled.div`
         right: 3%;
         width: 25px;
         height: 25px;
+    }
+    .pageNumber {
+        display: flex;
+        width: 100%;
+
+        padding: 0rem;
+        span {
+            background-color: #daa520;
+            color: #000;
+            width: 25px;
+            height: 25px;
+            border-radius: 2.4rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    .oddPage {
+        padding-right: 0rem;
+        justify-content: end;
+    }
+    .evenPage {
+        justify-content: start;
+        padding-left: 2rem;
+    }
+    ::-webkit-scrollbar {
+        background: var(--custom-input-border);
+        height: 4px;
+        width: 4px;
+        margin: 0;
+        padding: 0;
+        border-radius: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: var(--custom-input-border);
+        height: 4px;
+        width: 4px;
+        margin: 0;
+        padding: 0;
+        border-radius: 5px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: var(--custom-orange-color);
+        height: 0px;
+        width: 0px;
+        margin: 0;
+        padding: 0;
+        border-radius: 5px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--custom-orange-color);
+        height: 4px;
+        width: 0px;
+        margin: 0;
+        padding: 0;
+        border-radius: 5px;
     }
 `;
 export const Page = forwardRef((props, ref) => {
@@ -132,7 +191,14 @@ export const Page = forwardRef((props, ref) => {
                         setPaginationCurrentPage={setPaginationCurrentPage}
                     />
                 </div>
-                <div className="page-footer">{props?.data?.pageNumber}</div>
+                <div
+                    className={`page-footer pageNumber ${
+                        props?.data?.pageNumber % 2 === 0 ? "oddPage" : "evenPage"
+                    }`}
+                >
+                <span>{props?.data?.pageNumber}</span>
+                    
+                </div>
             </PageWrapper>
         </div>
     );

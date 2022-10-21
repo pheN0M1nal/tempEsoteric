@@ -4,13 +4,13 @@ import { LoginForm } from './Form'
 
 const LoginContainer = ({ showRegister }) => {
 	return (
-		<MainWrapper>
-			<AuthMainContainer mode={'login'}>
+		
+			<AuthMainContainer mode={'login'} modeimg={'login'}>
 				<div className='LoginFormOuter'>
 					<LoginForm showRegister={showRegister} />
 				</div>
 			</AuthMainContainer>
-		</MainWrapper>
+		
 	)
 }
 

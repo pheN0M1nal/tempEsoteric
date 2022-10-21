@@ -20,16 +20,40 @@ src: url("./static/fonts/rushing_nightshade.ttf") format("truetype"); /* Safari,
 
 .ReactModal__Overlay--after-open {
   background-color: rgb(137 137 137 / 18%) !important;
+  z-index: 2;
 }
-.ReactModal__Content.ReactModal__Content--after-open {
-  width: 100vw;
+
+.ReactModal__Content.ReactModal__Content--after-open.login_model ,.ReactModal__Content.ReactModal__Content--after-open.pdf_model  {
+  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: center;
   margin: 0 auto;
   height: 100vh;
+  overflow: auto;
   inset: 0 !important;
   padding: 4rem !important;
+  background: #9b9999;
+  background-image: url(../images/general/wood.png);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+.ReactModal__Content.ReactModal__Content--after-open.pdf_model {
+ 
+  align-items: start;
+
+}
+@media (max-width:1100px){
+  .ReactModal__Content.ReactModal__Content--after-open.login_model {
+
+    margin: 0 auto;
+ 
+    padding:0 2rem !important;
+
+
+  }
 }
 /* .react-pdf__Page__textContent
 {
@@ -106,8 +130,8 @@ root {
 
 ::-webkit-scrollbar {
   background: var(--custom-input-border);
-  height: 4px;
-  width: 6px;
+  height: 0px;
+  width: 0px;
   margin: 0;
   padding: 0;
   border-radius: 5px;
@@ -116,8 +140,8 @@ root {
 /* Track */
 ::-webkit-scrollbar-track {
   background: var(--custom-input-border);
-  height: 4px;
-  width: 6px;
+  height: 0px;
+  width: 0px;
   margin: 0;
   padding: 0;
   border-radius: 5px;
@@ -126,8 +150,8 @@ root {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background:  var(--custom-orange-color);
-  height: 4px;
-  width: 6px;
+  height: 0px;
+  width: 0px;
   margin: 0;
   padding: 0;
   border-radius: 5px;
@@ -136,8 +160,8 @@ root {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background:  var(--custom-orange-color);
-  height: 4px;
-  width: 8px;
+  height: 0px;
+  width: 0px;
   margin: 0;
   padding: 0;
   border-radius: 5px;

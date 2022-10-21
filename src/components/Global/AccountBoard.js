@@ -12,6 +12,7 @@ import profilePicture from "../../static/images/Auth/How-to-be-happy-as-an-intro
 import down from "../../static/images/Auth/4980085@0.png";
 import { useDispatch } from "react-redux";
 import { showLoginModal } from "../../store/actions/modalActions";
+import { ModalComponent } from "./Modal";
 
 const Wrapper = styled.div`
         display: flex;
@@ -135,7 +136,7 @@ export const AccountBoard = ({ profile }) => {
     };
     return (
         <Wrapper>
-            {!profile ? (
+            {profile ? (
                 <>
                     <div className="profileTab">
                         <ProfilePictureBoard size={2.5}>
@@ -199,6 +200,21 @@ export const AccountBoard = ({ profile }) => {
                     </Button>
                 </div>
             )}
+            {/* <ModalComponent
+                        modalLabel={"Edit Institution"}
+                        isOpen={showModalEditInstitution}
+                        callbackCloseModal={() => {
+                            setShowModalEditInstitution(false);
+                        }}
+                    >
+                         <EditInstitution
+                            callbackCancel={() => {
+                                setShowModalEditInstitution(false);
+                            }}
+                            callbackProceed={finalizeEditInstitution}
+                            institutionID={institutionToEdit.current}
+                        /> 
+                    </ModalComponent> */}
         </Wrapper>
     );
 };

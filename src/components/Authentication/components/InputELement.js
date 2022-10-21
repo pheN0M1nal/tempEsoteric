@@ -6,10 +6,10 @@ const InputElement = styled.input`
   background-color: var(--custom-transparent);
   width: 100%;
   max-width: 535px;
-  height: 50px;
+  height: 40px;
 
   letter-spacing: 1px;
-  margin-top: 1rem;
+  margin-top: 0rem;
   margin-bottom: 1rem;
   border-bottom: 1px solid var(--custom-border-color);
   color: var(--custom-txt-color);

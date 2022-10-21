@@ -10,10 +10,10 @@ import Pagination from "./Pagination";
 const Wrapper = styled.div`
     .flip_card {
         background-color: transparent;
-        width: 250px;
-        height: 200px;
+        width: 200px;
+        height: 150px;
         perspective: 1000px;
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
         cursor: pointer;
         .flip_card_inner {
             position: relative;
@@ -26,8 +26,8 @@ const Wrapper = styled.div`
             .flip_card_front {
                 background-color: #bbb;
                 color: black;
-                width: 250px;
-                height: 200px;
+                width: 200px;
+                height: 150px;
                 img {
                     width: 100%;
                     height: 100%;

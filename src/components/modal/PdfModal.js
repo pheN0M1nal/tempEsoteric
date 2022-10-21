@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { hidePdfModal } from "../../store/actions/modalActions";
 import { ModalComponent } from "../Global/Modal";
+import { CloseBtn } from "../Global/CloseBtn";
 
 const customStyles = {
     content: {
@@ -50,6 +51,7 @@ const PdfModal = () => {
             onAfterOpen={afterOpenModal}
             onRequestClose={closeModal}
             contentLabel="Example Modal"
+            className={"pdf_model"}
         >
             <div className="all-page-container">
                 <AllPages
@@ -58,6 +60,7 @@ const PdfModal = () => {
                         closeModal();
                     }}
                 />
+              <CloseBtn handleOnClickClose={closeModal}/>
             </div>
         </Modal>
     );

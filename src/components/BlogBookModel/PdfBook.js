@@ -57,6 +57,7 @@ const StyledComponent = styled.div`
         max-height: 500px;
         overflow: auto;
     }
+    
     .--soft {
         background-color: white;
     }
@@ -133,7 +134,7 @@ const PdfBook = ({ children: BlogPages }) => {
                 maxHeight={800}
                 flippingTime={1500}
                 maxShadowOpacity={0.5}
-                drawShadow={false}
+                drawShadow={true}
                 showCover={true}
                 mobileScrollSupport={true}
                 onFlip={onFlip}
@@ -158,6 +159,7 @@ const PdfBook = ({ children: BlogPages }) => {
                 )}
                 <PageCover bgimg={bgimg2} title={"."} key={BlogPages.length} pos="bottom" />
             </HTMLFlipBook>
+            
         </StyledComponent>
     );
 };
