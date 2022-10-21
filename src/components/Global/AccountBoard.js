@@ -9,6 +9,7 @@ import { Button } from './Button'
 import logout from '../../static/images/Auth/3599716@0.png'
 import profileimg from '../../static/images/Auth/2384396@0.png'
 import profilePicture from '../../static/images/Auth/How-to-be-happy-as-an-introvert.png'
+import plansimg from '../../static/images/Auth/4222015@1.png'
 import down from '../../static/images/Auth/4980085@0.png'
 import { useDispatch } from 'react-redux'
 import {
@@ -26,6 +27,7 @@ const Wrapper = styled.div`
 	.profileTab {
 		display: flex;
 		align-items: center;
+		cursor: pointer;
 		position: relative;
 		padding: 0.3rem 0 0.3rem 0.4rem;
 		border: 1px solid #c0dfd9;
@@ -196,10 +198,10 @@ export const AccountBoard = ({ profile }) => {
 								className='logout-button logout1'
 							>
 								<img
-									src={profileimg}
+									src={plansimg}
 									alt='userprofile'
 								/>
-								&nbsp; Subscription
+								&nbsp; Plans
 							</Link>
 							<Link
 								to={`/logout/${profile?.id}`}

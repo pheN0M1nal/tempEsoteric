@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Button } from './Button'
-
+import dummyImage from "../../static/images/pics/05.jpg"
 const StyledComponent = styled.div`
     display: flex;
     align-items: center;
@@ -17,7 +17,7 @@ const StyledComponent = styled.div`
            width:100%;
            height:100%;
             object-fit: cover;
-            border-radius: 50%;
+            /* border-radius: 50%; */
         }
     }
     
@@ -87,7 +87,7 @@ export const ImagePickerComponent = ({
 	return (
 		<StyledComponent>
 			<div className='imageWrapper'>
-				<img src={tempImageData || image} alt={''} />
+				<img src={tempImageData || image ||dummyImage} alt={''} />
 			</div>
 			<div className='controlsWrapperImage'>
 				<span className='text'>

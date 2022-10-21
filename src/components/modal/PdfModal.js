@@ -33,7 +33,7 @@ const PdfModal = () => {
 			onRequestClose={closeModal}
 			modalLabel={'Example Modal'}
 			stylesFromProps={customStyles}
-			classNameFromProps='className whatever pdf_model'
+			classNameFromProps='pdf_model'
 		>
 			<div className='all-page-container'>
 				<AllPages

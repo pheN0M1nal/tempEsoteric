@@ -23,7 +23,10 @@ src: url("./static/fonts/rushing_nightshade.ttf") format("truetype"); /* Safari,
   z-index: 2;
 }
 
-.ReactModal__Content.ReactModal__Content--after-open.login_model ,.ReactModal__Content.ReactModal__Content--after-open.pdf_model  {
+.ReactModal__Content.ReactModal__Content--after-open.login_model ,
+.ReactModal__Content.ReactModal__Content--after-open.pdf_model,
+.ReactModal__Content.ReactModal__Content--after-open.subscriptionModels,
+.ReactModal__Content.ReactModal__Content--after-open.ProfileModal {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -34,25 +37,30 @@ src: url("./static/fonts/rushing_nightshade.ttf") format("truetype"); /* Safari,
   inset: 0 !important;
   padding: 4rem !important;
   background: #9b9999;
-  background-image: url(../images/general/wood.png);
+  background-image: url(../images/general/homepagebgs.jpg);
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
 }
-.ReactModal__Content.ReactModal__Content--after-open.pdf_model {
- 
-  align-items: start;
-
+.ReactModal__Content.ReactModal__Content--after-open.subscriptionModels{
+  padding: 4rem 1rem !important;
 }
+.ReactModal__Content.ReactModal__Content--after-open.pdf_model {
+  align-items: start;
+}
+
+.ReactModal__Content.ReactModal__Content--after-open.ProfileModal{
+  padding: 2rem 4rem !important;
+}
+
 @media (max-width:1100px){
   .ReactModal__Content.ReactModal__Content--after-open.login_model {
-
     margin: 0 auto;
- 
     padding:0 2rem !important;
-
-
+  }
+  .ReactModal__Content.ReactModal__Content--after-open.ProfileModal{
+    padding: 1rem 1rem !important;
   }
 }
 /* .react-pdf__Page__textContent

@@ -20,26 +20,7 @@ const Wrapper = styled.div`
 	@media (max-width:1100px){
 		margin-top:30rem;
 	}
-    /* .closeBtn {
-        border-radius: 2.4rem;
-        border: 0;
-		background-color: transparent;
-        position: absolute;
-        top: 5%;
-        right: 5%;
-		
-		transition: width 2s, height 2s,   transform 2s;
-		:hover img{
-			transform: rotateY(3.142rad);
-			width:35px;
-			height: 35px;
-		}
-		img{
-			width:30px;
-			height: 30px;
-			object-fit: contain;
-		}
-    } */
+  
 `;
 
 const Login = () => {
