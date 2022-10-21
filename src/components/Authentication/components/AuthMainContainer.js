@@ -1,59 +1,12 @@
 import styled from "styled-components";
+import { AuthenticationImage } from "./AuthImage";
 import { AuthenticationHeader } from "./Header";
-const StyledContainer = styled.div`
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin: auto;
-    max-width: 1024px;
-    width: 90%;
-    height: 100%;
 
-    color: var(--custom-txt-color);
-    ${"" /* background-color: var(--custom-primary-bg); */}
-    position: relative;
-    z-index: 0;
-    ::after {
-        content: "";
-        position: absolute;
-        top: -100%;
-        right: -60%;
-        
-        width: 50rem;
-        height: 50rem;
-        z-index: -1;
-    }
-    .LoginFormOuter {
-        width: 100%;
-    }
-    .txtlogo {
-        color: var(--custom-txt-logo);
-        font-size: var(--font-74);
-    }
-    .Imagewrapper {
-        display: "inline-block";
-        width: 20rem;
-
-        flex-basis: content;
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        @media (max-width: 1100px) {
-            height: 200px;
-            width: 100%;
-            flex-basis: auto;
-        }
-    }
-`;
 const FormWrapper = styled.div`
     flex-grow: 1;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border: 1px solid var(--custom-input-border);
-    background-color: var(--custom-secondry-bg);
     width: 100%;
     overflow: hidden;
     border-radius: 10px;
@@ -64,7 +17,8 @@ const FormWrapper = styled.div`
     .AuthContent {
         display: flex;
         flex-direction: column;
-        flex: auto;
+        align-items: center;
+        width:100%;
         padding-left: 2rem;
         padding-top: 2rem;
         padding-bottom: 2rem;
@@ -82,26 +36,20 @@ const FormWrapper = styled.div`
             border-right: 1px solid var(--custom-border-color);
             margin-right: 2rem;
         }
-        .registerBtn {
-            width: 100%;
-            p {
-                color: var(--custom-txt-color);
-                margin-bottom: 1rem;
-            }
-        }
+        
     }
 `;
 
-export const AuthMainContainer = ({ mode, children }) => {
+export const AuthMainContainer = ({ mode,modeimg, children }) => {
     return (
-        <StyledContainer>
+        
             <FormWrapper>
                 <div className="AuthContent">
                     <AuthenticationHeader mode={mode} />
                     {children}
                 </div>
-                
+               <AuthenticationImage modeimg={modeimg}/>
             </FormWrapper>
-        </StyledContainer>
+        
     );
 };

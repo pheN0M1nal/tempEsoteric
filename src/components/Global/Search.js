@@ -6,14 +6,18 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     gap: 1rem;
-    border: 1px solid #b3b3b3;
+    border: 1px solid var(--custom-border-color);
     border-radius: 2.5rem;
-    background-color: transparent;
+    background-color: var(--custom-light-bg);
     height: 3rem;
     width: 100%;
     max-width: 23.9375rem;
     align-items: center;
     padding: 0 1rem;
+    &:hover,
+    &:active {
+        box-shadow: var(--custom-shadow);
+    }
     input {
         border: none;
         outline: none;
@@ -24,6 +28,10 @@ const Wrapper = styled.div`
     button {
         border-radius: 2.5rem;
         padding: 0.1rem 0.3rem;
+        &:hover,
+        &:active {
+            box-shadow: var(--custom-shadow);
+        }
     }
 `;
 export const Search = ({ fetchAndParseDataFromAPI, endpointQueryParam }) => {

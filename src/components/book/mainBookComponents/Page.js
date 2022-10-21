@@ -8,10 +8,10 @@ const PageWrapper = styled.div`
     width: 100%;
     height: 100%;
     position: relative;
-	border: 8px solid #DAA520;
-    border-width: ${(props) => (props.pageNumber % 2 === 0 ? `8px 8px 8px 0` : "8px 0 8px 8px")};
+    /* border: 8px solid #DAA520;
+	border-width: ${(props) => (props.pageNumber % 2 === 0 ? `8px 8px 8px 0` : "8px 0 8px 8px")}; */
     background-color: #00ff00;
-    /* padding-left: 5%; */
+    /* padding-left: 5%;	 */
     position: relative;
     display: flex;
     flex-direction: column;
@@ -26,41 +26,37 @@ const PageWrapper = styled.div`
         background-size: 100% 100%;
         background-repeat: no-repeat;
         background-image: url(${(props) => props?.imag});
-        /* border: 2px solid #DAA520; */
         width: 100%;
         height: 100%;
         display: flex;
         flex-direction: column;
         justify-self: center;
         align-items: center;
-        padding: 10% 15%;
+        padding: 10% 13%;
     }
     .pageContentOuter {
         text-align: center;
         margin: 0 auto;
         height: 100%;
         overflow: auto;
-
-  
-        .imageOuterList {
-            width: 100%;
-            height: 100%;
-            max-width: 300px;
-            max-height: 250px;
-            overflow: hidden;
-            margin: 0.5rem auto;
-            img {
-                padding: 1rem;
-                border: 1px solid #ff0000;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .heading {
+        font-size: 1.4rem;
+        @media (max-width: 500px) {
+            font-size: 1rem;
         }
     }
+    .word1 {
+        font-size: 1.2rem !important;
+    }
+    .word2 {
+        font-size: 1.1rem !important;
+    }
     .page-footer {
-        background-color: #DAA520;
-        color: #000;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -73,17 +69,77 @@ const PageWrapper = styled.div`
         width: 25px;
         height: 25px;
     }
+    .pageNumber {
+        display: flex;
+        width: 100%;
+
+        padding: 0rem;
+        span {
+            background-color: #daa520;
+            color: #000;
+            width: 25px;
+            height: 25px;
+            border-radius: 2.4rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    .oddPage {
+        padding-right: 0rem;
+        justify-content: end;
+    }
+    .evenPage {
+        justify-content: start;
+        padding-left: 2rem;
+    }
+    ::-webkit-scrollbar {
+        background: var(--custom-input-border);
+        height: 4px;
+        width: 4px;
+        margin: 0;
+        padding: 0;
+        border-radius: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: var(--custom-input-border);
+        height: 4px;
+        width: 4px;
+        margin: 0;
+        padding: 0;
+        border-radius: 5px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: var(--custom-orange-color);
+        height: 0px;
+        width: 0px;
+        margin: 0;
+        padding: 0;
+        border-radius: 5px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--custom-orange-color);
+        height: 4px;
+        width: 0px;
+        margin: 0;
+        padding: 0;
+        border-radius: 5px;
+    }
 `;
 export const Page = forwardRef((props, ref) => {
-    console.log(props.data, "props");
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [paginationCurrentPage, setPaginationCurrentPage] = useState(1);
-    const [recordsPerPage] = useState(10);
 
     const cancelToken = axios.CancelToken.source();
     const get = async (cp) => {
-        const api = `https://jsonplaceholder.typicode.com/photos/${cp}`;
+        const api = `http://localhost:3500/content`;
 
         console.log(api);
 
@@ -91,7 +147,8 @@ export const Page = forwardRef((props, ref) => {
             const data = await axios.get(api, {
                 cancelToken: cancelToken.token,
             });
-            setData([data.data]);
+            setData(data.data);
+            console.log();
         } catch (error) {
             axios.isCancel(error) && console.log("error: ", error);
         }
@@ -109,10 +166,6 @@ export const Page = forwardRef((props, ref) => {
         };
     }, [paginationCurrentPage]);
 
-    const indexOfLastRecord = paginationCurrentPage * recordsPerPage;
-    const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-    const nPages = 5;
-
     return (
         <div
             className={`page softPage ${props.data.pageNumber}`}
@@ -121,15 +174,31 @@ export const Page = forwardRef((props, ref) => {
         >
             <PageWrapper imag={props?.data?.imag} pageNumber={props.data.pageNumber}>
                 <div className="pageInner">
-                    <h2>{props.data.name}</h2>
-                    <Records data={data} />
-                    <Pagination
-                        nPages={nPages}
-                        currentPage={paginationCurrentPage}
-                        setCurrentPage={setPaginationCurrentPage}
+                    <h2
+                        className={`heading ${
+                            props.data.name.length < 40
+                                ? ""
+                                : props?.data?.name.length >= 41 || props?.data?.name.length <= 80
+                                ? "word1"
+                                : "word2"
+                        }`}
+                    >
+                        {props.data.name}
+                    </h2>
+                    <Records
+                        data={data}
+                        paginationCurrentPage={paginationCurrentPage}
+                        setPaginationCurrentPage={setPaginationCurrentPage}
                     />
                 </div>
-                <div className="page-footer">{props?.data?.pageNumber}</div>
+                <div
+                    className={`page-footer pageNumber ${
+                        props?.data?.pageNumber % 2 === 0 ? "oddPage" : "evenPage"
+                    }`}
+                >
+                <span>{props?.data?.pageNumber}</span>
+                    
+                </div>
             </PageWrapper>
         </div>
     );

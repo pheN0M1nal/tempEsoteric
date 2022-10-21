@@ -21,7 +21,7 @@ const StyledComponent = styled.div`
         max-width: 1000px;
     }
     @media (min-width: 1100px) and (max-width: 1400px) {
-        max-width: 900px;
+        max-width: 800px;
     }
     .bookOuterContainer {
         margin: 0 auto;
@@ -39,16 +39,22 @@ const StyledComponent = styled.div`
 			max-width:900px;
 		} */
     }
+    h2.wrap {
+        background-color: #daa520;
+        padding: 20px;
+    }
+    h2.wrap2 {
+        background: transparent;
+        background-color: transparent;
+
+        padding: 20px;
+    }
     .flip-book {
         .page-cover {
-            width: 93vw;
-            height: 100vw;
         }
         .softPage {
             background-color: #fff;
-            width: 93%;
-            height: 94.7vh;
-			/* margin: ${(props) => (props.pageNumber%2===0 ? `5% 5% 5% 0` : "5% 0 5% 5%")}; */
+            /* margin: ${(props) => (props.pageNumber % 2 === 0 ? `5% 5% 5% 0` : "5% 0 5% 5%")}; */
             ${
                 "" /* padding: 2rem auto;
         padding-left:${(pageLength) => (pageLength % 2 === 0 ? `auto` : `2%`)};    
@@ -76,14 +82,6 @@ const MainBook = () => {
     // getting pageNumber to goto
     const pageNumber = params.pageNumber;
 
-    const nextButtonClick = () => {
-        flipRef.current.pageFlip().flipNext();
-    };
-
-    const prevButtonClick = () => {
-        flipRef.current.pageFlip().flipPrev();
-    };
-
     const onFlip = useCallback((e) => {
         setPage(e.data);
     }, []);
@@ -105,70 +103,46 @@ const MainBook = () => {
     return (
         <StyledComponent pageLength={pages?.length}>
             <div className="container-md bookOuterContainer">
-                <HTMLFlipBook
-                    width={550}
-                    height={733}
-                    size="stretch"
-                    minWidth={315}
-                    maxWidth={800}
-                    minHeight={400}
-                    maxHeight={1000}
-                    flippingTime={1500}
-                    maxShadowOpacity={0.5}
-                    drawShadow={false}
-                    showCover={true}
-                    mobileScrollSupport={true}
-                    onFlip={onFlip}
-                    // onChangeOrientation={onChangeOrientation}
-                    // onChangeState={onChangeState}
-                    className="flip-book html-book demo-book"
-                    ref={flipRef}
-                >
-                    <PageCover bgimg={bgimg1} title={"."} key={0} pos="top" />
-                    <PageCover bgimg={""} title={"."} key={1} pos="top" />
-                    <MenuPage book={flipRef} />
-                    {pages.map((item, index) => (
-                        <Page key={index} data={item} className="page" number={page}></Page>
-                    ))}
-                    {pages.length % 2 !== 0 ? (
-                        <PageCover bgimg={""} title={"."} key={pages.length - 1} pos="bottom" />
-                    ) : (
-                        [2, 1].map((number, i) => (
-                            <PageCover
-                                bgimg={""}
-                                title={`. ${number}`}
-                                key={pages.length - number}
-                                pos="bottom"
-                            />
-                        ))
-                    )}
-                    <PageCover bgimg={bgimg2} title={"."} key={pages.length} pos="bottom" />
-                </HTMLFlipBook>
-            </div>
-
-            <div className="container mt-3">
-                <div className="row">
-                    <div className="col-md-6">
-                        <button
-                            type="button"
-                            className="btn btn-info btn-sm btn-prev"
-                            onClick={() => prevButtonClick()}
-                        >
-                            Previous page
-                        </button>
-                        [<span>{page}</span> of <span>{totalPage}</span>]
-                        <button
-                            type="button"
-                            className="btn btn-info btn-sm btn-next"
-                            onClick={() => nextButtonClick()}
-                        >
-                            Next page
-                        </button>
-                    </div>
-                    {/* <div className='col-md-6'>
-						State: <i>{readState}</i>, orientation:{' '}
-						<i>{orientation}</i>
-					</div> */}
+                <div className={page > 1 && page < pages.length +2 ? `wrap` : `wrap2`}>
+                    <HTMLFlipBook
+                        width={550}
+                        height={733}
+                        size="stretch"
+                        minWidth={315}
+                        maxWidth={800}
+                        minHeight={400}
+                        maxHeight={1000}
+                        flippingTime={1500}
+                        maxShadowOpacity={0.5}
+                        drawShadow={false}
+                        showCover={true}
+                        mobileScrollSupport={true}
+                        onFlip={onFlip}
+                        // onChangeOrientation={onChangeOrientation}
+                        // onChangeState={onChangeState}
+                        className="flip-book html-book demo-book"
+                        ref={flipRef}
+                    >
+                        <PageCover bgimg={bgimg1} title={"."} key={0} pos="top" />
+                        <PageCover bgimg={""} title={"."} key={1} pos="top" />
+                        <MenuPage book={flipRef} />
+                        {pages.map((item, index) => (
+                            <Page key={index} data={item} className="page" number={page}></Page>
+                        ))}
+                        {pages.length % 2 !== 0 ? (
+                            <PageCover bgimg={""} title={"."} key={pages.length - 1} pos="bottom" />
+                        ) : (
+                            [2, 1].map((number, i) => (
+                                <PageCover
+                                    bgimg={""}
+                                    title={`. ${number}`}
+                                    key={pages.length - number}
+                                    pos="bottom"
+                                />
+                            ))
+                        )}
+                        <PageCover bgimg={bgimg2} title={"."} key={pages.length} pos="bottom" />
+                    </HTMLFlipBook>
                 </div>
             </div>
         </StyledComponent>

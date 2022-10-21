@@ -2,12 +2,12 @@ import styled from "styled-components";
 
 const Wrapper = styled.button`
     margin-top: ${({ marginTop }) => marginTop}rem;
-    background-color: var(--custom-${({ BgColor }) => BgColor || "btn-bg"});
+    background-color: var(--custom-${({ BgColor }) => BgColor || "orange-color"});
     text-align: center;
     font-size: ${({ fontSize }) => fontSize}px;
     padding: ${({ paddingTopBottom }) => paddingTopBottom || 0.2}rem
         ${({ paddingLeftRight }) => paddingLeftRight || 1}rem;
-    border-radius: 5px;
+    border-radius: 2.4rem;
     text-transform: ${(props) => (props.textTransform ? `${props.textTransform}` : "lowercase")};
     outline: none;
     border: 1px solid var(--custom-${({ border }) => border || "btn-bg"});
@@ -26,7 +26,7 @@ const Wrapper = styled.button`
     }
 
     :hover {
-        box-shadow: ${({ addEffect }) => (addEffect ? "0 0 5px var(--custom-orange)" : "null")};
+        box-shadow: ${({ addEffect }) => (addEffect ? "var(--custom-shadow)" : "null")};
     }
 `;
 export const Button = ({
