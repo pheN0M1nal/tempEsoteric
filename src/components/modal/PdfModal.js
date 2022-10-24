@@ -1,6 +1,6 @@
 import React from 'react'
 import { hidePdfModal } from "../../store/actions/modalActions";
-import { AllPages } from '../BlogBookModel/ShowAllPages'
+import { AllPages } from '../PDFBookModel/ShowAllPages'
 import { useDispatch, useSelector } from 'react-redux'
 import { ModalComponent } from '../Global/Modal'
 import { CloseBtn } from '../Global/CloseBtn';

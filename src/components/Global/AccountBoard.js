@@ -157,7 +157,7 @@ export const AccountBoard = ({ profile }) => {
 
 	return (
 		<Wrapper>
-			{!profile ? (
+			{profile ? (
 				<>
 					<div className='profileTab'>
 						<ProfilePictureBoard size={2.5}>
@@ -231,7 +231,7 @@ export const AccountBoard = ({ profile }) => {
 						LOGIN
 					</Button>
 					<Button
-						//onClick={handleOnClickSignup}
+						onClick={handleOnClickLogin}
 						textTransform={'uppercase'}
 						paddingLeftRight={3}
 						fontSize={16}

@@ -30,7 +30,7 @@ export const RegistrationForm = ({ showLogin }) => {
 	const userInfo = useSelector(state => state.userProfile)
 	const { loading, profile, error } = userInfo
 
-	console.log(profile.logo)
+	console.log(profile?.logo)
 
 	// checking if user updated
 	const userUpdate = useSelector(state => state.userUpdateProfile)

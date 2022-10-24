@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react'
 import { Document, pdfjs } from 'react-pdf'
-import { Page } from './BlogPage'
+import { Page } from './PDFPage'
 import PdfBook from './PdfBook'
 
 

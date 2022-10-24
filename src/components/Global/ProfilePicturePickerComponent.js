@@ -105,7 +105,7 @@ export const ImagePickerComponent = ({
 							setTempImage(e.target.files[0])
 						}}
 					/>
-					<div className=''>
+					<div className='imageWrapper'>
 						<img
 							src={tempImageData || image || dummyImage}
 							alt={''}

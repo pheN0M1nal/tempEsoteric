@@ -27,27 +27,13 @@ const Login = () => {
     const [showLoginComp, setShowLoginComp] = useState(true);
     const [showRegisterComp, setShowRegisterComp] = useState(false);
     const [showForgetPassComp, setShowForgetPassComp] = useState(false);
+    const [openLogin, setOpenLogin] = useState(false);
 
     const dispatch = useDispatch();
 
     const loginModal = useSelector((state) => state.loginModal);
     const { show } = loginModal;
-    const customStyles = {
-        content: {
-            // top: "50%",
-            // left: "50%",
-            // right: "auto",
-            // bottom: "auto",
-            // maxWidth: "80%",
-            // borderRadius: "5px",
-            // marginRight: "0%",
-            // transform: "translate(0%, 0%)",
-            // background: "var(--custom-primary-bg)",
-            // padding: "2rem 3rem",
-            // maxHeight: "100vh",
-            // overflowY: "scroll",
-        },
-    };
+   
 
     const callbackCloseModal = () => {
         dispatch(hideLoginModal());
@@ -68,15 +54,13 @@ const Login = () => {
     return (
         <ModalComponent
             isOpen={show}
-            //onAfterOpen={callbackOnAfterOpen}
             onRequestClose={callbackCloseModal}
-            stylesFromProps={customStyles}
             contentLabel={"Login-SignUp"}
             classNameFromProps="login_model"
         >
             <Wrapper>
-                {showLoginComp && <LoginContainer showRegister={ShowRegister} />}
-                {showRegisterComp && <RegisterContainer showLogin={ShowLogin} />}
+                {showLoginComp && <LoginContainer showRegister={ShowRegister} setOpenLogin={setOpenLogin} openLogin={openLogin}/>}
+                {showRegisterComp && <RegisterContainer showLogin={ShowLogin} setOpenLogin={setOpenLogin} openLogin={openLogin}/>}
                 {showForgetPassComp && <ForgotPasswordContainer showLogin={ShowLogin} />}
                
                 <CloseBtn handleOnClickClose={callbackCloseModal}/>
