@@ -47,7 +47,7 @@ export const MenuPage = forwardRef((props, ref) => {
 	const navigate = useNavigate()
 
 	const goToPage = pageNumber => {
-		props.book.current.pageFlip().flip(pageNumber, 'top')
+		props.book.current.pageFlip().flip(pageNumber+2, 'top')
 		console.log(props.book.current.pageFlip().getPageCount())
 	}
 

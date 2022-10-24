@@ -157,15 +157,15 @@ export const AccountBoard = ({ profile }) => {
 
 	return (
 		<Wrapper>
-			{profile ? (
+			{!profile ? (
 				<>
 					<div className='profileTab'>
 						<ProfilePictureBoard size={2.5}>
 							<img
 								className='img'
 								src={
-									profile.logo
-										? profile.logo
+									profile?.logo
+										? profile?.logo
 										: profilePicture
 								}
 								alt=''

@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { fetchBlogs } from '../../../store/actions/blogsActions'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { Spinner } from '../../modal/Spinner'
+import { Spinner } from '../../Global/Spinner'
 
 const PageWrapper = styled.div`
 	width: 100%;

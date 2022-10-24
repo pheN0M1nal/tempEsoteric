@@ -46,8 +46,8 @@ const Wrapper = styled.div`
             content: "";
             position: absolute;
             background-color: #4f9595;
-            width: 80rem;
-            height: 40rem;
+            width: 100%;
+            height: 100%;
             z-index: -1;
             top: -50%;
             left: -140%;
