@@ -6,7 +6,7 @@ import { NavigationContext } from './MainWrapper'
 import { SizedBox } from './SizedBox'
 import { HorizontalRule } from './HorizontalRule'
 import { Button } from './Button'
-import logout from '../../static/images/Auth/3599716@0.png'
+import logoutImg from '../../static/images/Auth/3599716@0.png'
 import profileimg from '../../static/images/Auth/2384396@0.png'
 import profilePicture from '../../static/images/Auth/How-to-be-happy-as-an-introvert.png'
 import plansimg from '../../static/images/Auth/4222015@1.png'
@@ -17,7 +17,8 @@ import {
 	showProfileModal,
 	showSubscriptionModal,
 } from '../../store/actions/modalActions'
-import { ModalComponent } from './Modal'
+
+import { logout } from '../../store/actions/userActions'
 
 const Wrapper = styled.div`
 	display: flex;
@@ -150,17 +151,21 @@ export const AccountBoard = ({ profile }) => {
 		dispatch(showSubscriptionModal())
 	}
 
+	const logoutHandler = () => {
+		dispatch(logout())
+	}
+
 	return (
 		<Wrapper>
-			{!profile ? (
+			{profile ? (
 				<>
 					<div className='profileTab'>
 						<ProfilePictureBoard size={2.5}>
 							<img
 								className='img'
 								src={
-									profile?.profile?.picture
-										? profile?.profile?.picture
+									profile.logo
+										? profile.logo
 										: profilePicture
 								}
 								alt=''
@@ -197,17 +202,14 @@ export const AccountBoard = ({ profile }) => {
 								onClick={showSubscription}
 								className='logout-button logout1'
 							>
-								<img
-									src={plansimg}
-									alt='userprofile'
-								/>
+								<img src={plansimg} alt='userprofile' />
 								&nbsp; Plans
 							</Link>
 							<Link
-								to={`/logout/${profile?.id}`}
+								onClick={logoutHandler}
 								className='logout-button logout2'
 							>
-								<img src={logout} alt='logout' />
+								<img src={logoutImg} alt='logout' />
 								&nbsp; Log Out
 							</Link>
 						</div>

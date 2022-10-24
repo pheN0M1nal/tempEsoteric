@@ -21,7 +21,7 @@ import {
 import axiosServerInstance from '../../config/api/axois'
 import { HIDE_LOGIN_MODAL } from '../constants/modalConstants'
 import { notifySuccess } from '../../helpers/notifications/notifySuccess'
-import { userSignup, userLogin, updateUserProfile } from '../../api/EndPoints'
+import { userLogin, updateUserProfile } from '../../api/EndPoints'
 
 export const fetchUserProfile = (dispatch, getState) => {
 	dispatch({ type: FETCH_USER_PROFILE_START, payload: null })
@@ -92,6 +92,11 @@ export const register = modData => async dispatch => {
 	})
 
 	dispatch({
+		type: FETCH_USER_PROFILE_SUCCESS,
+		payload: modData,
+	})
+
+	dispatch({
 		type: HIDE_LOGIN_MODAL,
 	})
 }
@@ -129,6 +134,7 @@ export const login = data => async dispatch => {
 }
 
 export const logout = () => dispatch => {
+	console.log('object')
 	localStorage.removeItem('userInfo')
 
 	dispatch({ type: USER_LOGOUT })

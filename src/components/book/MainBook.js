@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, {
+	useCallback,
+	useEffect,
+	useRef,
+	useState,
+	useLayoutEffect,
+} from 'react'
 import HTMLFlipBook from 'react-pageflip'
 import styled from 'styled-components'
 import { PageCover } from './mainBookComponents/CoverPage'
@@ -9,6 +15,7 @@ import menuItems from '../../DataList/menuItems'
 import { MenuPage } from './mainBookComponents/MenuPage'
 import { useParams, useNavigate } from 'react-router'
 import { useDispatch } from 'react-redux'
+import { setBook } from '../../store/actions/bookActions'
 
 const StyledComponent = styled.div`
 	/* max-width: 90vw;*/

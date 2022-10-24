@@ -5,7 +5,7 @@ import { InputComponent } from '../components/InputELement'
 import { FormComponent } from '../components/FormElement'
 import { useEffect, useState } from 'react'
 import { ImagePickerComponent } from '../../Global/ProfilePicturePickerComponent'
-import { Spinner } from '../../Global/Spinner'
+import { Spinner } from '../../modal/Spinner'
 import { notifyFailure } from '../../../helpers/notifications/notifyFailure'
 import { HandleOnChangeInput } from '../../../helpers/formInput/HandleOnChangeInput'
 import { useDispatch, useSelector } from 'react-redux'
@@ -30,6 +30,8 @@ export const RegistrationForm = ({ showLogin }) => {
 	const userInfo = useSelector(state => state.userProfile)
 	const { loading, profile, error } = userInfo
 
+	console.log(profile.logo)
+
 	// checking if user updated
 	const userUpdate = useSelector(state => state.userUpdateProfile)
 	const {
@@ -43,6 +45,7 @@ export const RegistrationForm = ({ showLogin }) => {
 
 	useEffect(() => {
 		if (profilePicture) {
+			console.log(profilePicture)
 			if (typeof profilePicture !== 'string') {
 				let tempdata = { ...data }
 				tempdata['logo'] = profilePicture
@@ -61,7 +64,7 @@ export const RegistrationForm = ({ showLogin }) => {
 			'username',
 			'password',
 			'confirm_password',
-			'profilePicture',
+			'logo',
 		]
 		for (let field of fields) {
 			if (!data[field]) {
@@ -70,7 +73,9 @@ export const RegistrationForm = ({ showLogin }) => {
 			}
 		}
 		if (data.password !== data.confirm_password) {
-			console.log('bla')
+			console.log(data.password)
+			console.log(data.confirm_password)
+
 			notifyFailure(`Your passwords doesn't match`)
 			state = false
 		}

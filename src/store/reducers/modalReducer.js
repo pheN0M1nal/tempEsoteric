@@ -7,6 +7,8 @@ import {
 	HIDE_PROFILE_MODAL,
 	SHOW_SUBSCRIPTION_MODAL,
 	HIDE_SUBSCRIPTION_MODAL,
+	SHOW_BLOG_MODAL,
+	HIDE_BLOG_MODAL,
 } from '../constants/modalConstants'
 
 export const pdfModalReducer = (state = { show: false, pdf: '' }, action) => {
@@ -17,6 +19,22 @@ export const pdfModalReducer = (state = { show: false, pdf: '' }, action) => {
 				pdf: action.payload,
 			}
 		case HIDE_PDF_MODAL:
+			return {
+				show: false,
+			}
+		default:
+			return state
+	}
+}
+
+export const blogModalReducer = (state = { show: false, blog: {} }, action) => {
+	switch (action.type) {
+		case SHOW_BLOG_MODAL:
+			return {
+				show: true,
+				blog: action.payload,
+			}
+		case HIDE_BLOG_MODAL:
 			return {
 				show: false,
 			}

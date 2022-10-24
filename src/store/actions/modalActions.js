@@ -7,6 +7,8 @@ import {
 	HIDE_PROFILE_MODAL,
 	SHOW_SUBSCRIPTION_MODAL,
 	HIDE_SUBSCRIPTION_MODAL,
+	SHOW_BLOG_MODAL,
+	HIDE_BLOG_MODAL,
 } from '../constants/modalConstants'
 
 // PDF
@@ -43,4 +45,14 @@ export const showSubscriptionModal = () => async dispatch => {
 
 export const hideSubscriptionModal = () => async dispatch => {
 	dispatch({ type: HIDE_SUBSCRIPTION_MODAL })
+}
+
+// blog
+// subscription
+export const showBlognModal = () => async dispatch => {
+	dispatch({ type: SHOW_BLOG_MODAL })
+}
+
+export const hideBlogModal = () => async dispatch => {
+	dispatch({ type: HIDE_BLOG_MODAL })
 }

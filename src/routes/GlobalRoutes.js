@@ -1,34 +1,11 @@
 import { Route, Routes } from 'react-router-dom'
-import { ProtectedRouteComponent } from './ProtectedRouteComponent'
-import { isAuthenticated, isGuest } from '../conditions/Index'
 import HomeScreen from '../screens/HomeScreen'
-import LogoutContainer from '../components/Authentication/logout/Container'
-import LoginContainer from '../components/Authentication/login/Container'
+import BlogsScreen from '../screens/BlogsScreen'
 
 export const GlobalRoutes = () => {
 	return (
 		<Routes>
-			<Route
-				path='/login'
-				exact={true}
-				element={
-					<ProtectedRouteComponent
-						conditions={{ '/': isGuest }}
-						elementToRenderOnPass={<LoginContainer />}
-						profileRequired={false}
-					/>
-				}
-			/>
-			<Route
-				path='/logout'
-				exact={true}
-				element={
-					<ProtectedRouteComponent
-						conditions={{ '/login': isAuthenticated }}
-						elementToRenderOnPass={<LogoutContainer />}
-					/>
-				}
-			/>
+			<Route path='/blogs' element={<BlogsScreen />} />
 			<Route path='/' exact={true} element={<HomeScreen />} />
 		</Routes>
 	)
