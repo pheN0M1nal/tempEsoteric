@@ -49,7 +49,7 @@ export const hideSubscriptionModal = () => async dispatch => {
 
 // blog
 // subscription
-export const showBlognModal = () => async dispatch => {
+export const showBlogModal = () => async dispatch => {
 	dispatch({ type: SHOW_BLOG_MODAL })
 }
 

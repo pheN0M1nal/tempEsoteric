@@ -1,5 +1,4 @@
 import React from "react";
-import dimond from "../../static/images/Auth/2389848@1.png";
 import { Button } from "../Global/Button";
 
 export const SubscriptionSlide = ({ title,price,handleSubscrition }) => {
@@ -13,22 +12,10 @@ export const SubscriptionSlide = ({ title,price,handleSubscrition }) => {
       <div className="CardHeading">{title}</div>
       <div className="CardPrice">
         <span className="mainPrice">
-          ${price}/<small>mo</small>
+          {price}/<small>mo</small>
         </span>
       </div>
-      <div className="planCardDetailListOuter">
-        {/* <ul className="planCardDetailList">
-          {item.list.map((listItem, i) => {
-            return (
-              <li key={i}>
-                <img src={dimond} alt="" />
-
-                <span>{listItem}</span>
-              </li>
-            );
-          })}
-        </ul> */}
-      </div>
+  
       <span className="PlanBtn">
         <Button
           textTransform="capitalize"

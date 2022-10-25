@@ -8,7 +8,12 @@ const Wrapper = styled.div`
         justify-content: center;
         .countBox{
             display: flex;
+            flex-direction: row-reverse;
             gap: 1rem;
+            @media (max-width:400px){
+                gap: .2rem;
+                
+            }
             .countBoxItem{
                 display: flex;
                 flex-direction: column;
@@ -37,9 +42,12 @@ const Wrapper = styled.div`
 `;
 
 export const TimerCounter = () => {
+    const endFunction=()=>{
+
+    }
     return (
         <Wrapper>
-            <CountdownTimer count={5432}  showTitle   />
+            <CountdownTimer count={5432} onEnd={endFunction()}  showTitle   />
         </Wrapper>
     );
 };

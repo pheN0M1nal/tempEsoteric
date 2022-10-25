@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import HTMLFlipBook from 'react-pageflip'
 import styled from 'styled-components'
 import { PageCover } from '../book/mainBookComponents/CoverPage'
@@ -38,6 +38,7 @@ const StyledComponent = styled.div`
 	.react-pdf__Page__textContent {
 		border: 1px solid darkgrey;
 		box-shadow: 5px 5px 5px 1px #ccc;
+		background-color: #fff;
 		border-radius: 5px;
 		top: 0 !important;
 		transform: translate(-50%, 0%) rotate(0deg) !important;
@@ -99,9 +100,7 @@ const StyledComponent = styled.div`
 
 const PdfBook = ({ children: BlogPages }) => {
 	const [page, setPage] = useState(0)
-	const [totalPage, setTotalPage] = useState(0)
-	const [orientation, setOrientation] = useState('landscape')
-	const [readState, setReadState] = useState('read')
+	
 	const book = useRef()
 
 	console.log(BlogPages.length, 'children')
@@ -109,19 +108,7 @@ const PdfBook = ({ children: BlogPages }) => {
 	const onFlip = useCallback(e => {
 		setPage(e.data)
 	}, [])
-	useEffect(() => {
-		// 👇 add class to body element
-		let elem = document.querySelector('.pdf_flip_book_model').firstChild
-		console.log(elem && elem, 'truen find')
-
-		// elem.classList.remove('--landscape');
-		// elem.classList.add('bg-salmon');
-
-        // return () => {
-        //   // 👇️ removing classes from body element
-        //   // when the component unmounts
-        //   document.body.classList.remove('my-class-3');
-    }, []);
+	
     return (
         <StyledComponent>
             <HTMLFlipBook
@@ -141,11 +128,11 @@ const PdfBook = ({ children: BlogPages }) => {
                 className="flip-book html-book demo-book pdf_flip_book_model"
                 ref={book}
             >
-                <PageCover bgimg={bgimg1} title={"."} key={0} pos="top" />
-                <PageCover bgimg={""} title={"."} key={1} pos="top" />
+                {/* <PageCover bgimg={bgimg1} title={"."} key={0} pos="top" />
+                <PageCover bgimg={""} title={"."} key={1} pos="top" /> */}
 
                 {BlogPages}
-                {BlogPages.length % 2 === 0 ? (
+                {/* {BlogPages.length % 2 === 0 ? (
                     <PageCover bgimg={""} title={"."} key={BlogPages.length - 1} pos="bottom" />
                 ) : (
                     [2, 1].map((number, i) => (
@@ -157,7 +144,7 @@ const PdfBook = ({ children: BlogPages }) => {
                         />
                     ))
                 )}
-                <PageCover bgimg={bgimg2} title={"."} key={BlogPages.length} pos="bottom" />
+                <PageCover bgimg={bgimg2} title={"."} key={BlogPages.length} pos="bottom" /> */}
             </HTMLFlipBook>
             
         </StyledComponent>

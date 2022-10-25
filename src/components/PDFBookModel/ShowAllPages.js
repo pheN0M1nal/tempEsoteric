@@ -17,9 +17,7 @@ export const AllPages = props => {
     useEffect(() => {
         console.log("showAllPages");
     });
-    const handleOnClickClose = () => {
-        props.callbackCancel(false);
-    };
+   
     return (
         <>
             <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>

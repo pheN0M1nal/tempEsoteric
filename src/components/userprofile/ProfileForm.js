@@ -16,6 +16,10 @@ const StyledComponent = styled.div`
         justify-content: center;
         flex-direction: column;
         gap: 0.5rem;
+        .controlsWrapperImage{
+            align-items: center;
+
+        }
         .controlsWrapperImage .text {
             display: none;
         }
@@ -26,10 +30,9 @@ const StyledComponent = styled.div`
             border-radius: 2.5rem;
         }
         .imageWrapper {
-            width: 50%;
+            width: 100%;
             height: 12rem;
             border-radius: 5%;
-            /* border: 1.5rem solid #fff; */
             overflow: hidden;
         }
     }
@@ -41,6 +44,7 @@ const StyledComponent = styled.div`
             width: 100%;
           input{
             margin-bottom: .3rem;
+            max-width:100%;
           }
         }
         .actionButtonWrapper {

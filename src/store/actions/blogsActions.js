@@ -19,6 +19,7 @@ export const fetchBlogs = (page, section) => async dispatch => {
 	try {
 		dispatch({ type: FETCH_BLOGS_START })
 		const api = `http://localhost:3500/content`
+		// const api = `http://localhost:3500/content/blogs`
 		const { data } = await AxiosInstance().get(api)
 		dispatch({
 			type: FETCH_BLOGS_SUCCESS,

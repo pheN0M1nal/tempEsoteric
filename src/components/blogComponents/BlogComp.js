@@ -21,7 +21,7 @@ const BlogComp = () => {
 			}}
 		>
 			<h1>{blog?.title}</h1>
-			<img src={blog?.mainImage} alt='Blog Image' />
+			<img src={blog?.mainImage} alt='Blog' />
 			<p>{blog?.body}</p>
 		</div>
 	)

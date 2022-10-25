@@ -18,6 +18,7 @@ const StyledComponent = styled.div`
             width: 100%;
             input {
                 margin-bottom: 0.3rem;
+                max-width: 100%;
             }
         }
         .actionButtonWrapper {
@@ -85,6 +86,7 @@ export const RenewPassword = () => {
         <StyledComponent>
             <FormComponent className="formFieldWrapper" autocomplete="off">
             <h2>Reset Password</h2>
+                <SizedBox height={2} />
                 <div className="inputOuter">
                     <label>New Password</label>
                     <InputComponent
@@ -96,7 +98,6 @@ export const RenewPassword = () => {
                         }}
                     />
                 </div>
-                <SizedBox height={2} />
                 <div className="inputOuter">
                     <label>Confirm Password</label>
                     <InputComponent

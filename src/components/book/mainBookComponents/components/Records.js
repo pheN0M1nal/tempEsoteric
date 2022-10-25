@@ -1,12 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
-import styled from 'styled-components'
-import { GlobalUserProfileContext } from '../../../../App'
-import { fireDeleteConfirmAlert } from '../../../../helpers/alerts/alertDeleteConfirm'
-import { notifyFailure } from '../../../../helpers/notifications/notifyFailure'
-import { showPdfModal } from '../../../../store/actions/modalActions'
-import Pagination from './Pagination'
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import styled from "styled-components";
+import { fetchBlog } from "../../../../store/actions/blogsActions";
+import { showPdfModal, showBlogModal } from "../../../../store/actions/modalActions";
+import Pagination from "./Pagination";
 
 const Wrapper = styled.div`
     .flip_card {
@@ -46,80 +44,72 @@ const Wrapper = styled.div`
         }
     }
 
-	.flip_card:hover .flip_card_inner {
-		transform: rotateY(180deg);
-	}
+    .flip_card:hover .flip_card_inner {
+        transform: rotateY(180deg);
+    }
 
-	.flip_card_front,
-	.flip_card_back {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		-webkit-backface-visibility: hidden;
-		backface-visibility: hidden;
-	}
-`
-const Records = props => {
-	const [recordsPerPage] = useState(10)
-	const dispatch = useDispatch()
+    .flip_card_front,
+    .flip_card_back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+`;
+const Records = (props) => {
+    const [recordsPerPage] = useState(10);
+    const dispatch = useDispatch();
 
-	const userProfile = useSelector(state => state.userProfile)
-	const { profile } = userProfile
+    const userProfile = useSelector((state) => state.userProfile);
+    const { profile } = userProfile;
 
-	const openModal = img => {
-		dispatch(showPdfModal(img))
-	}
+    const openPdfModal = (img) => {
+        dispatch(showPdfModal(img));
+    };
+    const openBlogModal = (url) => {
+        dispatch(fetchBlog(url));
+        dispatch(showBlogModal());
+    };
 
-	const pdf = 'dashboard-of-nash-rambler.pdf'
+    const handleOnOpen = (item) => {
+        console.log(item, "item");
+        item.type === "pdf" ? openPdfModal(item.url) : openBlogModal(item.url);
+    };
 
-	const handleOnPDFOpen = item => {
-		profile
-			? openModal(item.url)
-			: fireDeleteConfirmAlert({ title: 'title' })
-	}
+    useEffect(() => {}, [props.data]);
+    // console.log(props.data[0].type, "props");
 
-	useEffect(() => {}, [props.data])
-	console.log(props, 'props')
+    const indexOfLastRecord = props.paginationCurrentPage * recordsPerPage;
+    const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+    const nPages = 5;
+    return (
+        <div className="pageContentOuter">
+            {props?.data?.map((item, i) => {
+                return (
+                    <Wrapper>
+                        <div class="flip_card" key={i} onClick={() => handleOnOpen(item)}>
+                            <div class="flip_card_inner">
+                                <div class="flip_card_front">
+                                    <img src={item.image} alt=" down" />
+                                </div>
+                                <div class="flip_card_back">
+                                    <h4>{item.title}</h4>
+                                    <p>Architect & Engineer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </Wrapper>
+                );
+            })}
 
-	const indexOfLastRecord = props.paginationCurrentPage * recordsPerPage
-	const indexOfFirstRecord = indexOfLastRecord - recordsPerPage
-	const nPages = 5
-	return (
-		<div className='pageContentOuter'>
-			{props?.data?.map((item, i) => {
-				return (
-					<Wrapper>
-						<div
-							class='flip_card'
-							key={i}
-							onClick={() => {
-								handleOnPDFOpen(item)
-							}}
-						>
-							<div class='flip_card_inner'>
-								<div class='flip_card_front'>
-									<img
-										src={item.image}
-										alt='image down'
-									/>
-								</div>
-								<div class='flip_card_back'>
-									<h4>{item.title}</h4>
-									<p>Architect & Engineer</p>
-								</div>
-							</div>
-						</div>
-					</Wrapper>
-				)
-			})}
+            <Pagination
+                nPages={nPages}
+                currentPage={props.paginationCurrentPage}
+                setCurrentPage={props.setPaginationCurrentPage}
+            />
+        </div>
+    );
+};
 
-			<Pagination
-				nPages={nPages}
-				currentPage={props.paginationCurrentPage}
-				setCurrentPage={props.setPaginationCurrentPage}
-			/>
-		</div>
-	)
-}
-
-export default Records
+export default Records;

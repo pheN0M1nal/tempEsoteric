@@ -10,6 +10,7 @@ import {
 	pdfModalReducer,
 	loginModalReducer,
 	profileModalReducer,
+	blogModalReducer,
 	subscriptionModalReducer,
 } from './reducers/modalReducer'
 import {
@@ -39,6 +40,7 @@ const reducer = combineReducers({
 
 	//modals
 	pdfModal: pdfModalReducer,
+	blogModal: blogModalReducer,
 	loginModal: loginModalReducer,
 	profileModal: profileModalReducer,
 	subscriptionModal: subscriptionModalReducer,

@@ -26,8 +26,7 @@ const StyledComponent = styled.div`
             font-weight: 700;
         }
     }
-    .timerNotify {
-    }
+   
 `;
 
 export const ProfileSubscription = () => {

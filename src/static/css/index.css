@@ -26,6 +26,7 @@ src: url("./static/fonts/rushing_nightshade.ttf") format("truetype"); /* Safari,
 .ReactModal__Content.ReactModal__Content--after-open.login_model ,
 .ReactModal__Content.ReactModal__Content--after-open.pdf_model,
 .ReactModal__Content.ReactModal__Content--after-open.subscriptionModels,
+.ReactModal__Content.ReactModal__Content--after-open.blog_modal,
 .ReactModal__Content.ReactModal__Content--after-open.ProfileModal {
   width: 100%;
   display: flex;
@@ -36,8 +37,8 @@ src: url("./static/fonts/rushing_nightshade.ttf") format("truetype"); /* Safari,
   overflow: auto;
   inset: 0 !important;
   padding: 4rem !important;
-  background: #9b9999;
-  background-image: url(../images/general/homepagebgs.jpg);
+  background: #727272bd;
+  /* background-image: url(../images/general/homepagebgs.jpg); */
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
@@ -48,6 +49,12 @@ src: url("./static/fonts/rushing_nightshade.ttf") format("truetype"); /* Safari,
 }
 .ReactModal__Content.ReactModal__Content--after-open.pdf_model {
   align-items: start;
+}
+
+.ReactModal__Content.ReactModal__Content--after-open.blog_modal{
+  overflow: inherit;
+  height: auto;
+  padding: 0rem  !important;
 }
 
 .ReactModal__Content.ReactModal__Content--after-open.ProfileModal{

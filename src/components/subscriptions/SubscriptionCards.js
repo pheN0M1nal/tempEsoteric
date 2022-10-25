@@ -9,23 +9,30 @@ import { SubscriptionSlide } from "./SubscriptionSlide";
 import { subscriptionModels } from "../../DataList/subscriptionModels";
 
 const StyledComponent = styled.div`
+text-align: center;
     .CardGroupPlan {
         box-shadow: inset 0 0px 30px 10px var(--cardshadowlight) !important;
         padding-bottom: 3rem !important;
         padding: 3rem;
-        @media (max-width:500px){
+        @media (max-width: 500px) {
             padding: 0rem;
-
         }
     }
     .Header {
-        margin-bottom: 3rem;
-        display: flex;
-        justify-content: center;
+        margin: 0 auto;
+        margin-bottom: 1rem;
+        font-weight: 700;
         text-transform: uppercase;
+        letter-spacing: 1px;
+        background-color: var(--custom-light-bg);
+        display: inline;
+        padding: 0.5rem 1rem;
+        border-radius:2.4rem;
+        width: 100%;
+        
     }
     .slick-slider {
-        background-color: var(--custom-secondry-bg);
+        background-color: var(--custom-light-bg);
         padding: 3rem;
         border-radius: 20px;
     }
@@ -116,9 +123,20 @@ const StyledComponent = styled.div`
         color: var(--color);
         font-size: 16px;
     }
+    .slick-prev:before,
+    .slick-next:before {
+        font-size: 45px;
+        color:var(--custom-orange-color);
+    }
+    .slick-prev {
+        left: 10px;
+    }
+    .slick-next {
+        right: 35px;
+    }
 `;
 
-const SubscriptionCards = ({ header }) => {
+const SubscriptionCards = () => {
     let settings = {
         dots: true,
         infinite: false,
@@ -126,7 +144,7 @@ const SubscriptionCards = ({ header }) => {
         slidesToShow: 3,
         slidesToScroll: 1,
         speed: 1000,
-        arrows: false,
+        arrows: true,
         initialSlide: 0,
         swipeToSlide: true,
         pauseOnHover: true,
@@ -172,7 +190,7 @@ const SubscriptionCards = ({ header }) => {
     return (
         <>
             <StyledComponent>
-                <h2 className="Header">{header}</h2>
+                <h2 className="Header">SUBSCRIPTION</h2>
                 <div className=" logincardgroup CardGroupPlan">
                     <Slider {...settings} className="umar">
                         {subscriptionModels.map((model) => (

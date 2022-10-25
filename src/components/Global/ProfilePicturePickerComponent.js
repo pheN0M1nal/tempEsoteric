@@ -37,7 +37,7 @@ const StyledComponent = styled.div`
 	}
 
 	.imageWrapper {
-		width: 2.5rem;
+		width: 3.5rem;
 		height: 2.5rem;
 
 		img {
@@ -91,6 +91,12 @@ export const ImagePickerComponent = ({
 						? image?.name || 'Select profile image'
 						: (label && label) || 'Select profile image'}
 				</span>
+				<div className='imageWrapper'>
+						<img
+							src={tempImageData || image || dummyImage}
+							alt={''}
+						/>
+					</div>
 				<div className='chooseImageButtonWrapper'>
 					<Button
 						fontSize={0.7}
@@ -105,12 +111,7 @@ export const ImagePickerComponent = ({
 							setTempImage(e.target.files[0])
 						}}
 					/>
-					<div className='imageWrapper'>
-						<img
-							src={tempImageData || image || dummyImage}
-							alt={''}
-						/>
-					</div>
+					
 				</div>
 			</div>
 		</StyledComponent>

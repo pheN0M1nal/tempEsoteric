@@ -36,7 +36,7 @@ const Wrapper = styled.div`
     .Update_profile_outer {
         grid-row: 1 / 3;
     }
-    .Update_profile_outer,
+    /* .Update_profile_outer,
     .View_Subscription,
     .Update_Password {
         position: relative;
@@ -53,7 +53,7 @@ const Wrapper = styled.div`
             left: -140%;
             transform: rotate(130deg);
         }
-    }
+    } */
 `;
 
 const ProfileModal = () => {
