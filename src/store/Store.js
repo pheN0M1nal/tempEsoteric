@@ -4,6 +4,7 @@ import {
 	blogLabelsReducer,
 	blogsFromLabelReducer,
 	blogsReducer,
+	blogReducer,
 } from './reducers/blogsReducer'
 import {
 	pdfModalReducer,
@@ -31,6 +32,7 @@ const reducer = combineReducers({
 	userUpdateProfile: userUpdateProfileReducer,
 
 	//blogs
+	blog: blogReducer,
 	blogs: blogsReducer,
 	blogLabels: blogLabelsReducer,
 	blogsInfoFromLabel: blogsFromLabelReducer,

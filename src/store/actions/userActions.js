@@ -105,32 +105,59 @@ export const login = data => async dispatch => {
 	dispatch({
 		type: USER_LOGIN_REQUEST,
 	})
-	axiosServerInstance()
-		.post(userLogin(), data)
-		.then(response => {
-			dispatch({
-				type: USER_LOGIN_SUCCESS,
-				payload: response.data,
-			})
-			localStorage.setItem('userInfo', JSON.stringify(data))
-			notifySuccess('Login successfull')
-			dispatch({
-				type: USER_LOGIN_SUCCESS,
-				payload: data,
-			})
-			dispatch({
-				type: HIDE_LOGIN_MODAL,
-			})
-		})
-		.catch(error => {
-			dispatch({
-				type: USER_LOGIN_FAIL,
-				payload:
-					error.response && error.response.data.message
-						? error.response.data.message
-						: error.message,
-			})
-		})
+	// 	axiosServerInstance()
+	// 		.post(userLogin(), data)
+	// 		.then(response => {
+	// 			dispatch({
+	// 				type: USER_LOGIN_SUCCESS,
+	// 				payload: response.data,
+	// 			})
+	// 			localStorage.setItem('userInfo', JSON.stringify(data))
+	// 			notifySuccess('Login successfull')
+	// 			dispatch({
+	// 				type: USER_LOGIN_SUCCESS,
+	// 				payload: data,
+	// 			})
+	// 			dispatch({
+	// 				type: HIDE_LOGIN_MODAL,
+	// 			})
+	// 		})
+	// 		.catch(error => {
+	// 			dispatch({
+	// 				type: USER_LOGIN_FAIL,
+	// 				payload:
+	// 					error.response && error.response.data.message
+	// 						? error.response.data.message
+	// 						: error.message,
+	// 			})
+	// 		})
+
+	const modData = {
+		firstname: 'john',
+		lastname: 'doe',
+		username: 'john123',
+		email: 'admin@example.com',
+		password: '123',
+		contact_number: '0000',
+		logo: 'dummy.jpg',
+	}
+
+	localStorage.setItem('userInfo', JSON.stringify(modData))
+	notifySuccess('Login success')
+
+	dispatch({
+		type: USER_LOGIN_SUCCESS,
+		payload: modData,
+	})
+
+	dispatch({
+		type: FETCH_USER_PROFILE_SUCCESS,
+		payload: modData,
+	})
+
+	dispatch({
+		type: HIDE_LOGIN_MODAL,
+	})
 }
 
 export const logout = () => dispatch => {

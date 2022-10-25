@@ -32,7 +32,7 @@ const Wrapper = styled.div`
 		position: relative;
 		padding: 0.3rem 0 0.3rem 0.4rem;
 		border: 1px solid #c0dfd9;
-		border-radius: 2.4rem;
+		border-radius: 0.4rem;
 		background-color: var(--custom-light-bg);
 		&:hover,
 		&:active {
@@ -124,6 +124,24 @@ const Wrapper = styled.div`
 		display: flex;
 		gap: 1rem;
 	}
+	.blog-btn {
+		text-decoration: none;
+		font-size: var(--font-14);
+		font-family: var(--font-1);
+		font-weight: 500;
+		display: flex;
+		align-items: center;
+		padding: 1rem;
+		border: 1px solid var(--custom-border-color);
+		border-radius: 0.4rem;
+		background-color: var(--custom-light-bg);
+		color: var(--custom-txt-color);
+		letter-spacing: 1px;
+		margin: 0.2rem 1.4rem 0.2rem 0;
+		:hover {
+			box-shadow: var(--custom-shadow);
+		}
+	}
 `
 
 export const AccountBoard = ({ profile }) => {
@@ -146,7 +164,6 @@ export const AccountBoard = ({ profile }) => {
 	const showProfile = () => {
 		dispatch(showProfileModal())
 	}
-
 	const showSubscription = () => {
 		dispatch(showSubscriptionModal())
 	}
@@ -157,6 +174,9 @@ export const AccountBoard = ({ profile }) => {
 
 	return (
 		<Wrapper>
+			<Link to={'/blogs'} className='blog-btn'>
+				&nbsp; Blogs
+			</Link>
 			{profile ? (
 				<>
 					<div className='profileTab'>
@@ -177,7 +197,7 @@ export const AccountBoard = ({ profile }) => {
 							onClick={handleOnClickProfileBoard}
 						>
 							<span className='first'>
-								{profile?.fullname || 'name'}
+								{profile?.username || 'name'}
 							</span>
 							<img
 								className='downChevron'
@@ -229,20 +249,6 @@ export const AccountBoard = ({ profile }) => {
 						border={'border-color'}
 					>
 						LOGIN
-					</Button>
-					<Button
-						onClick={handleOnClickLogin}
-						textTransform={'uppercase'}
-						paddingLeftRight={3}
-						fontSize={16}
-						maxWidth={200}
-						addEffect={true}
-						borderRadius={2.4}
-						height={41}
-						BgColor={'light-bg'}
-						border={'border-color'}
-					>
-						SIGNUP
 					</Button>
 				</div>
 			)}

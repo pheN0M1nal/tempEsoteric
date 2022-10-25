@@ -2,6 +2,9 @@ import {
 	FETCH_BLOGS_FAILED,
 	FETCH_BLOGS_START,
 	FETCH_BLOGS_SUCCESS,
+	FETCH_BLOG_FAILED,
+	FETCH_BLOG_START,
+	FETCH_BLOG_SUCCESS,
 	FETCH_BLOG_LABEL_FAILED,
 	FETCH_BLOG_LABEL_START,
 	FETCH_BLOG_LABEL_SUCCESS,
@@ -22,6 +25,22 @@ export const blogsReducer = (state = { blogs: [] }, action) => {
 				page: action.payload.page,
 			}
 		case FETCH_BLOGS_FAILED:
+			return { loading: false, error: action.payload }
+		default:
+			return state
+	}
+}
+
+export const blogReducer = (state = { blog: {} }, action) => {
+	switch (action.type) {
+		case FETCH_BLOG_START:
+			return { loading: true, blogs: {} }
+		case FETCH_BLOG_SUCCESS:
+			return {
+				loading: false,
+				blog: action.payload.blog,
+			}
+		case FETCH_BLOG_FAILED:
 			return { loading: false, error: action.payload }
 		default:
 			return state
