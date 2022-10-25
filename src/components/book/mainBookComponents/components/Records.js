@@ -13,6 +13,8 @@ const Wrapper = styled.div`
         height: 150px;
         perspective: 1000px;
         margin-bottom: 2rem;
+        position: relative;
+        z-index: 9 !important;
         cursor: pointer;
         .flip_card_inner {
             position: relative;
@@ -55,6 +57,7 @@ const Wrapper = styled.div`
         height: 100%;
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
+       
     }
 `;
 const Records = (props) => {

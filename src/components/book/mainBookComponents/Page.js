@@ -8,9 +8,8 @@ import { useSelector } from "react-redux";
 const PageWrapper = styled.div`
     width: 100%;
     height: 100%;
-    position: relative;
     border: 8px solid var(--custom-orange-color);
-	border-width: ${(props) => (props.pageNumber % 2 === 0 ? `8px 8px 8px 0` : "8px 0 8px 8px")};
+    border-width: ${(props) => (props.pageNumber % 2 === 0 ? `8px 8px 8px 0` : "8px 0 8px 8px")};
     background-color: #00ff00;
     /* padding-left: 5%;	 */
     position: relative;
@@ -18,6 +17,7 @@ const PageWrapper = styled.div`
     flex-direction: column;
     justify-self: center;
     align-items: center;
+    z-index: 2 !important;
     top: auto;
     bottom: auto;
     margin: auto;
@@ -34,29 +34,38 @@ const PageWrapper = styled.div`
         justify-self: center;
         align-items: center;
         padding: 10% 13%;
-    }
-    .pageContentOuter {
-        text-align: center;
-        margin: 0 auto;
-        height: 100%;
-        overflow: auto;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .heading {
-        font-size: 1.4rem;
-        @media (max-width: 500px) {
-            font-size: 1rem;
+        .contentOuter {
+            text-align:center;
+            height:95%;
+            width:100%;
+            position:relative;
+            z-index:5;
+            .pageContentOuter {
+                text-align: center;
+                margin: 0 auto;
+                height: 100%;
+                overflow: auto;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                position: relative;
+            }
+            .heading {
+                font-size: 1.4rem;
+                @media (max-width: 500px) {
+                    font-size: 1rem;
+                }
+            }
+            .word1 {
+                font-size: 1.2rem !important;
+            }
+            .word2 {
+                font-size: 1.1rem !important;
+            }
         }
     }
-    .word1 {
-        font-size: 1.2rem !important;
-    }
-    .word2 {
-        font-size: 1.1rem !important;
-    }
+
     .page-footer {
         display: flex;
         justify-content: center;
@@ -136,7 +145,6 @@ const PageWrapper = styled.div`
 export const Page = forwardRef((props, ref) => {
     const [paginationCurrentPage, setPaginationCurrentPage] = useState(1);
 
-
     const dispatch = useDispatch();
 
     const content = useSelector((state) => state.blogs);
@@ -144,9 +152,7 @@ export const Page = forwardRef((props, ref) => {
 
     useEffect(() => {
         dispatch(fetchBlogs(props.data.pageNumber, paginationCurrentPage));
-    }, [paginationCurrentPage,dispatch,props.data.pageNumber]);
-
-
+    }, [paginationCurrentPage, dispatch, props.data.pageNumber]);
 
     return (
         <div
@@ -156,22 +162,25 @@ export const Page = forwardRef((props, ref) => {
         >
             <PageWrapper imag={props?.data?.imag} pageNumber={props.data.pageNumber}>
                 <div className="pageInner">
-                    <h2
-                        className={`heading ${
-                            props.data.name.length < 40
-                                ? ""
-                                : props?.data?.name.length >= 41 || props?.data?.name.length <= 80
-                                ? "word1"
-                                : "word2"
-                        }`}
-                    >
-                        {props.data.name}
-                    </h2>
-                    <Records
-                        data={blogs}
-                        paginationCurrentPage={paginationCurrentPage}
-                        setPaginationCurrentPage={setPaginationCurrentPage}
-                    />
+                    <div className="contentOuter">
+                        <h2
+                            className={`heading ${
+                                props.data.name.length < 40
+                                    ? ""
+                                    : props?.data?.name.length >= 41 ||
+                                      props?.data?.name.length <= 80
+                                    ? "word1"
+                                    : "word2"
+                            }`}
+                        >
+                            {props.data.name}
+                        </h2>
+                        <Records
+                            data={blogs}
+                            paginationCurrentPage={paginationCurrentPage}
+                            setPaginationCurrentPage={setPaginationCurrentPage}
+                        />
+                    </div>
                 </div>
                 <div
                     className={`page-footer pageNumber ${
