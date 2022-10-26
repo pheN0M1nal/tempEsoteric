@@ -107,7 +107,7 @@ const BlogComponent = styled.div`
         max-width: 60%;
     }
 `;
-const BlogOuterWrapper = styled.div`
+const BlogOuterWrapper = styled.aside`
     width: 100%;
     max-width: 350px;
     position: absolute;

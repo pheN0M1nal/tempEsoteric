@@ -1,58 +1,69 @@
 import {
-	SHOW_PDF_MODAL,
-	HIDE_PDF_MODAL,
-	SHOW_LOGIN_MODAL,
-	HIDE_LOGIN_MODAL,
-	SHOW_PROFILE_MODAL,
-	HIDE_PROFILE_MODAL,
-	SHOW_SUBSCRIPTION_MODAL,
-	HIDE_SUBSCRIPTION_MODAL,
-	SHOW_BLOG_MODAL,
-	HIDE_BLOG_MODAL,
-} from '../constants/modalConstants'
+    SHOW_PDF_MODAL,
+    HIDE_PDF_MODAL,
+    SHOW_LOGIN_MODAL,
+    HIDE_LOGIN_MODAL,
+    SHOW_PROFILE_MODAL,
+    HIDE_PROFILE_MODAL,
+    SHOW_SUBSCRIPTION_MODAL,
+    HIDE_SUBSCRIPTION_MODAL,
+    SHOW_BLOG_MODAL,
+    HIDE_BLOG_MODAL,
+    SHOW_CHAT_MODAL,
+    HIDE_CHAT_MODAL,
+} from "../constants/modalConstants";
 
 // PDF
-export const showPdfModal = pdf => async dispatch => {
-	dispatch({ type: SHOW_PDF_MODAL, payload: pdf })
-}
+export const showPdfModal = (pdf) => async (dispatch) => {
+    dispatch({ type: SHOW_PDF_MODAL, payload: pdf });
+};
 
-export const hidePdfModal = () => async dispatch => {
-	dispatch({ type: HIDE_PDF_MODAL })
-}
+export const hidePdfModal = () => async (dispatch) => {
+    dispatch({ type: HIDE_PDF_MODAL });
+};
 
 // LOGIN/SIGNUP
-export const showLoginModal = () => async dispatch => {
-	dispatch({ type: SHOW_LOGIN_MODAL })
-}
+export const showLoginModal = () => async (dispatch) => {
+    dispatch({ type: SHOW_LOGIN_MODAL });
+};
 
-export const hideLoginModal = () => async dispatch => {
-	dispatch({ type: HIDE_LOGIN_MODAL })
-}
+export const hideLoginModal = () => async (dispatch) => {
+    dispatch({ type: HIDE_LOGIN_MODAL });
+};
 
 // profile
-export const showProfileModal = () => async dispatch => {
-	dispatch({ type: SHOW_PROFILE_MODAL })
-}
+export const showProfileModal = () => async (dispatch) => {
+    dispatch({ type: SHOW_PROFILE_MODAL });
+};
 
-export const hideProfileModal = () => async dispatch => {
-	dispatch({ type: HIDE_PROFILE_MODAL })
-}
+export const hideProfileModal = () => async (dispatch) => {
+    dispatch({ type: HIDE_PROFILE_MODAL });
+};
 
 // subscription
-export const showSubscriptionModal = () => async dispatch => {
-	dispatch({ type: SHOW_SUBSCRIPTION_MODAL })
-}
+export const showSubscriptionModal = () => async (dispatch) => {
+    dispatch({ type: SHOW_SUBSCRIPTION_MODAL });
+};
 
-export const hideSubscriptionModal = () => async dispatch => {
-	dispatch({ type: HIDE_SUBSCRIPTION_MODAL })
-}
+export const hideSubscriptionModal = () => async (dispatch) => {
+    dispatch({ type: HIDE_SUBSCRIPTION_MODAL });
+};
 
 // blog
 // subscription
-export const showBlogModal = () => async dispatch => {
-	dispatch({ type: SHOW_BLOG_MODAL })
-}
+export const showBlogModal = () => async (dispatch) => {
+    dispatch({ type: SHOW_BLOG_MODAL });
+};
 
-export const hideBlogModal = () => async dispatch => {
-	dispatch({ type: HIDE_BLOG_MODAL })
-}
+export const hideBlogModal = () => async (dispatch) => {
+    dispatch({ type: HIDE_BLOG_MODAL });
+};
+
+// chatBox
+export const showChatModal = () => async (dispatch) => {
+    dispatch({ type: SHOW_CHAT_MODAL });
+};
+
+export const hideChatModal = () => async (dispatch) => {
+    dispatch({ type: HIDE_CHAT_MODAL });
+};

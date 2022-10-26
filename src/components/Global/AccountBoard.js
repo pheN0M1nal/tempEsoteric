@@ -57,6 +57,7 @@ const Wrapper = styled.div`
                 height: 1rem;
                 margin-right: 0.5rem;
                 margin-left: 0.5rem;
+                transform:${(props)=>props?.subNavToggle?`rotate(180deg)`: `rotate(0deg)`}
             }
         }
 
@@ -167,8 +168,8 @@ export const AccountBoard = ({ profile }) => {
     };
 
     return (
-        <Wrapper>
-            {!profile ? (
+        <Wrapper subNavToggle={subNavToggle}>
+            {profile ? (
                 <>
                     <div className="profileTab">
                         <ProfilePictureBoard size={2.5}>

@@ -9,19 +9,20 @@ const Wrapper = styled.div`
     position: absolute;
     top: 5%;
     right: 5%;
+    
 
     :hover img {
-        transform: rotateY(3.142rad);
-        width: 35px;
-        height: 35px;
+        transform: scale(1.2);
     }
     img {
+        transition: ease-in-out .5s  ;
         width: 30px;
         height: 30px;
         object-fit: contain;
         border-radius: 50%;
         background: var(--custom-black);
         padding: 0.2rem;
+        cursor: pointer;
     }
 `;
 

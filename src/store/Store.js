@@ -12,6 +12,7 @@ import {
 	profileModalReducer,
 	blogModalReducer,
 	subscriptionModalReducer,
+	chatModalReducer,
 } from './reducers/modalReducer'
 import {
 	userLoginReducer,
@@ -44,6 +45,7 @@ const reducer = combineReducers({
 	loginModal: loginModalReducer,
 	profileModal: profileModalReducer,
 	subscriptionModal: subscriptionModalReducer,
+	ChatModal: chatModalReducer,
 
 	//book
 	book: bookReducer,

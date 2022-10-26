@@ -77,7 +77,7 @@ export const LoginForm = ({ showRegister }) => {
 				<label htmlFor='username'>User Name</label>
 				<InputComponent
 					id='username'
-					type='username'
+					type='text'
 					value={data.username}
 					onChange={e =>
 						HandleOnChangeInput(e, 'username', setData, data)

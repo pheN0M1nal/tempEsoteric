@@ -9,6 +9,8 @@ import {
 	HIDE_SUBSCRIPTION_MODAL,
 	SHOW_BLOG_MODAL,
 	HIDE_BLOG_MODAL,
+	SHOW_CHAT_MODAL,
+	HIDE_CHAT_MODAL,
 } from '../constants/modalConstants'
 
 export const pdfModalReducer = (state = { show: false, pdf: '' }, action) => {
@@ -80,6 +82,20 @@ export const subscriptionModalReducer = (state = { show: false }, action) => {
 				show: true,
 			}
 		case HIDE_SUBSCRIPTION_MODAL:
+			return {
+				show: false,
+			}
+		default:
+			return state
+	}
+}
+export const chatModalReducer = (state = { show: false }, action) => {
+	switch (action.type) {
+		case SHOW_CHAT_MODAL:
+			return {
+				show: true,
+			}
+		case HIDE_CHAT_MODAL:
 			return {
 				show: false,
 			}

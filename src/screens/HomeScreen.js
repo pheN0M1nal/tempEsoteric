@@ -7,12 +7,14 @@ import { NavigationContainer } from '../components/Global/navigation/Container'
 import Login from '../components/modal/LoginModal'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { FooterContainer } from '../components/Global/footer/Container'
 
 const HomeScreen = () => {
 	return (
 		<>
 			<NavigationContainer />
 			<MainBook />
+			<FooterContainer />
 			<PdfModal />
 			<SubscriptionModal />
 			<ProfileModal />
