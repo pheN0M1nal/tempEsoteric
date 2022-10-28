@@ -1,9 +1,9 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux'
 import { userProfileReducer } from './reducers/userReducer'
+import { contentReducer } from './reducers/contentReducer'
 import {
 	blogLabelsReducer,
 	blogsFromLabelReducer,
-	blogsReducer,
 	blogReducer,
 } from './reducers/blogsReducer'
 import {
@@ -35,7 +35,6 @@ const reducer = combineReducers({
 
 	//blogs
 	blog: blogReducer,
-	blogs: blogsReducer,
 	blogLabels: blogLabelsReducer,
 	blogsInfoFromLabel: blogsFromLabelReducer,
 
@@ -49,6 +48,9 @@ const reducer = combineReducers({
 
 	//book
 	book: bookReducer,
+
+	// content
+	content: contentReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')

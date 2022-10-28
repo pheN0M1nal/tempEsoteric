@@ -15,28 +15,6 @@ import {
 
 import AxiosInstance from '../../config/api/axois'
 
-export const fetchBlogs = (page, section) => async dispatch => {
-	try {
-		dispatch({ type: FETCH_BLOGS_START })
-		const api = `http://localhost:3500/content`
-		// const api = `http://localhost:3500/content/blogs`
-		const { data } = await AxiosInstance().get(api)
-		dispatch({
-			type: FETCH_BLOGS_SUCCESS,
-			payload: { blogs: data, page: page, section: section },
-		})
-	} catch (error) {
-		AxiosInstance().isCancel(error) && console.log('error: ', error)
-		dispatch({
-			type: FETCH_BLOGS_FAILED,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.message,
-		})
-	}
-}
-
 export const fetchBlog = blogUrl => async dispatch => {
 	try {
 		dispatch({ type: FETCH_BLOG_START })

@@ -8,6 +8,7 @@ import Login from '../components/modal/LoginModal'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { FooterContainer } from '../components/Global/footer/Container'
+import Chat from '../components/chatBody/components/Chat'
 
 const HomeScreen = () => {
 	return (
@@ -21,6 +22,7 @@ const HomeScreen = () => {
 			<BlogModal />
 			<Login />
 			<ToastContainer />
+			<Chat />
 		</>
 	)
 }

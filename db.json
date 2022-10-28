@@ -1,32 +1,49 @@
 {
 	"content": [
 		{
-			"id": 1,
-			"type": "pdf",
-			"title": "Esoteric curiosa",
-			"image": "dummy.jpg",
-			"url": "dashboard-of-nash-rambler.pdf"
+			"page": 1,
+			"pageContent": [
+				{
+					"type": "pdf",
+					"title": " Esoteric curiosa",
+					"image": "dummy.jpg",
+					"url": "dashboard-of-nash-rambler.pdf"
+				}
+			]
 		},
 		{
-			"id": 2,
-			"type": "pdf",
-			"title": "Esoteric curiosa",
-			"image": "dummy.jpg",
-			"url": "dashboard-of-nash-rambler.pdf"
+			"page": 2,
+			"pageContent": [
+				{
+					"type": "pdf",
+					"title": "Esoteric curiosa",
+					"image": "dummy.jpg",
+					"url": "dashboard-of-nash-rambler.pdf"
+				},
+				{
+					"type": "pdf",
+					"title": "Esoteric curiosa",
+					"image": "dummy.jpg",
+					"url": "dashboard-of-nash-rambler.pdf"
+				}
+			]
 		},
 		{
-			"id": 3,
-			"type": "blog",
-			"title": "Esoteric curiosa",
-			"image": "dummy.jpg",
-			"url": "blogUrl"
-		},
-		{
-			"id": 4,
-			"type": "blog",
-			"title": "Esoteric curiosa",
-			"image": "dummy.jpg",
-			"url": "blogUrl"
+			"page": 3,
+			"pageContent": [
+				{
+					"type": "blog",
+					"title": "Esoteric curiosa",
+					"image": "dummy.jpg",
+					"url": "blogUrl"
+				},
+				{
+					"type": "blog",
+					"title": "Esoteric curiosa",
+					"image": "dummy.jpg",
+					"url": "blogUrl"
+				}
+			]
 		}
 	],
 	"users": [
@@ -59,19 +76,19 @@
 	],
 	"search_value": [
 		{
-			"id":1,
+			"id": 1,
 			"blogName": "blog name",
 			"blogCoverImg": "dummy.jpg",
 			"blog": "blogUrl"
 		},
 		{
-			"id":2,
+			"id": 2,
 			"blogName": "blog name",
 			"blogCoverImg": "dummy.jpg",
 			"blog": "blogUrl"
 		},
 		{
-			"id":3,
+			"id": 3,
 			"blogName": "blog name",
 			"blogCoverImg": "dummy.jpg",
 			"blog": "blogUrl"
