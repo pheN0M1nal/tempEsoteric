@@ -1,15 +1,5 @@
-import React from 'react'
-import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
-
-const BlogComp = () => {
-	const blogInfo = useSelector(state => state.blog)
-
-	const { blog } = blogInfo
-
-	useEffect(() => {
-		console.log(blog)
-	}, [blog])
+const BlogComp = ({ blog }) => {
+	console.log(blog)
 
 	return (
 		<div

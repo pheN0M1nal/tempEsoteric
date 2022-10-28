@@ -1,10 +1,11 @@
 import { forwardRef, useState, useEffect } from 'react'
 import Records from './components/Records'
 import styled from 'styled-components'
-import { fetchBlogs } from '../../../store/actions/blogsActions'
+import { Spinner } from '../../Global/Spinner'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { fetchContent } from '../../../store/actions/contentActions'
+import BlogComp from '../../blogComponents/BlogComp'
 
 const PageWrapper = styled.div`
 	width: 100%;
@@ -145,27 +146,46 @@ const PageWrapper = styled.div`
 	}
 `
 export const Page = forwardRef((props, ref) => {
+	// initializing
 	const [paginationCurrentPage, setPaginationCurrentPage] = useState(1)
-
 	const dispatch = useDispatch()
 
+	// assigning values
+	const pageNumber = props.data.pageNumber
+
 	const contentData = useSelector(state => state.content)
-	const { loading, content, page, section } = contentData
+	var indexPageNum = contentData.content.findIndex(
+		item => item.pageNumber === pageNumber
+	)
+
+	if (indexPageNum === -1) {
+		indexPageNum = 0
+	}
+
+	const {
+		loading,
+		pageContent: content,
+		page,
+		section,
+	} = contentData.content[indexPageNum]
 
 	useEffect(() => {
-		dispatch(fetchContent(props.data.pageNumber, paginationCurrentPage))
-	}, [paginationCurrentPage, dispatch, props.data.pageNumber])
+		dispatch(fetchContent(pageNumber, paginationCurrentPage))
+	}, [paginationCurrentPage, dispatch, pageNumber])
+
+	const blogCont = {
+		title: 'From The Dashboariosa 2.0!”',
+		mainImage: 'main-image.jpg',
+		body: 'ddd',
+	}
 
 	return (
 		<div
-			className={`page softPage ${props.data.pageNumber}`}
+			className={`page softPage ${pageNumber}`}
 			ref={ref}
 			data-density={props.data.density | 'soft'}
 		>
-			<PageWrapper
-				imag={props?.data?.imag}
-				pageNumber={props.data.pageNumber}
-			>
+			<PageWrapper imag={props?.data?.imag} pageNumber={pageNumber}>
 				<div className='pageInner'>
 					<div className='contentOuter'>
 						<h2
@@ -180,13 +200,26 @@ export const Page = forwardRef((props, ref) => {
 						>
 							{props.data.name}
 						</h2>
-						<Records
-							data={content}
-							paginationCurrentPage={paginationCurrentPage}
-							setPaginationCurrentPage={
-								setPaginationCurrentPage
-							}
-						/>
+						{loading && <Spinner />}
+						{pageNumber === 6 ? (
+							<BlogComp blog={blogCont} />
+						) : pageNumber === 8 ? (
+							<BlogComp blog={blogCont} />
+						) : pageNumber === 10 ? (
+							<BlogComp blog={blogCont} />
+						) : (
+							<>
+								<Records
+									data={content}
+									paginationCurrentPage={
+										paginationCurrentPage
+									}
+									setPaginationCurrentPage={
+										setPaginationCurrentPage
+									}
+								/>
+							</>
+						)}
 					</div>
 				</div>
 				<div

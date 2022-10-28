@@ -137,10 +137,15 @@ const BlogOuterWrapper = styled.aside`
 `;
 
 export const BlogsScreen = () => {
+
+	// init
     const [showLabelList, setShowLabelList] = useState(false);
     const [showBlogList, setShowBlogList] = useState(true);
 
-    const blogsInfoFromLabel = useSelector((state) => state.blogsInfoFromLabel);
+	// aasigning
+   const blogInfo = useSelector(state => state.blog)
+   const { blog } = blogInfo 
+	const blogsInfoFromLabel = useSelector((state) => state.blogsInfoFromLabel);
     const { blogsInfo } = blogsInfoFromLabel;
     const fetchAndParseDataFromAPI = () => {};
     const handleCloseBlogList = (data) => {
@@ -175,7 +180,7 @@ export const BlogsScreen = () => {
                 )}
             </BlogOuterWrapper>
             <BlogComponent>
-                <BlogComp />
+				 <BlogComp blog={ blog} />
             </BlogComponent>
         </StyledComponent>
     );
