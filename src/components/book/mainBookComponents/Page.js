@@ -167,6 +167,7 @@ export const Page = forwardRef((props, ref) => {
 		pageContent: content,
 		page,
 		section,
+		count,
 	} = contentData.content[indexPageNum]
 
 	useEffect(() => {
@@ -200,7 +201,7 @@ export const Page = forwardRef((props, ref) => {
 						>
 							{props.data.name}
 						</h2>
-						{loading && <Spinner />}
+						{loading && <Spinner size={5} />}
 						{pageNumber === 6 ? (
 							<BlogComp blog={blogCont} />
 						) : pageNumber === 8 ? (
@@ -210,6 +211,7 @@ export const Page = forwardRef((props, ref) => {
 						) : (
 							<>
 								<Records
+									count={count}
 									data={content}
 									paginationCurrentPage={
 										paginationCurrentPage

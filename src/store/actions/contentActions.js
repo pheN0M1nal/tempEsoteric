@@ -17,7 +17,7 @@ export const fetchContent = (page, section) => async dispatch => {
 		const api = `http://localhost:3500/content?page=${page}`
 		// const api = `http://localhost:3500/content/blogs`
 		const { data } = await AxiosInstance().get(api)
-		console.log(data[0].pageContent)
+		console.log(data)
 
 		dispatch({
 			type: FETCH_CONTENT_SUCCESS,
@@ -25,6 +25,7 @@ export const fetchContent = (page, section) => async dispatch => {
 				content: data[0].pageContent,
 				page: page,
 				section: section,
+				count: data[0].count,
 			},
 		})
 	} catch (error) {
