@@ -2,14 +2,16 @@ import styled from 'styled-components'
 
 const SpinnerWidget = styled.div`
 	border: ${props => props.size / 8}rem solid transparent; /* Light grey */
-	border-top: ${props => props.size / 8}rem solid var(--custom-orange-color); /* Blue */
-	border-right: ${props => props.size / 8}rem solid
+	border-top: ${props => props.size / 8}rem  var(--custom-orange-color); /* Blue */
+	border-right: ${props => props.size / 8}rem dotted
+		var(--custom-orange-color); /* Blue */
+	border-left: ${props => props.size / 8}rem dotted
 		var(--custom-orange-color); /* Blue */
 	border-radius: 50%;
 	width: ${props => props.size}rem;
 	height: ${props => props.size}rem;
-	animation: spin 0.5s linear infinite;
-	margin: 0;
+	animation: spin 1s linear infinite;
+	margin:auto;
 
 	@keyframes spin {
 		0% {
