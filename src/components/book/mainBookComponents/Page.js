@@ -203,21 +203,26 @@ export const Page = forwardRef((props, ref) => {
 							}`}>
 							{props.data.name}
 						</h2>
-						{loading && <Spinner size={5} />}
-						{pageNumber === 6 ? (
-							<BlogComp blog={blogCont} />
-						) : pageNumber === 8 ? (
-							<BlogComp blog={blogCont} />
-						) : pageNumber === 10 ? (
-							<BlogComp blog={blogCont} />
+						{loading ? (
+							<Spinner size={5} />
 						) : (
 							<>
-								<Records
-									count={count}
-									data={content}
-									paginationCurrentPage={paginationCurrentPage}
-									setPaginationCurrentPage={setPaginationCurrentPage}
-								/>
+								{pageNumber === 6 ? (
+									<BlogComp blog={blogCont} />
+								) : pageNumber === 8 ? (
+									<BlogComp blog={blogCont} />
+								) : pageNumber === 10 ? (
+									<BlogComp blog={blogCont} />
+								) : (
+									<>
+										<Records
+											count={count}
+											data={content}
+											paginationCurrentPage={paginationCurrentPage}
+											setPaginationCurrentPage={setPaginationCurrentPage}
+										/>
+									</>
+								)}
 							</>
 						)}
 					</div>
