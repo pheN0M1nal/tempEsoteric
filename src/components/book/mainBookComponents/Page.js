@@ -1,11 +1,11 @@
-import { forwardRef, useState, useEffect } from 'react'
-import Records from './components/Records'
-import styled from 'styled-components'
-import { Spinner } from '../../Global/Spinner'
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'react-redux'
-import { fetchContent } from '../../../store/actions/contentActions'
-import BlogComp from '../../blogComponents/BlogComp'
+import { forwardRef, useState, useEffect } from 'react';
+import Records from './components/Records';
+import styled from 'styled-components';
+import { Spinner } from '../../Global/Spinner';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { fetchContent } from '../../../store/actions/contentActions';
+import BlogComp from '../../blogComponents/BlogComp';
 
 const PageWrapper = styled.div`
 	width: 100%;
@@ -144,22 +144,25 @@ const PageWrapper = styled.div`
 		padding: 0;
 		border-radius: 5px;
 	}
-`
+`;
 export const Page = forwardRef((props, ref) => {
 	// initializing
-	const [paginationCurrentPage, setPaginationCurrentPage] = useState(1)
-	const dispatch = useDispatch()
+	const [paginationCurrentPage, setPaginationCurrentPage] = useState(1);
+	const dispatch = useDispatch();
 
 	// assigning values
-	const pageNumber = props.data.pageNumber
+	const pageNumber = props.data.pageNumber;
 
-	const contentData = useSelector(state => state.content)
+	const contentData = useSelector(state => state.content);
 	var indexPageNum = contentData.content.findIndex(
 		item => item.pageNumber === pageNumber
-	)
+	);
+
+	// className For blog page
+	const classNameForBlog = `blog_open_${pageNumber}`;
 
 	if (indexPageNum === -1) {
-		indexPageNum = 0
+		indexPageNum = 0;
 	}
 
 	const {
@@ -168,24 +171,24 @@ export const Page = forwardRef((props, ref) => {
 		page,
 		section,
 		count,
-	} = contentData.content[indexPageNum]
+		pageClass,
+	} = contentData.content[indexPageNum];
 
 	useEffect(() => {
-		dispatch(fetchContent(pageNumber, paginationCurrentPage))
-	}, [paginationCurrentPage, dispatch, pageNumber])
+		dispatch(fetchContent(pageNumber, paginationCurrentPage));
+	}, [paginationCurrentPage, dispatch, pageNumber]);
 
 	const blogCont = {
 		title: 'From The Dashboariosa 2.0!”',
 		mainImage: 'main-image.jpg',
 		body: 'ddd',
-	}
+	};
 
 	return (
 		<div
 			className={`page softPage ${pageNumber}`}
 			ref={ref}
-			data-density={props.data.density | 'soft'}
-		>
+			data-density={props.data.density | 'soft'}>
 			<PageWrapper imag={props?.data?.imag} pageNumber={pageNumber}>
 				<div className='pageInner'>
 					<div className='contentOuter'>
@@ -197,8 +200,7 @@ export const Page = forwardRef((props, ref) => {
 									  props?.data?.name.length <= 80
 									? 'word1'
 									: 'word2'
-							}`}
-						>
+							}`}>
 							{props.data.name}
 						</h2>
 						{loading && <Spinner size={5} />}
@@ -213,12 +215,8 @@ export const Page = forwardRef((props, ref) => {
 								<Records
 									count={count}
 									data={content}
-									paginationCurrentPage={
-										paginationCurrentPage
-									}
-									setPaginationCurrentPage={
-										setPaginationCurrentPage
-									}
+									paginationCurrentPage={paginationCurrentPage}
+									setPaginationCurrentPage={setPaginationCurrentPage}
 								/>
 							</>
 						)}
@@ -226,14 +224,11 @@ export const Page = forwardRef((props, ref) => {
 				</div>
 				<div
 					className={`page-footer pageNumber ${
-						props?.data?.pageNumber % 2 === 0
-							? 'oddPage'
-							: 'evenPage'
-					}`}
-				>
+						props?.data?.pageNumber % 2 === 0 ? 'oddPage' : 'evenPage'
+					}`}>
 					<span>{props?.data?.pageNumber}</span>
 				</div>
 			</PageWrapper>
 		</div>
-	)
-})
+	);
+});

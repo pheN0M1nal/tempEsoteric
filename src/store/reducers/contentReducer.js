@@ -2,12 +2,13 @@ import {
 	FETCH_CONTENT_FAILED,
 	FETCH_CONTENT_START,
 	FETCH_CONTENT_SUCCESS,
-} from '../constants/contentConstants'
+} from '../constants/contentConstants';
 
 let initialState = {
 	content: [
 		{
 			loading: false,
+			pageClass: '',
 			count: 0,
 			pageNumber: 1,
 			pageContent: [],
@@ -16,6 +17,7 @@ let initialState = {
 		},
 		{
 			loading: false,
+			pageClass: '',
 			count: 0,
 			pageNumber: 2,
 			pageContent: [],
@@ -24,6 +26,7 @@ let initialState = {
 		},
 		{
 			loading: false,
+			pageClass: '',
 			count: 0,
 			pageNumber: 3,
 			pageContent: [],
@@ -32,6 +35,7 @@ let initialState = {
 		},
 		{
 			loading: false,
+			pageClass: '',
 			count: 0,
 			pageNumber: 4,
 			pageContent: [],
@@ -40,6 +44,7 @@ let initialState = {
 		},
 		{
 			loading: false,
+			pageClass: '',
 			count: 0,
 			pageNumber: 5,
 			pageContent: [],
@@ -48,6 +53,7 @@ let initialState = {
 		},
 		{
 			loading: false,
+			pageClass: '',
 			count: 0,
 			pageNumber: 7,
 			pageContent: [],
@@ -56,6 +62,7 @@ let initialState = {
 		},
 		{
 			loading: false,
+			pageClass: '',
 			count: 0,
 			pageNumber: 9,
 			pageContent: [],
@@ -63,7 +70,7 @@ let initialState = {
 			error: '',
 		},
 	],
-}
+};
 
 export const contentReducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -75,13 +82,13 @@ export const contentReducer = (state = initialState, action) => {
 						arr.push({
 							...thing,
 							loading: true,
-						})
+						});
 					} else {
-						arr.push(thing)
+						arr.push(thing);
 					}
-					return arr
+					return arr;
 				}, []),
-			}
+			};
 		case FETCH_CONTENT_SUCCESS:
 			return {
 				...state,
@@ -92,13 +99,14 @@ export const contentReducer = (state = initialState, action) => {
 							pageContent: action.payload.content,
 							loading: false,
 							count: action.payload.count,
-						})
+							pageClass: action.payload.pageClass,
+						});
 					} else {
-						arr.push(thing)
+						arr.push(thing);
 					}
-					return arr
+					return arr;
 				}, []),
-			}
+			};
 		case FETCH_CONTENT_FAILED:
 			return {
 				...state,
@@ -107,14 +115,14 @@ export const contentReducer = (state = initialState, action) => {
 						arr.push({
 							...thing,
 							error: action.payload.error,
-						})
+						});
 					} else {
-						arr.push(thing)
+						arr.push(thing);
 					}
-					return arr
+					return arr;
 				}, []),
-			}
+			};
 		default:
-			return state
+			return state;
 	}
-}
+};

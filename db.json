@@ -3,6 +3,7 @@
 		{
 			"page": 1,
 			"count": 1,
+			"pageClass": "pdf_list",
 			"pageContent": [
 				{
 					"type": "pdf",
@@ -15,6 +16,7 @@
 		{
 			"page": 2,
 			"count": 2,
+			"pageClass": "pdf_list",
 			"pageContent": [
 				{
 					"type": "pdf",
@@ -32,7 +34,8 @@
 		},
 		{
 			"page": 3,
-			"count": 22,
+			"count": 175,
+			"pageClass": "blog_list",
 			"pageContent": [
 				{
 					"type": "blog",
@@ -167,6 +170,20 @@
 					"url": "blogUrl"
 				}
 			]
+		},
+		{
+			"page": 6,
+			"pageClass": "blog_open",
+			"pageContent": {
+				"title": "From The Dashboard Of Nash Rambler ~ “The Esoteric Curiosa 2.0!”",
+				"mainImage": "main-image.jpg",
+				"body": "[Lady Ward, née Jean Templeton Reid. Seated three-quarter length in a French armchair, wearing a yellow satin dress with a full chiffon stole round her shoulders, a gold bandeau, a long string of pearls, a lorgnette in her right hand and her left resting on her hip. Oil on canvas, 109.22 x 76.2 cm (43 x 30 in.) Inscribed lower left: de László / 1922. XII. Sitters’ Book II, f. 31: Jean Ward July 15th. This portrait was commissioned by the sitter’s mother, Mrs. Whitelaw Reid, who paid the artist an honorarium of £630. A preparatory drawing is in the collection of a descendant of the artist. A contemporary copy of the present portrait by an unknown artist remains in the possession of a member of the family. De László also painted the sitter’s husband in 1916, her mother, in 1922, and a double portrait of her two sons in 1927. Jean Templeton Reid was born in 1884, the daughter of Whitelaw Reid (1837+1912), Editor-in-chief of the New York Tribune, and his wife Elisabeth Mills. In 1905 the sitter’s father was appointed as the American Ambassador to the Court of St. James’s, a post he would hold until his death in 1912. The Reid family moved into Dorchester House, and Jean Reid joined London society. She was presented at Court to King Edward VII and Queen Alexandra at Buckingham Palace on May 25, 1906. On June 23, 1908, at the Chapel Royal in St. James’s Palace, she married the Honorable John Hubert Ward (1870+1938), brother of the 2nd Earl of Dudley, and equerry to Edward VII, Queen Alexandra, George V and Edward VIII. There were two sons of the marriage: Edward (1909+1990) and Alexander (1915), godsons to King Edward and Queen Alexandra. During the Second World War, Lady Ward was director of the American Red Cross in London and was awarded the CBE and the Order of St. John of Jerusalem. She was joint owner, with her brother Ogden Reid, of the New York Herald Tribune, which they inherited from their father. The Ward family divided their time between their home in Berkshire, Chilton Lodge, purchased for them by the sitter’s father shortly after their marriage, and the Kinnaird Estate in Perthshire, Scotland, which the sitter bought from the Duke of Atholl in 1926. The Kinnaird Estate included an eighteenth-century house and 8,000 acres of land, where Lady Ward enjoyed outdoor activities, particularly fishing and training gundogs. She was considered one of the best female anglers of her time, fishing on the river Tay which ran through her estate. She excelled at tennis, playing doubles at Wimbledon with Mrs. Winston Churchill. Lady Ward died in 1962. The sitter was also painted by the British portraitist Edward Hughes (1832+1908) and later by Flora Lion (1878+1958).]"
+			}
+		},
+		{
+			"page": 7,
+			"pageClass": "contact_us",
+			"postApi": ""
 		}
 	],
 	"users": [

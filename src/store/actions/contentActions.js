@@ -2,8 +2,8 @@ import {
 	FETCH_CONTENT_FAILED,
 	FETCH_CONTENT_START,
 	FETCH_CONTENT_SUCCESS,
-} from '../constants/contentConstants'
-import AxiosInstance from '../../config/api/axois'
+} from '../constants/contentConstants';
+import AxiosInstance from '../../config/api/axois';
 
 export const fetchContent = (page, section) => async dispatch => {
 	try {
@@ -13,11 +13,11 @@ export const fetchContent = (page, section) => async dispatch => {
 				page: page,
 				section: section,
 			},
-		})
-		const api = `http://localhost:3500/content?page=${page}`
+		});
+		const api = `http://localhost:3500/content?page=${page}`;
 		// const api = `http://localhost:3500/content/blogs`
-		const { data } = await AxiosInstance().get(api)
-		console.log(data)
+		const { data } = await AxiosInstance().get(api);
+		console.log(data);
 
 		dispatch({
 			type: FETCH_CONTENT_SUCCESS,
@@ -26,8 +26,9 @@ export const fetchContent = (page, section) => async dispatch => {
 				page: page,
 				section: section,
 				count: data[0].count,
+				pageClass: data[0].pageClass,
 			},
-		})
+		});
 	} catch (error) {
 		dispatch({
 			type: FETCH_CONTENT_FAILED,
@@ -38,6 +39,6 @@ export const fetchContent = (page, section) => async dispatch => {
 						: error.message,
 				page: page,
 			},
-		})
+		});
 	}
-}
+};
