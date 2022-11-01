@@ -2,8 +2,6 @@ import React from "react";
 import classnames from "classnames";
 import { UsePagination, DOTS } from "./UsePagination";
 import styled from "styled-components";
-import prev from "../../../static/images/Auth/4980083@0.png";
-import next from "../../../static/images/Auth/4980081@0.png";
 
 const StyledComponent = styled.div`
     .pagination-container {
@@ -13,37 +11,33 @@ const StyledComponent = styled.div`
         justify-content: right;
         margin-right: 2rem;
         .pagination-item {
-            width: 30px;
-            height: 30px;
-
+            padding: 0 12px;
+            min-width: 32px;
+            height: 32px;
             text-align: center;
-            margin: auto 2px;
+            margin: auto 4px;
             color: #000;
             display: flex;
             box-sizing: border-box;
             align-items: center;
-            justify-content: center;
             letter-spacing: 0.01071em;
-            border: 1px solid var(--custom-orange-color);
-            border-radius: 2.4rem;
+            border: 1px solid #aab8b6;
+            border-radius: 0;
             line-height: 1.43;
             font-size: 16px;
-            @media (max-width: 1400px) {
-                width: 25px;
-                height: 25px;
-            }
+
             &.dots:hover {
                 background-color: transparent;
                 cursor: default;
             }
             &:hover {
-                background-color: var(--custom-orange-color);
+                background-color: #aab8b6;
                 cursor: pointer;
                 color: #fff;
             }
 
             &.selected {
-                background-color: var(--custom-orange-color);
+                background-color: #aab8b6;
                 color: #fff;
             }
 
@@ -60,13 +54,13 @@ const StyledComponent = styled.div`
                     border-top: 0.12em solid rgba(0, 0, 0, 0.87);
                 }
 
-                /* &.left {
+                &.left {
                     transform: rotate(-135deg) translate(-50%);
                 }
 
                 &.right {
                     transform: rotate(45deg);
-                } */
+                }
             }
             &:hover ::before {
                 border-color: #fff;
@@ -86,23 +80,6 @@ const StyledComponent = styled.div`
                 }
             }
         }
-        .leftArrow,
-        .rightArrow {
-            border: 0;
-            width: 30px;
-            height: 30px;
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-            }
-        }
-    }
-    .pagination-item.dots {
-        border: 0;
-        font-size: 22px;
-        align-items: flex-end;
-        color: blue;
     }
 `;
 const Pagination = (props) => {
@@ -121,23 +98,25 @@ const Pagination = (props) => {
     }
 
     const onNext = () => {
-        if (currentPage !== totalCount) onPageChange(currentPage + 1);
+        onPageChange(currentPage + 1);
     };
+
     const onPrevious = () => {
-        if (currentPage !== 1) onPageChange(currentPage - 1);
+        onPageChange(currentPage - 1);
     };
+
     let lastPage = paginationRange[paginationRange?.length - 1];
     return (
         <StyledComponent>
             <ul className={classnames("pagination-container", { [className]: className })}>
                 {/* Left navigation arrow */}
                 <li
-                    className={classnames("pagination-item leftArrow", {
+                    className={classnames("pagination-item", {
                         disabled: currentPage === 1,
                     })}
                     onClick={onPrevious}
                 >
-                    <img src={prev} alt="prev" />
+                    <div className="arrow left" />
                 </li>
                 {paginationRange?.map(
                     (pageNumber, i) =>
@@ -160,16 +139,16 @@ const Pagination = (props) => {
                         )
 
                     // Render our Page Pills
-                    // code added
+                    // code added 
                 )}
                 {/*  Right Navigation arrow */}
                 <li
-                    className={classnames("pagination-item rightArrow", {
+                    className={classnames("pagination-item", {
                         disabled: currentPage === lastPage,
                     })}
                     onClick={onNext}
                 >
-                    <img src={next} alt="next" />
+                    <div className="arrow right" />
                 </li>
             </ul>
         </StyledComponent>

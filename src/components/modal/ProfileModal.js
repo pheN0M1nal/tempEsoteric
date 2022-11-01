@@ -77,7 +77,7 @@ const ProfileModal = () => {
             classNameFromProps="ProfileModal"
         >
             <Wrapper>
-                <div className="grid-container">
+                <div class="grid-container">
                     <div className="Update_profile_outer ">
                         <EditProfile />
                     </div>
