@@ -142,7 +142,7 @@ root {
 
 
 
-
+  
 ::-webkit-scrollbar {
   background: var(--custom-input-border);
   height: 0px;
@@ -153,30 +153,73 @@ root {
 }
 
 /* Track */
-::-webkit-scrollbar-track {
+  
+::-webkit-scrollbar {
   background: var(--custom-input-border);
-  height: 0px;
-  width: 0px;
+  height: 0px ;
+  width: 0px ;
   margin: 0;
   padding: 0;
   border-radius: 5px;
 }
 
 /* Handle */
-::-webkit-scrollbar-thumb {
+  
+::-webkit-scrollbar {
   background:  var(--custom-orange-color);
-  height: 0px;
-  width: 0px;
+  height: 0px ;
+  width: 0px ;
   margin: 0;
   padding: 0;
   border-radius: 5px;
 }
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
+  
+::-webkit-scrollbar {
   background:  var(--custom-orange-color);
-  height: 0px;
-  width: 0px;
+  height: 0px ;
+  width: 0px ;
+  margin: 0;
+  padding: 0;
+  border-radius: 5px;
+}
+
+
+.pageContentOuter::-webkit-scrollbar {
+  background: var(--custom-input-border);
+  height: 4px;
+  width: 4px;
+  margin: 0;
+  padding: 0;
+  border-radius: 5px;
+}
+
+/* Track */
+.pageContentOuter::-webkit-scrollbar-track {
+  background: var(--custom-input-border);
+  height: 4px;
+  width: 4px;
+  margin: 0;
+  padding: 0;
+  border-radius: 5px;
+}
+
+/* Handle */
+.pageContentOuter::-webkit-scrollbar-thumb {
+  background:  var(--custom-orange-color);
+  height: 4px;
+  width: 4px;
+  margin: 0;
+  padding: 0;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+.pageContentOuter::-webkit-scrollbar-thumb:hover {
+  background:  var(--custom-orange-color);
+  height: 4px;
+  width: 4px;
   margin: 0;
   padding: 0;
   border-radius: 5px;

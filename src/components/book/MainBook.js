@@ -9,6 +9,7 @@ import menuItems from "../../DataList/menuItems";
 import { MenuPage } from "./mainBookComponents/MenuPage";
 import { useParams, useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
+import { ContactUs } from "./mainBookComponents/ContactUs";
 
 const StyledComponent = styled.div`
     max-height: 100vh;
@@ -44,7 +45,7 @@ const StyledComponent = styled.div`
         }
         .softPage {
             background-color: #fff;
-			
+
             /* margin: ${(props) => (props.pageNumber % 2 === 0 ? `5% 5% 5% 0` : "5% 0 5% 5%")}; */
             ${
                 "" /* padding: 2rem auto;
@@ -75,8 +76,6 @@ const MainBook = () => {
         setPage(e.data);
     }, []);
 
-   
-
     useEffect(() => {
         setTotalPage(flipRef.current.pageFlip()?.getPageCount());
     });
@@ -99,7 +98,7 @@ const MainBook = () => {
                         showCover={true}
                         mobileScrollSupport={true}
                         onFlip={onFlip}
-						disableFlipByClick={true}
+                        disableFlipByClick={true}
                         className="flip-book html-book demo-book"
                         ref={flipRef}
                     >
@@ -109,7 +108,8 @@ const MainBook = () => {
                         {pages.map((item, index) => (
                             <Page key={index} data={item} className="page" number={page}></Page>
                         ))}
-                        {pages.length % 2 !== 0 ? (
+                        <ContactUs book={flipRef} />
+                        {pages.length+1 % 2 !== 0 ? (
                             <PageCover bgimg={""} title={"."} key={pages.length - 1} pos="bottom" />
                         ) : (
                             [2, 1].map((number, i) => (

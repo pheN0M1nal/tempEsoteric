@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import BlogComp from "../components/blogComponents/BlogComp";
@@ -7,6 +8,7 @@ import BlogListComp from "../components/blogComponents/BlogListComp";
 import Labels from "../components/blogComponents/Labels";
 import { TopBar } from "../components/Global/TopBar";
 import LabelsImg from "../static/images/Auth/3664039@0.png";
+import { fetchBlogFromLabel } from "../store/actions/blogsActions";
 const StyledComponent = styled.div`
     position: relative;
     width: 100%;
@@ -46,6 +48,7 @@ const StyledComponent = styled.div`
                 a {
                     border: 1px solid var(--custom-border-color);
                     background-color: var(--custom-light-bg);
+                    backdrop-filter: blur(10px);
                     /* border-radius: 2.4rem; */
                     padding: 0.5rem 1rem;
                     display: flex;
@@ -101,7 +104,10 @@ const BlogComponent = styled.div`
     margin: 0 auto;
     height: 90vh;
     overflow: auto;
-
+    background-color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    padding: 1rem;
     img {
         width: 100%;
         max-width: 60%;
@@ -137,21 +143,31 @@ const BlogOuterWrapper = styled.aside`
 `;
 
 export const BlogsScreen = () => {
-
-	// init
+    // init
     const [showLabelList, setShowLabelList] = useState(false);
     const [showBlogList, setShowBlogList] = useState(true);
-
-	// aasigning
-   const blogInfo = useSelector(state => state.blog)
-   const { blog } = blogInfo 
-	const blogsInfoFromLabel = useSelector((state) => state.blogsInfoFromLabel);
+    const dispatch = useDispatch();
+    // aasigning
+    const blogInfo = useSelector((state) => state.blog);
+    const { blog } = blogInfo;
+    const blogsInfoFromLabel = useSelector((state) => state.blogsInfoFromLabel);
     const { blogsInfo } = blogsInfoFromLabel;
     const fetchAndParseDataFromAPI = () => {};
     const handleCloseBlogList = (data) => {
         setShowBlogList(data);
     };
+    // const labels = useSelector((state) => state.blogLabels);
+    // const { blogLabels } = labels;
+    // console.log(blogLabels, "blogLabels");
     const query = ["s", "a"];
+    let blogId = 1;
+    let blogListId = 1;
+    // const loadBlogInfo = (label) => {
+    //     dispatch(fetchBlogFromLabel(label));
+    // };
+    // useEffect(() => {
+    //     loadBlogInfo();
+    // }, [blogListId]);
     return (
         <StyledComponent>
             <TopBar
@@ -168,7 +184,11 @@ export const BlogsScreen = () => {
                 </div>
             ) : null}
             <BlogOuterWrapper show={showBlogList} onClick={() => setShowLabelList(false)}>
-                <BlogListComp blogsInfo={blogsInfo} setShowBlogList={handleCloseBlogList} />
+                <BlogListComp
+                    blogsInfo={blogsInfo}
+                    blogId={blogId}
+                    setShowBlogList={handleCloseBlogList}
+                />
                 {blogsInfo.length !== 0 && (
                     <Link
                         to=""
@@ -180,7 +200,7 @@ export const BlogsScreen = () => {
                 )}
             </BlogOuterWrapper>
             <BlogComponent>
-				 <BlogComp blog={ blog} />
+                <BlogComp blog={blog} />
             </BlogComponent>
         </StyledComponent>
     );

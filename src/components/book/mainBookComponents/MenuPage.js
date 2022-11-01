@@ -19,8 +19,8 @@ const PageWrapper = styled.div`
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	background-image: url(${props => props.imag});
-	border: 5px solid #DAA520;
-	outline: #DAA520;
+	border: 5px solid var(--custom-orange-color);
+	outline: var(--custom-orange-color);
 	box-shadow: none;
 	h1{
 		text-align: center;

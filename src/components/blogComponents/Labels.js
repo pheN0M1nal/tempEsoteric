@@ -9,7 +9,7 @@ const Labels = () => {
 
     const labels = useSelector((state) => state.blogLabels);
     const { blogLabels } = labels;
-
+console.log(labels,"blogLabels")
     useEffect(() => {
         dispatch(fetchLabels());
     }, []);

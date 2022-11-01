@@ -28,6 +28,8 @@ export const fetchContent = (page, section) => async dispatch => {
 				section: section,
 				count: data[0].count ? data[0].count : 0,
 				pageClass: data[0].pageClass,
+				blogListName: data[0].blogListName,
+				blogListId: data[0].blogListId,
 			},
 		});
 	} catch (error) {

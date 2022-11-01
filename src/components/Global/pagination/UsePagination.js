@@ -5,7 +5,7 @@ const range = (start, end) => {
 
     return Array.from({ length }, (_, idx) => idx + start);
 };
-export const DOTS = "...";
+export const DOTS = "....";
 export const UsePagination = ({ totalCount, pageSize, siblingCount = 1, currentPage }) => {
     const paginationRange = useMemo(() => {
         const totalPageCount = Math.ceil(totalCount / pageSize);

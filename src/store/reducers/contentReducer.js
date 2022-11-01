@@ -128,6 +128,9 @@ export const contentReducer = (state = initialState, action) => {
 							count: action.payload.count,
 							pageClass: action.payload.pageClass,
 							blog: action.payload.blog,
+							blogListId: action.payload.blogListId,
+							blogListName: action.payload.blogListName,
+
 						});
 					} else {
 						arr.push(thing);

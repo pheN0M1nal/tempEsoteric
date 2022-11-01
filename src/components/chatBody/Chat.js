@@ -23,7 +23,7 @@ const AsideComponent = styled.aside`
         border-radius: 10px;
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
-    ..sc-message-list {
+    .sc-message-list {
         background: transparent;
     }
     .sc-header {
@@ -60,7 +60,7 @@ const Chat = () => {
 
     const userProfile = useSelector((state) => state.userProfile);
     const { isFetchingProfile, profile } = userProfile;
-    console.log(profile, "profile");
+
     let incomingData = messageList;
     useEffect(() => {
         setMessageList(incomingData);

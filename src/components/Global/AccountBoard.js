@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Button } from "./Button";
 import logoutImg from "../../static/images/Auth/3599716@0.png";
 import profileimg from "../../static/images/Auth/2384396@0.png";
-import profilePicture from "../../static/images/Auth/How-to-be-happy-as-an-introvert.png";
+import profilePicture from "../../static/images/Auth/communication-chat-6013688-5272892.png";
 import plansimg from "../../static/images/Auth/4222015@1.png";
 import down from "../../static/images/Auth/4980085@0.png";
 import { useDispatch } from "react-redux";
@@ -57,7 +57,7 @@ const Wrapper = styled.div`
                 height: 1rem;
                 margin-right: 0.5rem;
                 margin-left: 0.5rem;
-                transform:${(props)=>props?.subNavToggle?`rotate(180deg)`: `rotate(0deg)`}
+                transform: ${(props) => (props?.subNavToggle ? `rotate(180deg)` : `rotate(0deg)`)};
             }
         }
 

@@ -6,6 +6,7 @@ import { fetchBlog } from "../../store/actions/blogsActions";
 const StyledComponent = styled.ul`
     list-style: none;
     background-color: var(--custom-light-bg);
+    backdrop-filter: blur(10px);
     height: inherit;
     margin: 0;
     padding: 0;
@@ -45,7 +46,7 @@ const StyledComponent = styled.ul`
 `;
 const BlogListComp = ({ blogsInfo, setShowBlogList }) => {
     const dispatch = useDispatch();
-
+// console.log(blogsInfo,"blogsInfo")
     const loadBlog = (url) => {
         dispatch(fetchBlog(url));
         setShowBlogList(false);

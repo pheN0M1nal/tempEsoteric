@@ -15,10 +15,10 @@ import {
 
 import AxiosInstance from '../../config/api/axois'
 
-export const fetchBlog = blogUrl => async dispatch => {
+export const fetchBlog = (blogUrl,blogListId) => async dispatch => {
 	try {
 		dispatch({ type: FETCH_BLOG_START })
-		const api = `http://localhost:3500/${blogUrl}`
+		const api = `http://localhost:3500/${blogUrl}/${blogListId}`
 		const { data } = await AxiosInstance().get(api)
 		dispatch({
 			type: FETCH_BLOG_SUCCESS,

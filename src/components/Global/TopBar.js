@@ -78,10 +78,7 @@ export const TopBar = ({
             <div className="blogLabelOuter">
                 <Search fetchAndParseDataFromAPI={fetchAndParseDataFromAPI} query={query} />
                 <div className="navBtn">
-                    <Link to={"/"} className="logout-button logout1" onClick={() => closeModal()}>
-                        <img src={Home} alt="userprofile" />
-                        &nbsp; Home
-                    </Link>
+                  
                     <Link
                         onClick={() => setShowLabelList(!showLabelList)}
                         className="logout-button logout1"

@@ -54,20 +54,16 @@ const menuItems = [
 		pageNumber: 10,
 		imag:imag5,
 	},
+	
 	{
-		name: 'Esoteric Queries',
+		name: 'Esoteric Fodder',
 		pageNumber: 11,
 		imag:imag1,
 	},
 	{
-		name: 'Esoteric Fodder',
+		name: 'Esoteric Essentials',
 		pageNumber: 12,
 		imag:imag1,
-	},
-	{
-		name: 'Esoteric Essentials',
-		pageNumber: 13,
-		imag:imag2,
 	},
 ]
 
