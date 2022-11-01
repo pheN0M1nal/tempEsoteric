@@ -8,7 +8,6 @@ let initialState = {
 	content: [
 		{
 			loading: false,
-			blog: '',
 			pageClass: '',
 			count: 0,
 			pageNumber: 1,
@@ -18,7 +17,6 @@ let initialState = {
 		},
 		{
 			loading: false,
-			blog: '',
 			pageClass: '',
 			count: 0,
 			pageNumber: 2,
@@ -28,7 +26,6 @@ let initialState = {
 		},
 		{
 			loading: false,
-			blog: '',
 			pageClass: '',
 			count: 0,
 			pageNumber: 3,
@@ -38,7 +35,6 @@ let initialState = {
 		},
 		{
 			loading: false,
-			blog: '',
 			pageClass: '',
 			count: 0,
 			pageNumber: 4,
@@ -48,7 +44,6 @@ let initialState = {
 		},
 		{
 			loading: false,
-			blog: '',
 			pageClass: '',
 			count: 0,
 			pageNumber: 5,
@@ -58,17 +53,6 @@ let initialState = {
 		},
 		{
 			loading: false,
-			blog: '',
-			pageClass: '',
-			count: 0,
-			pageNumber: 6,
-			pageContent: [],
-			paginationNumber: 1,
-			error: '',
-		},
-		{
-			loading: false,
-			blog: '',
 			pageClass: '',
 			count: 0,
 			pageNumber: 7,
@@ -78,17 +62,6 @@ let initialState = {
 		},
 		{
 			loading: false,
-			blog: '',
-			pageClass: '',
-			count: 0,
-			pageNumber: 8,
-			pageContent: [],
-			paginationNumber: 1,
-			error: '',
-		},
-		{
-			loading: false,
-			blog: '',
 			pageClass: '',
 			count: 0,
 			pageNumber: 9,
@@ -127,7 +100,6 @@ export const contentReducer = (state = initialState, action) => {
 							loading: false,
 							count: action.payload.count,
 							pageClass: action.payload.pageClass,
-							blog: action.payload.blog,
 						});
 					} else {
 						arr.push(thing);

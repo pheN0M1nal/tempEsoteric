@@ -22,11 +22,10 @@ export const fetchContent = (page, section) => async dispatch => {
 		dispatch({
 			type: FETCH_CONTENT_SUCCESS,
 			payload: {
-				blog: data[0].blog ? data[0].blog : '',
-				content: data[0].pageContent ? data[0].pageContent : [],
+				content: data[0].pageContent,
 				page: page,
 				section: section,
-				count: data[0].count ? data[0].count : 0,
+				count: data[0].count,
 				pageClass: data[0].pageClass,
 			},
 		});
