@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { fetchContent } from '../../../store/actions/contentActions';
 import BlogComp from '../../blogComponents/BlogComp';
+import { BookLoader } from '../../Global/BookLoader';
 
 const PageWrapper = styled.div`
 	width: 100%;
@@ -39,7 +40,7 @@ const PageWrapper = styled.div`
 		padding: 10% 13%;
 		.contentOuter {
 			text-align: center;
-			height: 95%;
+			height: 100%;
 			width: 100%;
 			position: relative;
 			z-index: 5;
@@ -50,9 +51,15 @@ const PageWrapper = styled.div`
 				overflow: auto;
 				width: 100%;
 				display: flex;
-				flex-direction: column;
+				flex-direction: row;
+				flex-wrap: wrap;
+				gap: 0.8rem;
+				justify-content: center;
 				align-items: center;
 				position: relative;
+				@media (max-width: 1400px) {
+					height: 97%;
+				}
 			}
 			.heading {
 				font-size: 1.4rem;
@@ -65,6 +72,26 @@ const PageWrapper = styled.div`
 			}
 			.word2 {
 				font-size: 1.1rem !important;
+			}
+		}
+		.blog_list {
+			text-align: center;
+			height: 95%;
+			width: 100%;
+			position: relative;
+			z-index: 5;
+			.pageContentOuter {
+				justify-content: center;
+			}
+		}
+		.contact_us {
+			text-align: center;
+			height: 95%;
+			width: 100%;
+			position: relative;
+			z-index: 5;
+			.pageContentOuter {
+				justify-content: center;
 			}
 		}
 	}
@@ -157,9 +184,9 @@ export const Page = forwardRef((props, ref) => {
 	var indexPageNum = contentData.content.findIndex(
 		item => item.pageNumber === pageNumber
 	);
-
+	console.log(contentData?.content[indexPageNum]?.count, 'indexPageNum');
 	// className For blog page
-	const classNameForBlog = `blog_open_${pageNumber}`;
+	const classNameForBlog = `blog_open_${contentData}`;
 
 	if (indexPageNum === -1) {
 		indexPageNum = 0;
@@ -173,6 +200,8 @@ export const Page = forwardRef((props, ref) => {
 		count,
 		pageClass,
 	} = contentData.content[indexPageNum];
+
+	console.log(count, 'count');
 
 	useEffect(() => {
 		dispatch(fetchContent(pageNumber, paginationCurrentPage));
