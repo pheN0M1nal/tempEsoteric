@@ -59,7 +59,7 @@ export const Search = ({ fetchAndParseDataFromAPI, endpointQueryParam }) => {
 		<Wrapper>
 			<input
 				type='search'
-				placeholder='Enter page number ...'
+				placeholder='search something here ...'
 				value={searchParam}
 				onChange={handleSearchInputChange}
 			/>
