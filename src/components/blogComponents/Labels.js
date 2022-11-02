@@ -4,26 +4,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchBlogFromLabel, fetchLabels } from "../../store/actions/blogsActions";
 
-const Labels = () => {
+const Labels = ({blogListId}) => {
     const dispatch = useDispatch();
-
+    console.log(blogListId,"blogListId")
     const labels = useSelector((state) => state.blogLabels);
     const { blogLabels } = labels;
-console.log(labels,"blogLabels")
+    console.log(blogLabels, "blogLabels");
     useEffect(() => {
         dispatch(fetchLabels());
     }, []);
 
-    const loadBlogInfo = (label) => {
-        dispatch(fetchBlogFromLabel(label));
+    const loadBlogInfo = (blogListId) => {
+        dispatch(fetchBlogFromLabel(blogListId,1));
     };
 
     return (
         <ul>
-            {blogLabels.map((label) => (
-                <li>
-                    <Link to="" onClick={() => loadBlogInfo(label.search_value)}>
-                        {label.name} &nbsp;<span className="badge">{label.quantity}</span>
+            {blogLabels.map((item,i) => (
+                <li key={i} className={`${blogListId === item.blogListId ? "active" : ""}`}>
+                    <Link to="" onClick={() => loadBlogInfo(item.blogListId)}>
+                        {item.blogListName} &nbsp;<span className="badge">{item.count}</span>
                     </Link>
                 </li>
             ))}

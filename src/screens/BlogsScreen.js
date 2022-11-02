@@ -8,7 +8,7 @@ import BlogListComp from "../components/blogComponents/BlogListComp";
 import Labels from "../components/blogComponents/Labels";
 import { TopBar } from "../components/Global/TopBar";
 import LabelsImg from "../static/images/Auth/3664039@0.png";
-import { fetchBlogFromLabel } from "../store/actions/blogsActions";
+import { fetchBlog, fetchBlogFromLabel } from "../store/actions/blogsActions";
 const StyledComponent = styled.div`
     position: relative;
     width: 100%;
@@ -43,12 +43,15 @@ const StyledComponent = styled.div`
             list-style: none;
             padding: 0;
             margin: 0;
+            background-color: var(--custom-light-bg);
+            .active {
+                background-color: #ffffff85;
+            }
             li {
                 cursor: pointer;
+                backdrop-filter: blur(10px);
                 a {
                     border: 1px solid var(--custom-border-color);
-                    background-color: var(--custom-light-bg);
-                    backdrop-filter: blur(10px);
                     /* border-radius: 2.4rem; */
                     padding: 0.5rem 1rem;
                     display: flex;
@@ -93,9 +96,6 @@ const StyledComponent = styled.div`
                 box-shadow: var(--custom-shadow);
             }
         }
-    }
-    #labelNav.active {
-        display: initial;
     }
 `;
 const BlogComponent = styled.div`
@@ -146,28 +146,34 @@ export const BlogsScreen = () => {
     // init
     const [showLabelList, setShowLabelList] = useState(false);
     const [showBlogList, setShowBlogList] = useState(true);
+    const [itemId, setItemId] = useState();
     const dispatch = useDispatch();
     // aasigning
     const blogInfo = useSelector((state) => state.blog);
     const { blog } = blogInfo;
+
     const blogsInfoFromLabel = useSelector((state) => state.blogsInfoFromLabel);
-    const { blogsInfo } = blogsInfoFromLabel;
+    const { blogsInfo, requestedBlogId } = blogsInfoFromLabel;
+
+    let blogListId = blogsInfo[0]?.blogListId;
+
     const fetchAndParseDataFromAPI = () => {};
-    const handleCloseBlogList = (data) => {
-        setShowBlogList(data);
-    };
-    // const labels = useSelector((state) => state.blogLabels);
-    // const { blogLabels } = labels;
-    // console.log(blogLabels, "blogLabels");
+
+    const blogItem = useSelector((state) => state.blog);
+
     const query = ["s", "a"];
-    let blogId = 1;
-    let blogListId = 1;
-    // const loadBlogInfo = (label) => {
-    //     dispatch(fetchBlogFromLabel(label));
-    // };
-    // useEffect(() => {
-    //     loadBlogInfo();
-    // }, [blogListId]);
+
+    const loadBlogInfo = (blogListId, blogId) => {
+        setItemId(blogId);
+        dispatch(fetchBlog(blogListId, blogId));
+        setShowBlogList(false);
+    };
+
+    useEffect(() => {
+        loadBlogInfo(blogListId, requestedBlogId);
+        setItemId(requestedBlogId);
+    }, [requestedBlogId, blogListId]);
+
     return (
         <StyledComponent>
             <TopBar
@@ -180,14 +186,15 @@ export const BlogsScreen = () => {
             />
             {showLabelList ? (
                 <div id="labelNav">
-                    <Labels />
+                    <Labels blogListId={blogListId} />
                 </div>
             ) : null}
             <BlogOuterWrapper show={showBlogList} onClick={() => setShowLabelList(false)}>
                 <BlogListComp
                     blogsInfo={blogsInfo}
-                    blogId={blogId}
-                    setShowBlogList={handleCloseBlogList}
+                    blogId={itemId}
+                    blogListId={blogListId}
+                    loadBlogInfo={loadBlogInfo}
                 />
                 {blogsInfo.length !== 0 && (
                     <Link
@@ -200,7 +207,13 @@ export const BlogsScreen = () => {
                 )}
             </BlogOuterWrapper>
             <BlogComponent>
-                <BlogComp blog={blog} />
+                <BlogComp
+                    blog={blog}
+                    blogsInfo={blogsInfo}
+                    blogId={itemId}
+                    blogListId={blogListId}
+                    loadBlogInfo={loadBlogInfo}
+                />
             </BlogComponent>
         </StyledComponent>
     );

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { fetchBlog } from "../../../../store/actions/blogsActions";
+import { fetchBlogFromLabel } from "../../../../store/actions/blogsActions";
 import { showPdfModal, showBlogModal } from "../../../../store/actions/modalActions";
 // import Pagination from "./Pagination";
 import Pagination from "../../../Global/pagination/Pagination";
@@ -67,33 +67,32 @@ const Wrapper = styled.div`
 const Records = (props) => {
     const [recordsPerPage] = useState(5);
     const dispatch = useDispatch();
-
     const userProfile = useSelector((state) => state.userProfile);
     const { profile } = userProfile;
 
     const openPdfModal = (img) => {
         dispatch(showPdfModal(img));
     };
-    const openBlogModal = (url,blogListId) => {
-        dispatch(fetchBlog(url,blogListId));
+    const openBlogModal = (blogListId, blogId) => {
+        dispatch(fetchBlogFromLabel(blogListId, blogId));
         dispatch(showBlogModal());
     };
 
-    const handleOnOpen = (item) => {
-        console.log(item,"item")
-        item.type === "pdf" ? openPdfModal(item.url) : openBlogModal(item.url,item.blogListId);
+    const handleOnOpen = (item, blogListId) => {
+        item.type === "pdf" ? openPdfModal(item.url) : openBlogModal(blogListId, item.blogId);
     };
-
     const indexOfLastRecord = props.paginationCurrentPage * recordsPerPage;
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
     const nPages = Math.ceil(props?.count / recordsPerPage);
-    
     return (
         <div className="pageContentOuter">
             {props?.data?.map((item, i) => {
                 return (
                     <Wrapper key={i}>
-                        <div className="flip_card" onClick={() => handleOnOpen(item)}>
+                        <div
+                            className="flip_card"
+                            onClick={() => handleOnOpen(item, props?.blogListId)}
+                        >
                             <div className="flip_card_inner">
                                 <div className="flip_card_front">
                                     <img src={item.image} alt=" down" />

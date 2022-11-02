@@ -183,7 +183,9 @@ export const Page = forwardRef((props, ref) => {
 
     const contentData = useSelector((state) => state.content);
     var indexPageNum = contentData.content.findIndex((item) => item.pageNumber === pageNumber);
-//  console.log(contentData,"contentData")
+//  console.log( contentData.content[indexPageNum].pageNumber,"contentData")
+
+
     // className For blog page
     const classNameForBlog = `blog_open_${contentData}`;
 
@@ -255,9 +257,11 @@ export const Page = forwardRef((props, ref) => {
                                       "contact_us" ? (
                                         <BlogComp blog={blogCont} />
                                     ) : (
+                                        
                                         <Records
                                             count={contentData?.content[indexPageNum]?.count}
                                             data={content}
+                                            page={page}
 											blogListId={blogListId}
                                             paginationCurrentPage={paginationCurrentPage}
                                             setPaginationCurrentPage={setPaginationCurrentPage}
