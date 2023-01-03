@@ -9,16 +9,16 @@ import { Spinner } from "../Global/Spinner";
 import { HandleOnChangeInput } from "../../helpers/formInput/HandleOnChangeInput";
 import { useDispatch, useSelector } from "react-redux";
 import { notifyFailure } from "../../helpers/notifications/notifyFailure";
-import { register } from "../../store/actions/userActions";
+import { editProfile } from "../../store/actions/userActions";
+import axiosInstance from "../../config/api/axois";
 
 const StyledComponent = styled.div`
     .profilePicturePickerWrapper > div {
         justify-content: center;
         flex-direction: column;
         gap: 0.5rem;
-        .controlsWrapperImage{
+        .controlsWrapperImage {
             align-items: center;
-
         }
         .controlsWrapperImage .text {
             display: none;
@@ -38,14 +38,14 @@ const StyledComponent = styled.div`
     }
 
     form {
-        margin-top:0rem ;
+        margin-top: 0rem;
 
         .inputOuter {
             width: 100%;
-          input{
-            margin-bottom: .3rem;
-            max-width:100%;
-          }
+            input {
+                margin-bottom: 0.3rem;
+                max-width: 100%;
+            }
         }
         .actionButtonWrapper {
             display: flex;
@@ -66,8 +66,19 @@ export const EditProfile = () => {
     const dispatch = useDispatch();
 
     // checking if user gets registered
-    const userInfo = useSelector((state) => state.userRegister);
-    const { loading, error } = userInfo;
+    const userInfo = useSelector((state) => state.userProfile);
+    const { profile, error, loading } = userInfo;
+
+    useEffect(() => {
+        setData({
+            firstname: profile?.first_name,
+            lastname: profile?.last_name,
+            email: profile?.email,
+            contact_number: profile?.contact_number,
+            username: profile?.username,
+        });
+        setProfilePicture(profile?.picture?.file);
+    }, []);
 
     // notifying if error from reducer state
     error && notifyFailure(error);
@@ -76,34 +87,33 @@ export const EditProfile = () => {
         if (profilePicture) {
             if (typeof profilePicture !== "string") {
                 let tempdata = { ...data };
-                tempdata["logo"] = profilePicture;
+                tempdata["picture"] = profilePicture;
                 setData(tempdata);
             }
         }
     }, [profilePicture]);
 
-    // validating fields
-    const validateFields = () => {
-        let state = true;
-        let fields = ["firstname", "lastname", "username", "email", "contact_number"];
-        for (let field of fields) {
-            if (!data[field]) {
-                notifyFailure(`${field} is required`);
-                state = false;
-            }
-        }
-        return state;
-    };
-
     // handling sign up button
     const handleUpdateProfile = async (e) => {
         e.preventDefault();
         console.log("data", data);
-        if (!validateFields()) {
-            return;
-        }
 
-        dispatch(register(data));
+        if (data["picture"]) {
+            const formData = new FormData();
+            formData.append("file", profilePicture);
+            formData.append("purpose", "profile update");
+
+            axiosInstance()
+                .post("/upload", formData)
+                .then((res) => {
+                    console.log("upload picture res", res.data);
+                    let tempdata = { ...data };
+                    tempdata["picture"] = res.data.id;
+                    setData(tempdata);
+
+                    dispatch(editProfile(data));
+                });
+        }
     };
 
     const cleanState = () => {

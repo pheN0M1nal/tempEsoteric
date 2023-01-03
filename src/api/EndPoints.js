@@ -40,3 +40,24 @@ export const get_userCurrentGeneralSubscription = () => `${baseURL}/user/subscri
 export const get_AllGeneralSubscriptionPlan = () => `${baseURL}/subscription/general/`;
 export const get_SingleGeneralSubscriptionPlan = (id) => `${baseURL}/subscription/general/${id}/`;
 export const post_CreateGeneralSubscriptionPlan = (id) => `${baseURL}/subscription/general/`;
+// ======================================================
+// AUTHENTICATION APIS
+export const loginEP = () => `${baseURL}/auth/login`;
+export const registerEP = () => `${baseURL}/auth/register`;
+export const logoutEP = () => `${baseURL}/auth/logout`;
+
+// GET USER INFO
+export const getUserInfoEP = () => `${baseURL}/auth/me`;
+export const patchUserInfoEP = () => `${baseURL}/auth/me`;
+export const resetPassEP = () => `${baseURL}/auth/change_password`;
+
+// USER APIS
+export const initResetPassEP = () => `${baseURL}/auth/initiate_reset_password_email/`;
+
+export const finalizeResetPassEP = () => `${baseURL}/auth/finalize_reset_password_email/`;
+
+export const updateUserProfile = (id) => `${baseURL}/updateUserProfile/${id}`;
+
+export const deleteUser = (id) => `${baseURL}/deleteUser/${id}`;
+
+export const approveUser = (id) => `${baseURL}/approveUser/${id}`;

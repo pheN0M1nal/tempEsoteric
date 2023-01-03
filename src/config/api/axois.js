@@ -4,13 +4,13 @@ const axiosInstance = () => {
     //
     const axiosInst = axios.create({
         baseURL:
-            process.env.NODE_ENV === "development"
-                ? `${process.env.REACT_APP_MAIN_SERVER_URL_PRODUCTION}`
-                : `${process.env.REACT_APP_MAIN_SERVER_URL_DEVELOPMENT}`,
+            process.env.REACT_APP_NODE_ENV === "production"
+                ? `${process.env.REACT_APP_MAIN_SERVER_URL_PRODUCTION}/api/v1`
+                : `${process.env.REACT_APP_MAIN_SERVER_URL_DEVELOPMENT}/api/v1`,
         timeout: 99999999999999999999,
         headers: {
-            Authorization: window.localStorage.getItem("userInfo")
-                ? `Bearer ${window.localStorage.getItem("userInfo").token}`
+            Authorization: window.localStorage.getItem("access_token")
+                ? `Bearer ${window.localStorage.getItem("access_token")}`
                 : null,
             "Content-Type": "application/json",
             accept: "application/json",
