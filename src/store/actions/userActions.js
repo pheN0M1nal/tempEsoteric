@@ -21,7 +21,7 @@ import {
 import axiosServerInstance from '../../config/api/axois'
 import { HIDE_LOGIN_MODAL } from '../constants/modalConstants'
 import { notifySuccess } from '../../helpers/notifications/notifySuccess'
-import { userLogin, updateUserProfile } from '../../api/EndPoints'
+import { userLogin, patch_profile } from '../../api/EndPoints'
 
 export const fetchUserProfile = (dispatch, getState) => {
 	dispatch({ type: FETCH_USER_PROFILE_START, payload: null })
@@ -173,7 +173,7 @@ export const updateProfile = user => async dispatch => {
 		type: USER_UPDATE_PROFILE_REQUEST,
 	})
 	axiosServerInstance()
-		.post(updateUserProfile(), user)
+		.post(patch_profile(), user)
 		.then(response => {
 			dispatch({
 				type: USER_UPDATE_PROFILE_SUCCESS,

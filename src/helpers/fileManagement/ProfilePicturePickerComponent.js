@@ -8,38 +8,36 @@ const StyledComponent = styled.div`
     align-items: center;
     justify-content: flex-start;
     gap: 1.5rem;
-    
-    
-    .imageWrapper{
+
+    .imageWrapper {
         width: 2.5rem;
         height: 2.5rem;
-        
-        img{
-           width:100%;
-           height:100%;
-            object-fit: cover;
-            border-radius: 50%:
-        }
+
         margin-bottom: 15px;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
     }
-    
-    .controlsWrapperImage{
+
+    .controlsWrapperImage {
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
         align-items: flex-start;
-        
-        .text{
+
+        .text {
             color: var(--custom-white);
             font-weight: 600;
-            font-size:.9rem;
+            font-size: 0.9rem;
         }
-        
-        .chooseImageButtonWrapper{
+
+        .chooseImageButtonWrapper {
             position: relative;
-            
-            
-            input{
+
+            input {
                 cursor: pointer;
                 opacity: 0;
                 position: absolute;
@@ -56,7 +54,7 @@ const StyledComponent = styled.div`
 export const ImagePickerComponent = ({ image, setFiles, field_name, label, purpose }) => {
     const [tempImage, setTempImage] = useState(null);
     const [tempImageData, setTempImageData] = useState(null);
-    
+
     useEffect(() => {
         if (tempImage) {
             const fileReader = new FileReader();
@@ -86,7 +84,7 @@ export const ImagePickerComponent = ({ image, setFiles, field_name, label, purpo
                 <img src={tempImageData || image} alt={""} />
             </div>
             <div className="controlsWrapperImage">
-                <span className="text">{tempImage?.name ||  "Select profile image"}</span>
+                <span className="text">{tempImage?.name || "Select profile image"}</span>
 
                 <div className="chooseImageButtonWrapper">
                     <Button fontSize={1} paddingTopBottom={0.4} paddingLeftRight={1.5}>

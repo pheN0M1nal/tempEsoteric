@@ -1,4 +1,4 @@
-import { batchFileUploaded, deleteBatchFile, deleteSingleFile, fetchAllFilesUploaded, singleFileUploaded } from "../../api";
+import { post_batchFileUploaded, delete_BatchFile, delete_SingleFile, get_fetchAllFilesUploaded, post_singleFileUploaded,patch_updateSingleFile } from "../../api";
 import axiosServerInstance from "../../config/api/axios";
 
 import {notifyApiErrorMessage} from "../notifications/notifyApiErrorMessage";
@@ -9,7 +9,7 @@ export const singleFileUpload = async ({fileBuffer, purpose}) => {
     formData.append('file', fileBuffer);
     formData.append('purpose', purpose);
     return await axiosServerInstance()
-        .post(singleFileUploaded(), formData)
+        .post(post_singleFileUploaded(), formData)
         .then((response) => {
             return response.data
         })
@@ -25,7 +25,7 @@ export const batchFileUpload = async ({fileBuffers, purpose}) => {
     formData.append('files', fileBuffers);
     formData.append('purpose', purpose);
     return await axiosServerInstance()
-        .post(batchFileUploaded(), formData)
+        .post(post_batchFileUploaded(), formData)
         .then((response) => {
             return response.data
         })
@@ -36,7 +36,7 @@ export const batchFileUpload = async ({fileBuffers, purpose}) => {
 
 export const deleteSingleUploadedFile = async ({fileID}) => {
     return await axiosServerInstance()
-        .delete(deleteSingleFile(fileID))
+        .delete(delete_SingleFile(fileID))
         .then((response) => {
             return true
         })
@@ -47,7 +47,7 @@ export const deleteSingleUploadedFile = async ({fileID}) => {
 
 export const fetchAllFilesUpload = async () => {
     return await axiosServerInstance()
-        .get(fetchAllFilesUploaded())
+        .get(get_fetchAllFilesUploaded())
         .then((response) => {
             console.log(response,"fetch All Files Uploaded")
         })
@@ -58,7 +58,7 @@ export const fetchAllFilesUpload = async () => {
 
 export const deleteBatchUploadedFile = async ({fileID}) => {
     return await axiosServerInstance()
-        .delete(deleteBatchFile(fileID))
+        .delete(delete_BatchFile(fileID))
         .then((response) => {
             return true
         })

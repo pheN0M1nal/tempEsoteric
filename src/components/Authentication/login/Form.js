@@ -28,7 +28,7 @@ const Wrapper = styled.div`
 export const LoginForm = ({ showRegister }) => {
 	// initializing
 	const [data, setData] = useState({
-		username: '',
+		login: '',
 		password: '',
 	})
 	const userInfo = useSelector(state => state.userLogin)
@@ -42,7 +42,7 @@ export const LoginForm = ({ showRegister }) => {
 	// validating feilds
 	const validateFields = () => {
 		let state = true
-		const fields = ['username', 'password']
+		const fields = ['login', 'password']
 		for (let field of fields) {
 			if (!data[field]) {
 				notifyFailure(`${field} is required`)
@@ -74,13 +74,13 @@ export const LoginForm = ({ showRegister }) => {
 	return (
 		<Wrapper>
 			<FormComponent>
-				<label htmlFor='username'>User Name</label>
+				<label htmlFor='login'>User Name</label>
 				<InputComponent
-					id='username'
+					id='login'
 					type='text'
-					value={data.username}
+					value={data.login}
 					onChange={e =>
-						HandleOnChangeInput(e, 'username', setData, data)
+						HandleOnChangeInput(e, 'login', setData, data)
 					}
 				/>
 				<SizedBox height={1.5} />

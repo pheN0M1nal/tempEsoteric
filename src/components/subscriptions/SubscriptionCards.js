@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -7,9 +7,13 @@ import styled from "styled-components";
 
 import { SubscriptionSlide } from "./SubscriptionSlide";
 import { subscriptionModels } from "../../DataList/subscriptionModels";
-
+import axiosInstance from "../../config/api/axois";
+import { Spinner } from "../Global/Spinner";
+import { get_AllGeneralSubscriptionPlan } from "../../api/EndPoints";
+// import { notifySuccess } from "../../../helpers/notifications/notifySuccess";
+// import { notifyFailure } from "../../../helpers/notifications/notifyFailure";
 const StyledComponent = styled.div`
-text-align: center;
+    text-align: center;
     .CardGroupPlan {
         box-shadow: inset 0 0px 30px 10px var(--cardshadowlight) !important;
         padding-bottom: 3rem !important;
@@ -27,9 +31,8 @@ text-align: center;
         background-color: var(--custom-light-bg);
         display: inline;
         padding: 0.5rem 1rem;
-        border-radius:2.4rem;
+        border-radius: 2.4rem;
         width: 100%;
-        
     }
     .slick-slider {
         background-color: var(--custom-light-bg);
@@ -126,7 +129,7 @@ text-align: center;
     .slick-prev:before,
     .slick-next:before {
         font-size: 45px;
-        color:var(--custom-orange-color);
+        color: var(--custom-orange-color);
     }
     .slick-prev {
         left: 10px;
@@ -137,6 +140,7 @@ text-align: center;
 `;
 
 const SubscriptionCards = () => {
+    const [showSpinner, setShowSpinner] = useState(false);
     let settings = {
         dots: true,
         infinite: false,
@@ -187,22 +191,45 @@ const SubscriptionCards = () => {
     const handleSubscrition = () => {
         console.log("handle subscription");
     };
+    const handleGetAllPlans = () => {
+        setShowSpinner(true);
+        axiosInstance()
+            .get(get_AllGeneralSubscriptionPlan())
+            .then((response) => {
+                setShowSpinner(false);
+                console.log(response, "response plans");
+                // notifySuccess("Logged out");
+                // navigate("/login", { replace: true });
+            })
+            .catch((err) => {
+                // notifyFailure(err?.message || "error occured");
+            });
+    };
+    useEffect(() => {
+        handleGetAllPlans();
+    }, []);
     return (
         <>
             <StyledComponent>
                 <h2 className="Header">SUBSCRIPTION</h2>
                 <div className=" logincardgroup CardGroupPlan">
-                    <Slider {...settings} className="umar">
-                        {subscriptionModels.map((model) => (
-                            <SubscriptionSlide
-                                title={model.title}
-                                price={model.price}
-                                timeSpan={model.timeSpan}
-                                description={model.description}
-                                handleSubscrition={handleSubscrition}
-                            />
-                        ))}
-                    </Slider>
+                    {showSpinner ? (
+                        <div className="text-center">
+                            <Spinner size={3} />
+                        </div>
+                    ) : (
+                        <Slider {...settings} className="umar">
+                            {subscriptionModels.map((model) => (
+                                <SubscriptionSlide
+                                    title={model.title}
+                                    price={model.price}
+                                    timeSpan={model.timeSpan}
+                                    description={model.description}
+                                    handleSubscrition={handleSubscrition}
+                                />
+                            ))}
+                        </Slider>
+                    )}
                 </div>
             </StyledComponent>
         </>

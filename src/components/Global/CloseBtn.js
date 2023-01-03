@@ -9,13 +9,12 @@ const Wrapper = styled.div`
     position: absolute;
     top: 5%;
     right: 5%;
-    
 
     :hover img {
         transform: scale(1.2);
     }
     img {
-        transition: ease-in-out .5s  ;
+        transition: ease-in-out 0.5s;
         width: 30px;
         height: 30px;
         object-fit: contain;
