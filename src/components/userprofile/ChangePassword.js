@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
 import { HandleOnChangeInput } from "../../helpers/formInput/HandleOnChangeInput"
 import { notifyFailure } from "../../helpers/notifications/notifyFailure"
-//import { resetPassword } from "../../store/actions/userActions"
+import { resetPassword } from "../../store/actions/userActions"
 import { FormComponent } from "../Authentication/components/FormElement"
 import { InputComponent } from "../Authentication/components/InputELement"
 import { Button } from "../Global/Button"
@@ -29,10 +29,10 @@ const StyledComponent = styled.div`
   }
 `
 
-export const RenewPassword = () => {
+export const ChangePassword = () => {
   const [data, setData] = useState({
-    password: "",
-    confirm_password: "",
+    old_password: "",
+    new_password: "",
   })
   const dispatch = useDispatch()
 
@@ -43,35 +43,15 @@ export const RenewPassword = () => {
   // notifying if error from reducer state
   error && notifyFailure(error)
 
-  // validating fields
-  const validateFields = () => {
-    let state = true
-    let fields = ["password", "confirm_password"]
-    for (let field of fields) {
-      if (!data[field]) {
-        notifyFailure(`${field} is required`)
-        state = false
-      }
-    }
-    if (data.password !== data.confirm_password) {
-      notifyFailure(`Your passwords doesn't match`)
-      state = false
-    }
-    return state
-  }
-
   // handling sign up button
   const handleResetPassword = async (e) => {
     e.preventDefault()
     console.log("data", data)
-    if (!validateFields()) {
-      return
-    }
     const formData = new FormData()
     formData.append("old_password", data.password)
     formData.append("new_password", data.confirm_password)
 
-    //dispatch(resetPassword(formData))
+    dispatch(resetPassword(formData))
   }
 
   const cleanState = () => {
@@ -86,10 +66,10 @@ export const RenewPassword = () => {
   return (
     <StyledComponent>
       <FormComponent className='formFieldWrapper' autocomplete='off'>
-        <h2>Reset Password</h2>
+        <h2>Change Password</h2>
         <SizedBox height={2} />
         <div className='inputOuter'>
-          <label>New Password</label>
+          <label>Old Password</label>
           <InputComponent
             type='password'
             fontSize={0.7}
@@ -100,7 +80,7 @@ export const RenewPassword = () => {
           />
         </div>
         <div className='inputOuter'>
-          <label>Confirm Password</label>
+          <label>New Password</label>
           <InputComponent
             type='password'
             fontSize={0.7}
@@ -122,7 +102,7 @@ export const RenewPassword = () => {
               height={41}
               onClick={handleResetPassword}
             >
-              Reset Password
+              Change Password
             </Button>
           )}
         </div>

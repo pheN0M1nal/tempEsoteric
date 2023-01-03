@@ -1,22 +1,31 @@
 // BEGINNING API INTEGRATION
 
-const baseURL = 'http://127.0.0.1:8000'
-// const baseURL = process.env.NODE_ENV === "production"
-// 	? `${process.env.REACT_APP_MAIN_SERVER_URL_PRODUCTION}/api`
-// 	: `${process.env.REACT_APP_MAIN_SERVER_URL_DEVELOPMENT}/api`;
+const baseURL =
+  process.env.REACT_APP_NODE_ENV === "production"
+    ? `${process.env.REACT_APP_MAIN_SERVER_URL_PRODUCTION}/api/v1`
+    : `${process.env.REACT_APP_MAIN_SERVER_URL_DEVELOPMENT}/api/v1`
 
 // AUTHENTICATION APIS
-export const userLogin = () => `${baseURL}/user_login`
-export const userSignup = () => `${baseURL}/user_signup`
-export const adminLogin = () => `${baseURL}/admin_login`
-export const adminSignup = () => `${baseURL}/admin_signup`
-export const logout = id => `${baseURL}/logout/${id}`
-export const forgotPassword = email => `${baseURL}/forgot_password/${email}`
+export const loginEP = () => `${baseURL}/auth/login`
+export const registerEP = () => `${baseURL}/auth/register`
+export const logoutEP = () => `${baseURL}/auth/logout`
+
+// GET USER INFO
+export const getUserInfoEP = () => `${baseURL}/auth/me`
+export const patchUserInfoEP = () => `${baseURL}/auth/me`
+export const resetPassEP = () => `${baseURL}/auth/change_password`
 
 // USER APIS
-export const getUsers = () => `${baseURL}/getUsers`
-export const updateUserProfile = id => `${baseURL}/updateUserProfile/${id}`
-export const deleteUser = id => `${baseURL}/deleteUser/${id}`
-export const approveUser = id => `${baseURL}/approveUser/${id}`
+export const initResetPassEP = () =>
+  `${baseURL}/auth/initiate_reset_password_email/`
+
+export const finalizeResetPassEP = () =>
+  `${baseURL}/auth/finalize_reset_password_email/`
+
+export const updateUserProfile = (id) => `${baseURL}/updateUserProfile/${id}`
+
+export const deleteUser = (id) => `${baseURL}/deleteUser/${id}`
+
+export const approveUser = (id) => `${baseURL}/approveUser/${id}`
 
 // ADMIN APIS
