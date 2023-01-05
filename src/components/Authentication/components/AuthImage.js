@@ -4,6 +4,11 @@ import forgetPassword from "../../../static/images/general/wood6.jpg";
 import register from "../../../static/images/general/wood5.jpg";
 
 const Wrapper = styled.div`
+    width: ${(props) => (props.mode==="forgot_password" ||props.mode==="reset_password"  ? `30rem` : "fit-content")};
+@media (max-width: 1100px) {
+    width:100%;
+
+}
     img {
         width: 100%;
         height: 100%;
@@ -25,9 +30,9 @@ const modeHeaderMapping = {
     register: register,
 };
 
-export const AuthenticationImage = ({ modeimg }) => {
+export const AuthenticationImage = ({ modeimg,mode }) => {
     return (
-        <Wrapper>
+        <Wrapper mode={mode}>
             <img src={modeHeaderMapping[modeimg]} />
         </Wrapper>
     );

@@ -12,8 +12,8 @@ import { AuthButtonContainer } from "../components/AuthButtonContainer";
 import { Button } from "../../Global/Button";
 import axiosInstance from "../../../config/api/axois";
 import { notifyApiErrorMessage } from "../../../helpers/notifications/notifyApiErrorMessage";
-import { useDispatch } from "react-redux";
-import { login } from "../../../store/actions/userActions";
+import { useDispatch, useSelector } from "react-redux";
+import { forgotPassword, login, verifyEmailStep1 } from "../../../store/actions/userActions";
 import { Spinner } from "../../Global/Spinner";
 
 const Wrapper = styled.div`
@@ -30,106 +30,101 @@ const Wrapper = styled.div`
         }
     }
 `;
-export const ForgotPasswordForm = ({ showLogin }) => {
+export const ForgotPasswordForm = ({ showLogin ,ShowResetPassword }) => {
     const navigate = useNavigate();
     const [data, setData] = useState({});
     const [showSpinner, setShowSpinner] = useState(false);
     const dispatch = useDispatch();
+    const Info = useSelector((state) => state.userForgotPass);
+    let { error, loading, success } = Info;
+    console.log(Info, "UserInfo");
+    // notifying if error from reducer state
+    error && notifyFailure(error);
+    const baseURL =
+        process.env.REACT_APP_NODE_ENV === "production"
+            ? `${process.env.REACT_APP_MAIN_SERVER_URL_PRODUCTION}`
+            : `${process.env.REACT_APP_MAIN_SERVER_URL_DEVELOPMENT}`;
 
     const handleSendVarificationEmail = () => {
-        let emailVerificationID = 3;
-        navigate(`/reset_password:${emailVerificationID}`, {
-            replace: true,
-        });
+        // let emailVerificationID = 3;
+        // navigate(`/reset_password:${emailVerificationID}`, {
+        //     replace: true,
+        // });
 
         if (data.email) {
             let tempData = { ...data };
-            tempData["page_uri"] = "http://127.0.0.1:8000";
-
-            axiosInstance()
-                .post(post_verifyEmailStep1(), tempData)
-                .then(async (response) => {
-                    notifySuccess(`Email Verification link has been sent to ${data?.email}`);
-                })
-                .catch(async (err) => {
-                    notifyApiErrorMessage(err);
-                });
+            // tempData["page_uri"] = "http://127.0.0.1:8000";
+            tempData["page_uri"] = baseURL;
+            dispatch(verifyEmailStep1(tempData));
         }
     };
 
-    const handleInitiateForgotPassword = async () => {
-        setShowSpinner(true);
-        axiosInstance()
-            .post(post_resetPasswordStep1(), data)
-            .then((response) => {
-                notifySuccess(`A password reset link has been sent to ${data?.email}`);
-                setShowSpinner(false);
-            })
-            .catch((err) => {
-                notifyApiErrorMessage(err);
-                setShowSpinner(false);
-            });
+    const handleInitiateForgotPassword = async (data) => {
+        dispatch(forgotPassword(data));
     };
 
     const handleGoToLogin = (e) => {
         e.preventDefault();
+        setShowSpinner(true);
         showLogin();
+        setShowSpinner(false);
+    };
+    const handleGoToResetPass = (e) => {
+        e.preventDefault();
+        setShowSpinner(true);
+        ShowResetPassword();
+        setShowSpinner(false);
     };
     const handleSendVarification = (e) => {
         e.preventDefault();
         if (!data.email) {
             notifyFailure(`email is required`);
         } else {
-            handleInitiateForgotPassword();
+            handleInitiateForgotPassword(data);
             handleSendVarificationEmail();
         }
     };
     return (
         <Wrapper>
             <FormComponent>
-                <h2>Enter YOUR EMAIL ADDRESS</h2>
-
+                <label htmlFor="forgot">Enter Your Email</label>
                 <InputComponent
-                    placeholder={"Email"}
+                    id="forgot"
                     type="email"
                     value={data?.email}
                     onChange={(e) => {
                         e.charCode === 13 && HandleOnChangeInput(e, "email", setData, data);
                     }}
                 />
+
                 <SizedBox height={1.5} />
                 <AuthButtonContainer>
-                    {!showSpinner ? (
-                        <>
+                    {!loading ? (
+                        <div className="formfooter">
                             <Button
                                 textTransform={"uppercase"}
-                                height={54}
                                 fontSize={16}
-                                maxWidth={250}
+                                addEffect={true}
+                                paddingLeftRight={3}
+                                height={35}
+                                BgColor={"orange-color"}
+                                border={"border-color"}
                                 onClick={() => handleSendVarification()}
                             >
                                 SEND VERFICATION LINK
                             </Button>
-                            <SizedBox height={1.0} />
-                        </>
-                    ) : (
-                        <Spinner />
-                    )}
-                </AuthButtonContainer>
-                <AuthButtonContainer>
-                    {!showSpinner ? (
-                        <>
-                            <Button
-                                textTransform={"uppercase"}
-                                height={54}
-                                fontSize={16}
-                                maxWidth={250}
-                                onClick={handleGoToLogin}
-                            >
-                                Go Back To Login
-                            </Button>
-                            <SizedBox height={1.0} />
-                        </>
+                            <SizedBox height={3.0} />
+                            <p>
+                                Do You Want To Go Back?
+                                <strong onClick={handleGoToLogin}>&nbsp;Go To Login</strong>
+                            </p>
+                            <p>
+                                Do You Want To Go Back?
+                                <strong onClick={(e)=>handleGoToResetPass(e)}>&nbsp;Go To Reset</strong>
+                            </p>
+                            
+                            <SizedBox height={3.0} />
+                        </div>
                     ) : (
                         <Spinner />
                     )}

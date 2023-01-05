@@ -9,7 +9,6 @@ import {
     USER_LOGIN_FAIL,
     USER_LOGIN_REQUEST,
     USER_LOGIN_SUCCESS,
-    USER_LOGOUT,
     USER_REGISTER_FAIL,
     USER_REGISTER_REQUEST,
     USER_REGISTER_SUCCESS,
@@ -17,17 +16,28 @@ import {
     USER_UPDATE_PROFILE_REQUEST,
     USER_UPDATE_PROFILE_RESET,
     USER_UPDATE_PROFILE_SUCCESS,
-    USER_RESET_PASS_REQUEST,
+    USER_CHANGE_PASS_START,
+    USER_CHANGE_PASS_SUCCESS,
+    USER_CHANGE_PASS_FAIL,
+    USER_RESET_PASS_START,
     USER_RESET_PASS_SUCCESS,
     USER_RESET_PASS_FAIL,
+    USER_FORGOT_PASS_START,
+    USER_FORGOT_PASS_SUCCESS,
+    USER_FORGOT_PASS_FAIL,
+    USER_VERIFY_EMAIL_STEP1_START,
+    USER_VERIFY_EMAIL_STEP1_SUCCESS,
+    USER_VERIFY_EMAIL_STEP1_FAIL,
 } from "../constants/userProfileConstants";
-import axios from "axios";
-import { HIDE_LOGIN_MODAL } from "../constants/modalConstants";
+import { HIDE_LOGIN_MODAL,  } from "../constants/modalConstants";
 import { notifySuccess } from "../../helpers/notifications/notifySuccess";
 import {
-    post_logout,
     patch_profile,
     post_ChangePassword,
+    post_resetPasswordStep1,
+    post_resetPasswordStep2,
+    post_verifyEmailStep1,
+    post_verifyEmailStep2,
     post_Login,
     post_Signup,
     get_profile,
@@ -56,15 +66,15 @@ export const fetchUserProfile = () => async (dispatch) => {
         });
 };
 
-export const register = (formData) => async (dispatch) => {
+export const register = (data) => async (dispatch) => {
     dispatch({
         type: USER_REGISTER_REQUEST,
     });
 
-    console.log("formdata", formData);
+    console.log("data", data);
 
     axiosInstance()
-        .post(post_Signup(), formData)
+        .post(post_Signup(), data)
         .then((response) => {
             console.log(response, "signup user initially");
             dispatch({
@@ -145,27 +155,20 @@ export const login = (data) => async (dispatch) => {
     //   })
 };
 
-export const logout = () => (dispatch) => {
-    console.log("object");
-    localStorage.removeItem("userInfo");
 
-    dispatch({ type: USER_LOGOUT });
-    dispatch({ type: CLEAR_USER_PROFILE });
-};
 
-export const editProfile = (user) => async (dispatch) => {
+export const editProfile = (data) => async (dispatch) => {
     dispatch({
         type: USER_UPDATE_PROFILE_REQUEST,
     });
     axiosInstance()
-        .patch(patch_profile(), user)
+        .patch(patch_profile(), data)
         .then((response) => {
             console.log("response for update action", response);
             dispatch({
                 type: USER_UPDATE_PROFILE_SUCCESS,
                 payload: response.data,
             });
-            localStorage.setItem("userInfo", JSON.stringify(user));
             notifySuccess("Profile Updated successfully");
             dispatch({
                 type: HIDE_LOGIN_MODAL,
@@ -182,12 +185,41 @@ export const editProfile = (user) => async (dispatch) => {
         });
 };
 
-export const resetPassword = (formData) => async (dispatch) => {
+// forgot password
+export const forgotPassword = (data) => async (dispatch) => {
     dispatch({
-        type: USER_RESET_PASS_REQUEST,
+        type: USER_FORGOT_PASS_START,
     });
     axiosInstance()
-        .post(post_ChangePassword(), formData)
+        .post(post_resetPasswordStep1(), data)
+        .then((response) => {
+            console.log("response for forgotPass action", response.data);
+            dispatch({
+                type: USER_FORGOT_PASS_SUCCESS,
+                payload: response.data.message,
+            });
+            notifySuccess(response.data.message);
+            dispatch({
+                type: HIDE_LOGIN_MODAL,
+            });
+        })
+        .catch(() => {
+            dispatch({
+                type: USER_FORGOT_PASS_FAIL,
+                // payload:
+                //     error.response && error.response.data.message
+                //         ? error.response.data.message
+                //         : error.message,
+            });
+        });
+};
+// reset password
+export const resetPassword = (data) => async (dispatch) => {
+    dispatch({
+        type: USER_RESET_PASS_START,
+    });
+    axiosInstance()
+        .post(post_resetPasswordStep2(), data)
         .then((response) => {
             console.log("response for resetPass action", response.data);
             dispatch({
@@ -199,9 +231,59 @@ export const resetPassword = (formData) => async (dispatch) => {
                 type: HIDE_LOGIN_MODAL,
             });
         })
-        .catch((error) => {
+        .catch(() => {
             dispatch({
                 type: USER_RESET_PASS_FAIL,
+                // payload:
+                // error.response && error.response.data.message
+                //     ? error.response.data.message
+                //     : error.message,
+            });
+        });
+};
+// verify Email Step 1
+export const verifyEmailStep1 = (data) => async (dispatch) => {
+    dispatch({
+        type: USER_VERIFY_EMAIL_STEP1_START,
+    });
+    axiosInstance()
+        .post(post_verifyEmailStep1(), data)
+        .then((response) => {
+            console.log("response for verify_Email_Step_1 action", response.data);
+            dispatch({
+                type: USER_VERIFY_EMAIL_STEP1_SUCCESS,
+                payload: response.data.message,
+            });
+            notifySuccess(response.data.message);
+        })
+        .catch(() => {
+            dispatch({
+                type: USER_VERIFY_EMAIL_STEP1_FAIL,
+                // payload:
+                //     error.response && error.response.data.message
+                //         ? error.response.data.message
+                //         : error.message,
+            });
+        });
+};
+// change Password
+export const changePassword = (data) => async (dispatch) => {
+    dispatch({
+        type: USER_CHANGE_PASS_START,
+    });
+    axiosInstance()
+        .post(post_ChangePassword(), data)
+        .then((response) => {
+            console.log("response for changePass action", response.data);
+            dispatch({
+                type: USER_CHANGE_PASS_SUCCESS,
+                payload: response.data.message,
+            });
+            notifySuccess(response.data.message);
+        })
+        .catch((error) => {
+            dispatch({
+                type: USER_CHANGE_PASS_FAIL,
                 payload:
                     error.response && error.response.data.message
                         ? error.response.data.message

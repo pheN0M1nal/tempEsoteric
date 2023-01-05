@@ -224,7 +224,7 @@ const SubscriptionCards = () => {
                 <h2 className="Header">SUBSCRIPTION</h2>
                 <div className=" logincardgroup CardGroupPlan">
                     {!showSpinner ? (
-                        subscriptionModels.length !== [] ? (
+                        subscriptionModels.length !== 0 ? (
                             <Slider {...settings} className="umar">
                                 {subscriptionModels.map((model) => (
                                     <SubscriptionSlide

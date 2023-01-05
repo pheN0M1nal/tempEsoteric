@@ -48,7 +48,7 @@ export const AuthMainContainer = ({ mode,modeimg, children }) => {
                     <AuthenticationHeader mode={mode} />
                     {children}
                 </div>
-               <AuthenticationImage modeimg={modeimg}/>
+               <AuthenticationImage modeimg={modeimg} mode={mode}/>
             </FormWrapper>
         
     );

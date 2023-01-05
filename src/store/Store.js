@@ -1,5 +1,5 @@
 import { applyMiddleware, combineReducers, createStore } from "redux"
-import { userProfileReducer } from "./reducers/userReducer"
+import { userChangePassReducer, userForgotPasswordReducer, userProfileReducer } from "./reducers/userReducer"
 import { contentReducer } from "./reducers/contentReducer"
 import {
   blogLabelsReducer,
@@ -28,10 +28,12 @@ import { composeWithDevTools } from "redux-devtools-extension"
 const reducer = combineReducers({
   // Auth
   userProfile: userProfileReducer,
+  userUpdateProfile: userUpdateProfileReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userResetPass: userResetPassReducer,
-  userUpdateProfile: userUpdateProfileReducer,
+  userForgotPass: userForgotPasswordReducer,
+  userChangePass:userChangePassReducer,
 
   //blogs
   blog: blogReducer,

@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import prev from "../../static/images/Auth/4980083@0.png";
-import next from "../../static/images/Auth/4980081@0.png";
+import prev from "../../static/images/Auth/2516190@0.png";
+import next from "../../static/images/Auth/2516189@0.png";
 
 const ListCaptions = styled.div`
     ul {

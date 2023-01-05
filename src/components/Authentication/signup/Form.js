@@ -180,7 +180,7 @@ export const RegistrationForm = ({ showLogin }) => {
                             fontSize={16}
                             maxWidth={200}
                             border={"transparent"}
-                            height={41}
+                            height={35}
                             onClick={handleUserSignup}
                         >
                             Sign Up

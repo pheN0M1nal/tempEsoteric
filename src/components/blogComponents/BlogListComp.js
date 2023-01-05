@@ -12,7 +12,8 @@ const StyledComponent = styled.div`
         text-align: center;
         margin: 0;
         padding: 1rem 0;
-        background-color: var(--custom-orange-color);
+        background-color: var(--custom-border-color);
+        border: 4px solid var(--custom-border-color);
     }
     ul {
         list-style: none;
@@ -62,12 +63,11 @@ const StyledComponent = styled.div`
     }
 `;
 const BlogListComp = ({ blogsInfo, blogId, loadBlogInfo, blogListId }) => {
-  
     return (
         <StyledComponent>
             <h5 className="heading">{blogsInfo[0]?.blogListName}</h5>
             <ul>
-                {blogsInfo[0]?.pageContent.map((blogInfo,i) => {
+                {blogsInfo[0]?.pageContent.map((blogInfo, i) => {
                     return (
                         <li className={`${blogId == blogInfo.blogId ? "active" : ""}`} key={i}>
                             <Link

@@ -139,6 +139,9 @@ const BlogOuterWrapper = styled.aside`
         justify-content: center;
         align-items: center;
         writing-mode: vertical-rl;
+        &:hover{
+            border-radius:0 20px 20px 0;
+        }
     }
 `;
 

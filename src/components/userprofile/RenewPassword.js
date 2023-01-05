@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { HandleOnChangeInput } from "../../helpers/formInput/HandleOnChangeInput";
 import { notifyFailure } from "../../helpers/notifications/notifyFailure";
-import { resetPassword } from "../../store/actions/userActions";
+import { changePassword } from "../../store/actions/userActions";
 import { FormComponent } from "../Authentication/components/FormElement";
 import { InputComponent } from "../Authentication/components/InputELement";
 import { Button } from "../Global/Button";
@@ -37,7 +37,7 @@ export const RenewPassword = () => {
     const dispatch = useDispatch();
 
     // checking if user gets registered
-    const info = useSelector((state) => state.userResetPass);
+    const info = useSelector((state) => state.userChangePass);
     const { loading, success, error } = info;
 
     // notifying if error from reducer state
@@ -68,11 +68,13 @@ export const RenewPassword = () => {
             return;
         }
 
-        dispatch(resetPassword(data));
+        dispatch(changePassword(data));
+    };
+    useEffect(() => {
         if (success === true) {
             cleanState();
         }
-    };
+    }, [success]);
 
     const cleanState = () => {
         console.log("cleaning");

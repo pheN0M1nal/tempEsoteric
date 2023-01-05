@@ -14,7 +14,7 @@ const Wrapper = styled.button`
     width: 100%;
     font-weight: 500;
     min-width: ${(props) => (props.minWidth ? `${props.minWidth}rem` : "initial")};
-    max-width: ${(props) => (props.maxWidth ? `${props.maxWidth}px` : "initial")};
+    max-width: ${(props) => (props.maxWidth ? `${props.maxWidth}px` : "fit-content")};
     height: ${(props) => (props.height ? `${props.height}px` : `34px`)};
     transition: all 0.25s ease-out;
     color: var(--custom-${({ inverted }) => (inverted ? "white" : "black")});

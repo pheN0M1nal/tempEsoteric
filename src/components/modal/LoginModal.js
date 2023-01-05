@@ -6,9 +6,9 @@ import { useDispatch } from "react-redux";
 import LoginContainer from "../Authentication/login/Container";
 import ForgotPasswordContainer from "../Authentication/forgot_password/Container";
 import RegisterContainer from "../Authentication/signup/Container";
-import closeBtn from "../../static/images/Auth/2389848@1.png";
 import styled from "styled-components";
 import { CloseBtn } from "../Global/CloseBtn";
+import { ResetPasswordContainer } from "../Authentication/reset_password/Container";
 // import { ResetPasswordContainer } from "../Authentication/reset_password/Container";
 
 const Wrapper = styled.div`
@@ -16,10 +16,12 @@ const Wrapper = styled.div`
     width: 100%;
     max-width: 1200px;
     overflow: auto;
+    height: auto;
     border-radius: 10px;
     position: relative;
     @media (max-width: 1100px) {
         margin-top: 30rem;
+        margin-bottom: 5rem;
     }
 `;
 
@@ -27,6 +29,7 @@ const Login = () => {
     const [showLoginComp, setShowLoginComp] = useState(true);
     const [showRegisterComp, setShowRegisterComp] = useState(false);
     const [showForgetPassComp, setShowForgetPassComp] = useState(false);
+    const [showResetPassComp, setShowResetPassComp] = useState(false);
     const [openLogin, setOpenLogin] = useState(false);
 
     const dispatch = useDispatch();
@@ -42,22 +45,26 @@ const Login = () => {
         setShowLoginComp(true);
         setShowRegisterComp(false);
         setShowForgetPassComp(false);
+        setShowResetPassComp(false);
     };
 
     const ShowRegister = () => {
         setShowLoginComp(false);
         setShowRegisterComp(true);
         setShowForgetPassComp(false);
+        setShowResetPassComp(false);
     };
     const ShowForgotPassword = () => {
         setShowLoginComp(false);
         setShowRegisterComp(false);
         setShowForgetPassComp(true);
+        setShowResetPassComp(false);
     };
     const ShowResetPassword = () => {
         setShowLoginComp(false);
         setShowRegisterComp(false);
-        setShowForgetPassComp(true);
+        setShowForgetPassComp(false);
+        setShowResetPassComp(true);
     };
 
     return (
@@ -71,8 +78,8 @@ const Login = () => {
                 {showLoginComp && (
                     <LoginContainer
                         showRegister={ShowRegister}
-                        setOpenLogin={setOpenLogin}
                         showForgotPassword={ShowForgotPassword}
+                        setOpenLogin={setOpenLogin}
                         openLogin={openLogin}
                     />
                 )}
@@ -87,16 +94,17 @@ const Login = () => {
                     <ForgotPasswordContainer
                         showLogin={ShowLogin}
                         setOpenLogin={setOpenLogin}
+                        ShowResetPassword={ShowResetPassword}
                         openLogin={openLogin}
                     />
                 )}
-                {/* {showForgetPassComp && (
+                {showResetPassComp && (
                     <ResetPasswordContainer
-                        showLogin={ShowLogin}
                         setOpenLogin={setOpenLogin}
+                        ShowForgotPassword={ShowForgotPassword}
                         openLogin={openLogin}
                     />
-                )} */}
+                )}
 
                 <CloseBtn handleOnClickClose={callbackCloseModal} />
             </Wrapper>

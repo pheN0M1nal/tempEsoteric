@@ -1,11 +1,16 @@
+import { useEffect } from "react";
+import { useDeferredValue } from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import styled from "styled-components";
 import { post_logout } from "../../../api/EndPoints";
 import axiosInstance from "../../../config/api/axois";
 import { notifySuccess } from "../../../helpers/notifications/notifySuccess";
+import { showLoginModal } from "../../../store/actions/modalActions";
+import { logout } from "../../../store/actions/userActions";
 import { Button } from "../../Global/Button";
-import { Spinner } from "../../modal/Spinner";
+import { Spinner } from "../../Global/Spinner";
 
 const StyledContainer = styled.div`
     padding: 1rem;
@@ -18,7 +23,6 @@ const StyledContainer = styled.div`
 
 const LogoutContainer = () => {
     const [showSpinner, setShowSpinner] = useState(false);
-    const { userId } = useParams();
     const navigate = useNavigate();
 
     const handleOnClickLogoutButton = (e) => {
@@ -27,15 +31,11 @@ const LogoutContainer = () => {
         axiosInstance()
             .post(post_logout())
             .then((response) => {
-                window.localStorage.setItem("access_token", "");
-                window.localStorage.setItem("refresh_token", "");
-                notifySuccess("Logged out");
-                navigate("/login", { replace: true });
-            })
-            .catch((err) => {
-                window.localStorage.setItem("access_token", "");
-                window.localStorage.setItem("refresh_token", "");
-                navigate("/login", { replace: true });
+                localStorage.removeItem("access_token");
+                localStorage.removeItem("refresh_token");
+                navigate("/", { replace: true });
+                window.location.reload();
+                setShowSpinner(false);
             });
     };
 

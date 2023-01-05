@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { ProfilePictureBoard } from "./ProfilePictureBoard";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "./Button";
 import logoutImg from "../../static/images/Auth/3599716@0.png";
@@ -16,6 +16,7 @@ import {
 } from "../../store/actions/modalActions";
 
 import { logout } from "../../store/actions/userActions";
+import LogoutContainer from "../Authentication/logout/Container";
 
 const Wrapper = styled.div`
     display: flex;
@@ -144,7 +145,7 @@ const Wrapper = styled.div`
 
 export const AccountBoard = ({ profile }) => {
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
     const [subNavToggle, setSubNavToggle] = useState(false);
 
     const handleOnClickProfileBoard = (e) => {
@@ -163,9 +164,7 @@ export const AccountBoard = ({ profile }) => {
         dispatch(showSubscriptionModal());
     };
 
-    const logoutHandler = () => {
-        dispatch(logout());
-    };
+   
 
     return (
         <Wrapper subNavToggle={subNavToggle}>
@@ -195,7 +194,7 @@ export const AccountBoard = ({ profile }) => {
                                 <img src={plansimg} alt="userprofile" />
                                 &nbsp; Plans
                             </Link>
-                            <Link onClick={logoutHandler} className="logout-button logout2">
+                            <Link to={"/logout"} className="logout-button logout2">
                                 <img src={logoutImg} alt="logout" />
                                 &nbsp; Log Out
                             </Link>

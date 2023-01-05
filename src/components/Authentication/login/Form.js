@@ -109,12 +109,14 @@ export const LoginForm = ({ showRegister, showForgotPassword }) => {
                             <SizedBox height={2} />
                             <p>
                                 Don't have an account?
-                                <strong onClick={handleOnClickSignUp}>&nbsp; Sign up</strong>
+                                <strong onClick={(e) => handleOnClickSignUp(e)}>
+                                    &nbsp; Sign up
+                                </strong>
                             </p>
                             <SizedBox height={1} />
                             <p>
                                 Forgot Password?
-                                <strong onClick={handleOnClickForgotPassword}>
+                                <strong onClick={(e) => handleOnClickForgotPassword(e)}>
                                     &nbsp; Click Here
                                 </strong>
                             </p>
@@ -122,7 +124,7 @@ export const LoginForm = ({ showRegister, showForgotPassword }) => {
                     ) : (
                         <Spinner size={1.5} />
                     )}
-                    <ModalComponent
+                    {/* <ModalComponent
                         modalLabel={"Edit SubUser"}
                         isOpen={forgotPasswordModal}
                         callbackCloseModal={() => {
@@ -130,7 +132,7 @@ export const LoginForm = ({ showRegister, showForgotPassword }) => {
                         }}
                     >
                         <ForgotPasswordContainer />
-                    </ModalComponent>
+                    </ModalComponent> */}
                 </AuthButtonContainer>
             </FormComponent>
         </Wrapper>
