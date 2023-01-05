@@ -7,6 +7,8 @@ import {finalizeVerifyEmail, login} from "../../../api";
 import {notifyApiErrorMessage} from "../../../helpers/notifications/notifyApiErrorMessage";
 import {notifySuccess} from "../../../helpers/notifications/notifySuccess";
 import {notifyFailure} from "../../../helpers/notifications/notifyFailure";
+import { useDispatch } from "react-redux";
+import { verifyEmailStep2 } from "../../../store/actions/userActions";
 
 const Wrapper = styled.div`
     width: 100%;
@@ -21,29 +23,7 @@ export const VerifyEmailForm = () => {
     const location = useLocation()
     const [verToken, setVerToken] = useState(null)
     const navigate = useNavigate()
-
-
-    useEffect(() => {
-        const verifyToken = async () => {
-            const requestData = {
-                token: verToken
-            }
-            await axiosServerInstance()
-                .post(finalizeVerifyEmail(), requestData)
-                .then((response) => {
-                    notifySuccess('Email verification successful')
-                })
-                .catch((err) => {
-                    notifyFailure('Email verification failed')
-                    notifyApiErrorMessage(err)
-                });
-            navigate(`/`, {replace: true});
-        }
-        if (verToken) {
-            verifyToken()
-        }
-    }, [verToken])
-
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const query = new URLSearchParams(location.search);
@@ -55,6 +35,21 @@ export const VerifyEmailForm = () => {
             })
         }
     }, []);
+    useEffect(() => {
+        const verifyToken =  () => {
+            const requestData = {
+                token: verToken
+            }
+            dispatch(verifyEmailStep2(requestData));
+            navigate(`/`, {replace: true});
+        }
+        if (verToken) {
+            verifyToken()
+        }
+    }, [verToken])
+
+
+   
 
 
     return (

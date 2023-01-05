@@ -7,15 +7,12 @@ const Wrapper = styled.div`
         max-width: 400px;
     }
 `;
-export const ResetPasswordContainer = ({ ShowForgotPassword, emailVerificationID }) => {
+export const ResetPasswordContainer = ({ ShowForgotPassword }) => {
     return (
         <Wrapper>
             <AuthMainContainer mode={"reset_password"} modeimg={"forgot_password"}>
                 <div className="LoginFormOuter">
-                    <ResetPasswordForm
-                        emailVerificationID={emailVerificationID}
-                        ShowForgotPassword={ShowForgotPassword}
-                    />
+                    <ResetPasswordForm ShowForgotPassword={ShowForgotPassword} />
                 </div>
             </AuthMainContainer>
         </Wrapper>

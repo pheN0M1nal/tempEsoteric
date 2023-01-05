@@ -28,6 +28,10 @@ const Wrapper = styled.button`
     :hover {
         box-shadow: ${({ addEffect }) => (addEffect ? "var(--custom-shadow)" : "null")};
     }
+    @media (max-width:600px){
+        font-size:0.85rem;
+        padding: 0.2rem 1rem;
+    }
 `;
 export const Button = ({
     marginTop = 0,

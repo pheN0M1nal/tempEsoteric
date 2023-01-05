@@ -28,6 +28,9 @@ import {
     USER_VERIFY_EMAIL_STEP1_START,
     USER_VERIFY_EMAIL_STEP1_SUCCESS,
     USER_VERIFY_EMAIL_STEP1_FAIL,
+    USER_VERIFY_EMAIL_STEP2_START,
+    USER_VERIFY_EMAIL_STEP2_SUCCESS,
+    USER_VERIFY_EMAIL_STEP2_FAIL,
 } from "../constants/userProfileConstants";
 import { HIDE_LOGIN_MODAL,  } from "../constants/modalConstants";
 import { notifySuccess } from "../../helpers/notifications/notifySuccess";
@@ -259,6 +262,30 @@ export const verifyEmailStep1 = (data) => async (dispatch) => {
         .catch(() => {
             dispatch({
                 type: USER_VERIFY_EMAIL_STEP1_FAIL,
+                // payload:
+                //     error.response && error.response.data.message
+                //         ? error.response.data.message
+                //         : error.message,
+            });
+        });
+};
+export const verifyEmailStep2 = (data) => async (dispatch) => {
+    dispatch({
+        type: USER_VERIFY_EMAIL_STEP2_START,
+    });
+    axiosInstance()
+        .post(post_verifyEmailStep2(), data)
+        .then((response) => {
+            console.log("response for verify_Email_Step_2 action", response.data);
+            dispatch({
+                type: USER_VERIFY_EMAIL_STEP2_SUCCESS,
+                payload: response.data.message,
+            });
+            notifySuccess(response.data.message);
+        })
+        .catch(() => {
+            dispatch({
+                type: USER_VERIFY_EMAIL_STEP2_FAIL,
                 // payload:
                 //     error.response && error.response.data.message
                 //         ? error.response.data.message

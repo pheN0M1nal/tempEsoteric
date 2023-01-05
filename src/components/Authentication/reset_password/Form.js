@@ -27,10 +27,9 @@ const Wrapper = styled.div`
     }
 `;
 
-export const ResetPasswordForm = ({ ShowForgotPassword, emailVerificationID }) => {
+export const ResetPasswordForm = ({ ShowForgotPassword }) => {
     const [data, setData] = useState({});
     const [resetPasswordToken, setResetPasswordToken] = useState(null);
-    const [showSpinner, setShowSpinner] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
@@ -52,6 +51,9 @@ export const ResetPasswordForm = ({ ShowForgotPassword, emailVerificationID }) =
             if (!data[field]) {
                 notifyFailure(`${field} is required`);
                 state = false;
+            } else if (data?.confirm_password !== data?.password) {
+                notifyFailure(`password does not match`);
+                state = false;
             }
         }
         return state;
@@ -69,15 +71,27 @@ export const ResetPasswordForm = ({ ShowForgotPassword, emailVerificationID }) =
     };
 
     const handleProceedResetPassword = (requestData) => {
+        console.log(requestData, "requestData");
         dispatch(resetPassword(requestData));
+
     };
     const handleGoToForgotPass = (e) => {
         e.preventDefault();
-        setShowSpinner(true);
         ShowForgotPassword();
-        setShowSpinner(false);
     };
-
+    useEffect(()=>{
+        if(success ===true){
+            cleanState()
+        }
+    },[success])
+    const cleanState = () => {
+        console.log("cleaning");
+        let tempData = {};
+        for (let field in data) {
+            tempData[field] = "";
+        }
+        setData(tempData);
+    };
     return (
         <Wrapper>
             <FormComponent>

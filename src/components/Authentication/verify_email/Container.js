@@ -4,13 +4,13 @@ import {VerifyEmailForm} from "./Form";
 
 const VerifyEmailContainer = () => {
     return (
-        <MainWrapper>
+        <Wrapper>
             <AuthMainContainer mode={"verifying_email"}>
                 <div className="LoginFormOuter">
                     <VerifyEmailForm/>
                 </div>
             </AuthMainContainer>
-        </MainWrapper>
+        </Wrapper>
     );
 };
 

@@ -30,7 +30,7 @@ const Wrapper = styled.div`
         }
     }
 `;
-export const ForgotPasswordForm = ({ showLogin ,ShowResetPassword }) => {
+export const ForgotPasswordForm = ({ showLogin, ShowResetPassword }) => {
     const navigate = useNavigate();
     const [data, setData] = useState({});
     const [showSpinner, setShowSpinner] = useState(false);
@@ -45,22 +45,16 @@ export const ForgotPasswordForm = ({ showLogin ,ShowResetPassword }) => {
             ? `${process.env.REACT_APP_MAIN_SERVER_URL_PRODUCTION}`
             : `${process.env.REACT_APP_MAIN_SERVER_URL_DEVELOPMENT}`;
 
-    const handleSendVarificationEmail = () => {
-        // let emailVerificationID = 3;
-        // navigate(`/reset_password:${emailVerificationID}`, {
-        //     replace: true,
-        // });
-
-        if (data.email) {
-            let tempData = { ...data };
-            // tempData["page_uri"] = "http://127.0.0.1:8000";
-            tempData["page_uri"] = baseURL;
-            dispatch(verifyEmailStep1(tempData));
-        }
+    const handleSendVarificationEmail = (tempData) => {
+       
+        console.log("email verify");
+        dispatch(verifyEmailStep1(tempData));
     };
 
-    const handleInitiateForgotPassword = async (data) => {
-        dispatch(forgotPassword(data));
+    const handleInitiateForgotPassword = async (tempData) => {
+        console.log(tempData)
+        console.log("email pass");
+        dispatch(forgotPassword(tempData));
     };
 
     const handleGoToLogin = (e) => {
@@ -80,8 +74,13 @@ export const ForgotPasswordForm = ({ showLogin ,ShowResetPassword }) => {
         if (!data.email) {
             notifyFailure(`email is required`);
         } else {
-            handleInitiateForgotPassword(data);
-            handleSendVarificationEmail();
+            if (data.email) {
+                
+                let tempData = { ...data, page_uri: baseURL };
+                
+                handleSendVarificationEmail(tempData);
+                handleInitiateForgotPassword(tempData);
+            }
         }
     };
     return (
@@ -93,8 +92,9 @@ export const ForgotPasswordForm = ({ showLogin ,ShowResetPassword }) => {
                     type="email"
                     value={data?.email}
                     onChange={(e) => {
-                        e.charCode === 13 && HandleOnChangeInput(e, "email", setData, data);
+                         HandleOnChangeInput(e, "email", setData, data);
                     }}
+                   
                 />
 
                 <SizedBox height={1.5} />
@@ -109,7 +109,7 @@ export const ForgotPasswordForm = ({ showLogin ,ShowResetPassword }) => {
                                 height={35}
                                 BgColor={"orange-color"}
                                 border={"border-color"}
-                                onClick={() => handleSendVarification()}
+                                onClick={(e) => handleSendVarification(e)}
                             >
                                 SEND VERFICATION LINK
                             </Button>
@@ -120,9 +120,11 @@ export const ForgotPasswordForm = ({ showLogin ,ShowResetPassword }) => {
                             </p>
                             <p>
                                 Do You Want To Go Back?
-                                <strong onClick={(e)=>handleGoToResetPass(e)}>&nbsp;Go To Reset</strong>
+                                <strong onClick={(e) => handleGoToResetPass(e)}>
+                                    &nbsp;Go To Reset
+                                </strong>
                             </p>
-                            
+
                             <SizedBox height={3.0} />
                         </div>
                     ) : (
