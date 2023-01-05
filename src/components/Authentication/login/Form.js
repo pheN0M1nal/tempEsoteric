@@ -25,7 +25,7 @@ const Wrapper = styled.div`
         }
     }
 `;
-export const LoginForm = ({ showRegister }) => {
+export const LoginForm = ({ showRegister, showForgotPassword }) => {
     // initializing
     const [data, setData] = useState({});
     const UserInfo = useSelector((state) => state.userLogin);
@@ -62,7 +62,7 @@ export const LoginForm = ({ showRegister }) => {
     }, [userInfo]);
     // forget password
     const handleOnClickForgotPassword = () => {
-        setForgotPasswordModal(true);
+        showForgotPassword();
     };
 
     // sign up

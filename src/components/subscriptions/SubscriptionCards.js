@@ -34,7 +34,8 @@ const StyledComponent = styled.div`
         border-radius: 2.4rem;
         width: 100%;
     }
-    .slick-slider {
+    .slick-slider,
+    .noPlan {
         background-color: var(--custom-light-bg);
         padding: 3rem;
         border-radius: 20px;
@@ -137,10 +138,18 @@ const StyledComponent = styled.div`
     .slick-next {
         right: 35px;
     }
+    .spinnercenter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
 `;
 
 const SubscriptionCards = () => {
     const [showSpinner, setShowSpinner] = useState(false);
+    const [subscriptionModels, setSubscriptionModels] = useState([]);
     let settings = {
         dots: true,
         infinite: false,
@@ -198,6 +207,7 @@ const SubscriptionCards = () => {
             .then((response) => {
                 setShowSpinner(false);
                 console.log(response, "response plans");
+                setSubscriptionModels(response?.data?.results);
                 // notifySuccess("Logged out");
                 // navigate("/login", { replace: true });
             })
@@ -213,22 +223,30 @@ const SubscriptionCards = () => {
             <StyledComponent>
                 <h2 className="Header">SUBSCRIPTION</h2>
                 <div className=" logincardgroup CardGroupPlan">
-                    {showSpinner ? (
-                        <div className="text-center">
+                    {!showSpinner ? (
+                        subscriptionModels.length !== [] ? (
+                            <Slider {...settings} className="umar">
+                                {subscriptionModels.map((model) => (
+                                    <SubscriptionSlide
+                                        id={model?.id}
+                                        title={model?.plan_name}
+                                        price={model?.price}
+                                        year={model?.per}
+                                        timeSpan={model?.per_length}
+                                        description={model?.description}
+                                        handleSubscrition={handleSubscrition}
+                                    />
+                                ))}
+                            </Slider>
+                        ) : (
+                            <div className="noPlan">
+                                <h2>We Don't Have Any Subscription Plan Yet!</h2>
+                            </div>
+                        )
+                    ) : (
+                        <div className="spinnercenter">
                             <Spinner size={3} />
                         </div>
-                    ) : (
-                        <Slider {...settings} className="umar">
-                            {subscriptionModels.map((model) => (
-                                <SubscriptionSlide
-                                    title={model.title}
-                                    price={model.price}
-                                    timeSpan={model.timeSpan}
-                                    description={model.description}
-                                    handleSubscrition={handleSubscrition}
-                                />
-                            ))}
-                        </Slider>
                     )}
                 </div>
             </StyledComponent>

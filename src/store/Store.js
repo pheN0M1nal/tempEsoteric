@@ -26,7 +26,7 @@ import thunk from "redux-thunk"
 import { composeWithDevTools } from "redux-devtools-extension"
 
 const reducer = combineReducers({
-  // users
+  // Auth
   userProfile: userProfileReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,

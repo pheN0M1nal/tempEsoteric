@@ -9,18 +9,18 @@ import RegisterContainer from "../Authentication/signup/Container";
 import closeBtn from "../../static/images/Auth/2389848@1.png";
 import styled from "styled-components";
 import { CloseBtn } from "../Global/CloseBtn";
+// import { ResetPasswordContainer } from "../Authentication/reset_password/Container";
 
 const Wrapper = styled.div`
     background-color: var(--custom-white);
     width: 100%;
     max-width: 1200px;
-	overflow: auto;
-	border-radius: 10px;
+    overflow: auto;
+    border-radius: 10px;
     position: relative;
-	@media (max-width:1100px){
-		margin-top:30rem;
-	}
-  
+    @media (max-width: 1100px) {
+        margin-top: 30rem;
+    }
 `;
 
 const Login = () => {
@@ -33,7 +33,6 @@ const Login = () => {
 
     const loginModal = useSelector((state) => state.loginModal);
     const { show } = loginModal;
-   
 
     const callbackCloseModal = () => {
         dispatch(hideLoginModal());
@@ -50,6 +49,16 @@ const Login = () => {
         setShowRegisterComp(true);
         setShowForgetPassComp(false);
     };
+    const ShowForgotPassword = () => {
+        setShowLoginComp(false);
+        setShowRegisterComp(false);
+        setShowForgetPassComp(true);
+    };
+    const ShowResetPassword = () => {
+        setShowLoginComp(false);
+        setShowRegisterComp(false);
+        setShowForgetPassComp(true);
+    };
 
     return (
         <ModalComponent
@@ -59,11 +68,37 @@ const Login = () => {
             classNameFromProps="login_model"
         >
             <Wrapper>
-                {showLoginComp && <LoginContainer showRegister={ShowRegister} setOpenLogin={setOpenLogin} openLogin={openLogin}/>}
-                {showRegisterComp && <RegisterContainer showLogin={ShowLogin} setOpenLogin={setOpenLogin} openLogin={openLogin}/>}
-                {showForgetPassComp && <ForgotPasswordContainer showLogin={ShowLogin} />}
-               
-                <CloseBtn handleOnClickClose={callbackCloseModal}/>
+                {showLoginComp && (
+                    <LoginContainer
+                        showRegister={ShowRegister}
+                        setOpenLogin={setOpenLogin}
+                        showForgotPassword={ShowForgotPassword}
+                        openLogin={openLogin}
+                    />
+                )}
+                {showRegisterComp && (
+                    <RegisterContainer
+                        showLogin={ShowLogin}
+                        setOpenLogin={setOpenLogin}
+                        openLogin={openLogin}
+                    />
+                )}
+                {showForgetPassComp && (
+                    <ForgotPasswordContainer
+                        showLogin={ShowLogin}
+                        setOpenLogin={setOpenLogin}
+                        openLogin={openLogin}
+                    />
+                )}
+                {/* {showForgetPassComp && (
+                    <ResetPasswordContainer
+                        showLogin={ShowLogin}
+                        setOpenLogin={setOpenLogin}
+                        openLogin={openLogin}
+                    />
+                )} */}
+
+                <CloseBtn handleOnClickClose={callbackCloseModal} />
             </Wrapper>
         </ModalComponent>
     );

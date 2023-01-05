@@ -1,7 +1,13 @@
-import { ForgotPasswordForm } from './Form'
+import { AuthMainContainer } from "../components/AuthMainContainer";
+import { ForgotPasswordForm } from "./Form";
 
 const ForgotPasswordContainer = ({ showLogin }) => {
-	console.log(showLogin, 'sl')
-	return <ForgotPasswordForm showLogin={showLogin} />
-}
-export default ForgotPasswordContainer
+    return (
+        <AuthMainContainer mode={"forgot_password"} modeimg={"forgot_password"}>
+            <div className="LoginFormOuter">
+                <ForgotPasswordForm showLogin={showLogin} />
+            </div>
+        </AuthMainContainer>
+    );
+};
+export default ForgotPasswordContainer;

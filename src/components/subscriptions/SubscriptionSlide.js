@@ -1,18 +1,19 @@
 import React from "react";
 import { Button } from "../Global/Button";
 
-export const SubscriptionSlide = ({ title,price,handleSubscrition }) => {
+export const SubscriptionSlide = ({ title,price,handleSubscrition ,year,id}) => {
   return (
     <div
       className="p-4  planCard slick-slide"
       tabIndex="-1"
       data-slick-index="3"
       aria-hidden="true"
+      key={id}
     >
       <div className="CardHeading">{title}</div>
       <div className="CardPrice">
         <span className="mainPrice">
-          {price}/<small>mo</small>
+          {price}/<small>{year}</small>
         </span>
       </div>
   

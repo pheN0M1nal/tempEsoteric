@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import { SizedBox } from "../Global/SizedBox";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FormComponent } from "../Authentication/components/FormElement";
 import { InputComponent } from "../Authentication/components/InputELement";
-import { ImagePickerComponent } from "../Global/ProfilePicturePickerComponent";
 import { Button } from "../Global/Button";
 import { Spinner } from "../Global/Spinner";
 import { HandleOnChangeInput } from "../../helpers/formInput/HandleOnChangeInput";
@@ -11,12 +10,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { notifyFailure } from "../../helpers/notifications/notifyFailure";
 import { editProfile } from "../../store/actions/userActions";
 import axiosInstance from "../../config/api/axois";
-
+import { handleFileUploadSingle } from "../../helpers/fileManagement/handler";
+import { ImagePickerComponent } from "../../helpers/fileManagement/ProfilePicturePickerComponent";
+import { patch_profile } from "../../api/EndPoints";
 const StyledComponent = styled.div`
     .profilePicturePickerWrapper > div {
         justify-content: center;
         flex-direction: column;
         gap: 0.5rem;
+
         .controlsWrapperImage {
             align-items: center;
         }
@@ -31,9 +33,16 @@ const StyledComponent = styled.div`
         }
         .imageWrapper {
             width: 100%;
+            max-width: 200px;
             height: 12rem;
             border-radius: 5%;
             overflow: hidden;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                object-position: center;
+            }
         }
     }
 
@@ -55,70 +64,71 @@ const StyledComponent = styled.div`
     }
 `;
 export const EditProfile = () => {
-    const [profilePicture, setProfilePicture] = useState(null);
-    const [data, setData] = useState({
-        firstname: "",
-        lastname: "",
-        email: "",
-        contact_number: "",
-        username: "",
-    });
+    const [files, setFiles] = useState({});
+    const [data, setData] = useState({});
     const dispatch = useDispatch();
 
     // checking if user gets registered
     const userInfo = useSelector((state) => state.userProfile);
     const { profile, error, loading } = userInfo;
 
-    useEffect(() => {
-        setData({
-            firstname: profile?.first_name,
-            lastname: profile?.last_name,
-            email: profile?.email,
-            contact_number: profile?.contact_number,
-            username: profile?.username,
-        });
-        setProfilePicture(profile?.picture?.file);
-    }, []);
-
     // notifying if error from reducer state
     error && notifyFailure(error);
-
     useEffect(() => {
-        if (profilePicture) {
-            if (typeof profilePicture !== "string") {
-                let tempdata = { ...data };
-                tempdata["picture"] = profilePicture;
-                setData(tempdata);
+        setData(profile);
+        const pictureData = {
+            url_on_server: profile && profile?.picture?.file,
+        };
+
+        setFiles({
+            ...files,
+            picture: pictureData,
+        });
+    }, [profile?.picture?.file, setFiles, profile]);
+    const uploadFile = useCallback(async () => {
+        if (files?.picture) {
+            const temp = {
+                ...files?.picture,
+                to_be_deleted_file_id: profile && profile?.picture?.id,
+            };
+
+            if (temp?.to_be_uploaded_buffer) {
+                const uploadedFileData = await handleFileUploadSingle(temp && temp);
+                let tempData = { ...data };
+                tempData["picture"] = uploadedFileData?.id || profile?.picture?.id;
+                setData(tempData);
             }
         }
-    }, [profilePicture]);
+    }, [files?.picture, setData, profile]);
+    useEffect(() => {
+        uploadFile();
+    }, [uploadFile]);
 
+    console.log("data before", data);
     // handling sign up button
     const handleUpdateProfile = async (e) => {
         e.preventDefault();
-        console.log("data", data);
-
-        if (data["picture"]) {
-            const formData = new FormData();
-            formData.append("file", profilePicture);
-            formData.append("purpose", "profile update");
-
-            axiosInstance()
-                .post("/upload", formData)
-                .then((res) => {
-                    console.log("upload picture res", res.data);
-                    let tempdata = { ...data };
-                    tempdata["picture"] = res.data.id;
-                    setData(tempdata);
-
-                    dispatch(editProfile(data));
-                });
+        console.log("data at submit click", data);
+        const formData = new FormData();
+        for (let field in data) {
+            formData.append(field, data[field]);
         }
+        formData.append("current_subscription_plan", null);
+
+        axiosInstance()
+            .patch(patch_profile(), formData)
+            .then((res) => {
+                console.log("upload picture res", res.data);
+                let tempdata = { ...data };
+                tempdata["picture"] = res.data.id;
+                setData(tempdata);
+
+                dispatch(editProfile(data));
+            });
     };
 
     const cleanState = () => {
         console.log("cleaning");
-        setProfilePicture(null);
         let tempData = {};
         for (let field in data) {
             tempData[field] = "";
@@ -130,9 +140,11 @@ export const EditProfile = () => {
             <FormComponent className="formFieldWrapper" autocomplete="off">
                 <div className="profilePicturePickerWrapper">
                     <ImagePickerComponent
-                        image={profilePicture}
-                        setImage={setProfilePicture}
-                        btnText="CHANGE LOGO"
+                        image={files?.picture?.url_on_server}
+                        field_name={"picture"}
+                        purpose={"Profile Picture"}
+                        label={" Picture"}
+                        setFiles={setFiles}
                     />
                     <SizedBox height={1} />
                 </div>
@@ -141,8 +153,8 @@ export const EditProfile = () => {
                     <InputComponent
                         type="text"
                         height={2.5}
-                        value={data?.firstname}
-                        onChange={(e) => HandleOnChangeInput(e, "firstname", setData, data)}
+                        value={data?.first_name}
+                        onChange={(e) => HandleOnChangeInput(e, "first_name", setData, data)}
                     />
                 </div>
                 <div className="inputOuter">
@@ -150,8 +162,8 @@ export const EditProfile = () => {
                     <InputComponent
                         type="text"
                         height={2.5}
-                        value={data?.lastname}
-                        onChange={(e) => HandleOnChangeInput(e, "lastname", setData, data)}
+                        value={data?.last_name}
+                        onChange={(e) => HandleOnChangeInput(e, "last_name", setData, data)}
                     />
                 </div>
                 <div className="inputOuter">

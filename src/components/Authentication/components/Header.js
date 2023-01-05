@@ -26,7 +26,7 @@ const modeHeaderMapping = {
     login: "Login To Your Account",
     forgot_password: "Forgot Password",
     reset_password: "ENTER YOUR NEW PASSWORD",
-    register:"Create a new account",
+    register: "Create a new account",
 };
 
 export const AuthenticationHeader = ({ mode }) => {
